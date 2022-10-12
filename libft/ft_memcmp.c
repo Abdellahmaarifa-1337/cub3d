@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 11:00:50 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/12 11:13:29 by amaarifa         ###   ########.fr       */
+/*   Created: 2021/11/02 09:23:49 by amaarifa          #+#    #+#             */
+/*   Updated: 2021/11/10 14:12:49 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	t_cub	g;
+	size_t			i;
+	unsigned char	*a;
+	unsigned char	*b;
 
-	if (ac != 2)
-		throw_error("Error : invalid argmuents!", 1);
-	parse_map(av[1], &g);
-	return (0);
+	a = (unsigned char *) s1;
+	b = (unsigned char *) s2;
+	i = 0;
+	if (n == 0)
+		return (0);
+	n--;
+	while (i < n && a[i] == b[i])
+		i++;
+	return (a[i] - b[i]);
 }

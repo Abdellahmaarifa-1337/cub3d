@@ -1,23 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 11:00:50 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/12 11:13:29 by amaarifa         ###   ########.fr       */
+/*   Created: 2021/11/02 08:50:47 by amaarifa          #+#    #+#             */
+/*   Updated: 2021/11/10 14:14:29 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	t_cub	g;
+	size_t	i;
+	char	*s;
+	char	*d;
 
-	if (ac != 2)
-		throw_error("Error : invalid argmuents!", 1);
-	parse_map(av[1], &g);
-	return (0);
+	s = (char *)src;
+	d = (char *)dst;
+	if (!dst && !src)
+		return (0);
+	if (s <= d)
+	{
+		d += len - 1;
+		s += len - 1;
+		while (len-- > 0)
+			*d-- = *s--;
+		return (dst);
+	}
+	i = 0;
+	while (i < len)
+	{
+		d[i] = s[i];
+		i++;
+	}
+	return (dst);
 }

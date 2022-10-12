@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 11:00:50 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/12 11:13:29 by amaarifa         ###   ########.fr       */
+/*   Created: 2021/11/10 13:15:35 by amaarifa          #+#    #+#             */
+/*   Updated: 2021/11/13 08:43:03 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_cub	g;
+	t_list	*last;
 
-	if (ac != 2)
-		throw_error("Error : invalid argmuents!", 1);
-	parse_map(av[1], &g);
-	return (0);
+	last = ft_lstlast(*lst);
+	if (!last)
+		*lst = new;
+	else
+		last->next = new;
 }

@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 11:00:50 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/12 11:13:29 by amaarifa         ###   ########.fr       */
+/*   Created: 2021/11/03 13:48:16 by amaarifa          #+#    #+#             */
+/*   Updated: 2021/11/10 14:20:03 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
-
-int	main(int ac, char **av)
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	t_cub	g;
+	unsigned int	i;
 
-	if (ac != 2)
-		throw_error("Error : invalid argmuents!", 1);
-	parse_map(av[1], &g);
-	return (0);
+	if (!s || !f)
+		return ;
+	i = 0;
+	while (s[i])
+	{
+		f(i, &s[i]);
+		i++;
+	}
 }

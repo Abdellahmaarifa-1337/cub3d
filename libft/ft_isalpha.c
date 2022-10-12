@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   isalpha.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaarifa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 11:00:50 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/12 11:13:29 by amaarifa         ###   ########.fr       */
+/*   Created: 2021/11/01 15:53:14 by amaarifa          #+#    #+#             */
+/*   Updated: 2021/11/13 09:20:52 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
-
-int	main(int ac, char **av)
+int	ft_isalpha(int c)
 {
-	t_cub	g;
-
-	if (ac != 2)
-		throw_error("Error : invalid argmuents!", 1);
-	parse_map(av[1], &g);
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+		return (1);
 	return (0);
 }

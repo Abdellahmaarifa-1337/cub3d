@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 11:00:50 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/12 11:13:29 by amaarifa         ###   ########.fr       */
+/*   Created: 2021/11/02 07:06:32 by amaarifa          #+#    #+#             */
+/*   Updated: 2021/11/10 14:14:50 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	t_cub	g;
+	size_t		i;
+	char		*s;
 
-	if (ac != 2)
-		throw_error("Error : invalid argmuents!", 1);
-	parse_map(av[1], &g);
-	return (0);
+	i = 0;
+	s = (char *)b;
+	while (i < len)
+	{
+		s[i] = c;
+		i++;
+	}
+	return (s);
 }

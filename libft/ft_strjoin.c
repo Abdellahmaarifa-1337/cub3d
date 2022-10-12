@@ -1,23 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 11:00:50 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/12 11:13:29 by amaarifa         ###   ########.fr       */
+/*   Created: 2021/11/02 15:39:58 by amaarifa          #+#    #+#             */
+/*   Updated: 2021/11/10 14:20:32 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include <stdlib.h>
+#include "libft.h"
 
-int	main(int ac, char **av)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	t_cub	g;
+	int		size;
+	int		i;
+	int		j;
+	char	*s;
 
-	if (ac != 2)
-		throw_error("Error : invalid argmuents!", 1);
-	parse_map(av[1], &g);
-	return (0);
+	if (!s1 || !s2)
+		return (0);
+	size = ft_strlen(s1) + ft_strlen(s2);
+	s = (char *)malloc((size + 1) * sizeof(char));
+	if (!s)
+		return (0);
+	i = 0;
+	j = 0;
+	while (s1[i])
+	{
+		s[i] = s1[i];
+		i++;
+	}
+	while (s2[j])
+	{
+		s[i + j] = s2[j];
+		j++;
+	}
+	s[i + j] = '\0';
+	return (s);
 }

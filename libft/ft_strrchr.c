@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 11:00:50 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/12 11:13:29 by amaarifa         ###   ########.fr       */
+/*   Created: 2021/11/01 17:23:04 by amaarifa          #+#    #+#             */
+/*   Updated: 2021/11/10 14:25:37 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+char	*ft_strrchr(const char *s, int c)
 {
-	t_cub	g;
+	int				size;
+	unsigned char	*str;
 
-	if (ac != 2)
-		throw_error("Error : invalid argmuents!", 1);
-	parse_map(av[1], &g);
+	str = (unsigned char *)s;
+	size = ft_strlen((const char *)str);
+	while (size >= 0)
+	{
+		if (str[size] == (unsigned char)c)
+			return ((char *)&str[size]);
+		size--;
+	}
 	return (0);
 }

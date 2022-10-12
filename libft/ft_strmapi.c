@@ -1,23 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 11:00:50 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/12 11:13:29 by amaarifa         ###   ########.fr       */
+/*   Created: 2021/11/03 12:06:13 by amaarifa          #+#    #+#             */
+/*   Updated: 2021/11/10 15:44:34 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "libft.h"
+#include <stdlib.h>
 
-int	main(int ac, char **av)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	t_cub	g;
+	int		size;
+	char	*str;
+	int		i;
 
-	if (ac != 2)
-		throw_error("Error : invalid argmuents!", 1);
-	parse_map(av[1], &g);
-	return (0);
+	if (!s || !f)
+		return (0);
+	i = 0;
+	size = ft_strlen(s);
+	str = (char *)malloc((sizeof(char) * (size + 1)));
+	if (!str)
+		return (str);
+	while (i < size)
+	{
+		str[i] = f(i, s[i]);
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
 }

@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 11:00:50 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/12 11:13:29 by amaarifa         ###   ########.fr       */
+/*   Created: 2021/11/10 13:50:35 by amaarifa          #+#    #+#             */
+/*   Updated: 2021/11/13 08:42:10 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	t_cub	g;
+	t_list	*temp;
+	t_list	*next;
 
-	if (ac != 2)
-		throw_error("Error : invalid argmuents!", 1);
-	parse_map(av[1], &g);
-	return (0);
+	if (*lst == NULL || !del)
+		return ;
+	temp = *lst;
+	next = *lst;
+	while (temp)
+	{
+		temp = temp->next;
+		ft_lstdelone(next, del);
+		next = temp;
+	}
+	*lst = NULL;
 }
