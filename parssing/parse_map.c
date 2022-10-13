@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:01:05 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/13 18:51:32 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/14 00:45:46 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	free_line(char **line)
 
 void	set_idn(t_idn *idn, char **line)
 {
+	char	*tmp;
 	if (!ft_strncmp(line[0], "NO", 2))
 		idn->_no = ft_strdup(line[1]);
 	else if (!ft_strncmp(line[0], "SO", 2))
@@ -65,9 +66,17 @@ void	set_idn(t_idn *idn, char **line)
 	else if (!ft_strncmp(line[0], "EA", 2))
 		idn->_ea = ft_strdup(line[1]);
 	else if (!ft_strncmp(line[0], "F", 2))
-		idn->_f = ft_strdup(line[1]);
+	{
+		tmp = ft_strjoin(line[1], line[2]);
+		idn->_f = ft_strjoin(tmp, line[3]);
+		free(tmp);
+	}
 	else if (!ft_strncmp(line[0], "C", 2))
-		idn->_c = ft_strdup(line[1]);
+	{
+		tmp = ft_strjoin(line[1], line[2]);
+		idn->_c = ft_strjoin(tmp, line[3]);
+		free(tmp);
+	}
 	else
 		throw_error("invalid identifiers", 1);
 }
@@ -95,7 +104,11 @@ void	get_identifiers(int fd, t_idn *idn)
 			free(line);
 			continue ;
 		}
-		if (line_length != 2)
+		if ((!ft_strncmp(line[0], "F", 2) || !ft_strncmp(line[0], "C", 2)) && line_length != 4)
+		{
+			throw_error("invalid identifier!", 1);
+		}
+		else if (line_length != 2 && ft_strncmp(line[0], "F", 2) && ft_strncmp(line[0], "C", 2))
 			throw_error("invalid identifier!", 1);
 		else
 		{
@@ -386,6 +399,8 @@ int	parse_map(const char *path, t_cub *g)
 
 	fd = open_file(path);
 	get_identifiers(fd, &(g->idn));
+	if (!g->idn._c || !g->idn._ea || !g->idn._f || !g->idn._no || !g->idn._so || !g->idn._we)
+		throw_error("Identifier error!", 1);
 	get_map(fd, g);
 	check_map(&(g->map));
 	print_idn(&(g->idn));
