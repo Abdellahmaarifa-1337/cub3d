@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:01:05 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/13 17:54:43 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/13 18:51:32 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -332,6 +332,8 @@ void	check_if_close(t_map *map, int i, int j)
 	while (tmp >= 0)
 	{
 		//printf("char in testing : %c\n", map->data[tmp][j]);
+		if ((size_t)j >= ft_strlen(map->data[tmp]) && map->data[tmp + 1][j] != '1')
+			throw_error("map should be closed", 1);
 		if (map->data[tmp][j] == '1')
 			break ;
 		if (map->data[tmp][j] == 32)
@@ -346,6 +348,8 @@ void	check_if_close(t_map *map, int i, int j)
 	while (tmp < (size_t)map->map_size)
 	{
 		//printf("char in testing : %c\n", map->data[tmp][j]);
+		if ((size_t)j >= ft_strlen(map->data[tmp]) && map->data[tmp - 1][j] != '1')
+			throw_error("map should be closed", 1);
 		if (map->data[tmp][j] == '1')
 			break ;
 		if (map->data[tmp][j] == 32)
