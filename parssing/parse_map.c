@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:01:05 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/12 19:40:01 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/13 17:54:43 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,17 +151,229 @@ char	*get_first_line(int fd)
 		}
 		break ;
 	}
-	return tmp;
+	return (tmp);
+}
+
+void	check_walls(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != '1' && line[i] != 32)
+			throw_error("the map should be closed by walls!", 1);
+		i++;
+	}
+}
+
+void	realloc_map(t_map *map)
+{
+	char	**new_data;
+	int		i;
+
+	map->map_capacity = map->map_capacity * 2;
+	new_data = (char **)malloc(sizeof(char *) * (map->map_capacity + 1));
+	i = 0;
+	while (i < map->map_size)
+	{
+		new_data[i] = ft_strdup(map->data[i]);
+		free (map->data[i]);
+		i++;
+	}
+	new_data[i] = NULL;
+	free(map->data);
+	map->data = new_data;
+}
+
+void	push_back(t_map *map, char *line)
+{
+	if (map->map_capacity == map->map_size)
+		realloc_map(map);
+	//printf("size : %d , capacity : %d\n", map->map_size, map->map_capacity);
+	map->data[map->map_size] = ft_strdup(line);
+	if ((map->data[map->map_size])[ft_strlen(line) - 1] == '\n')
+		(map->data[map->map_size])[ft_strlen(line) - 1] = '\0';
+	if (!ft_strncmp(map->data[map->map_size], "\n", 2))
+		throw_error("empty line not allowed in the map", 1);
+	map->map_size += 1;
+}
+
+int get_char(char *s, int c)
+{
+	int		i;
+	int		ch;
+
+	ch = 0;
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == c)
+		{
+			ch += c;
+		}
+		i++;
+	}
+	return (ch);
+}
+
+void	get_player(t_map *map, char *line)
+{
+	int p = get_char(line, 'N') + get_char(line, 'S') + get_char(line, 'E') + get_char(line, 'W');
+	// if (p && map->player)
+	// 	throw_error("there is more than one", 1);
+	// else if (p)
+	map->player += p;
+	//if (ft_strchr(line, 'N') )
+}
+
+void check_allowed_char(char *s)
+{
+	int i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] != '0' && s[i] != '1'
+			&& s[i] != 32 && s[i] != 'N' && s[i] != 'S'
+			&& s[i] != 'E' && s[i] != 'W' && s[i] != 10)
+		{
+			throw_error("not allowed characters", 1);
+		}
+		i++;
+	}
 }
 
 void	get_map(int fd, t_cub *g)
 {
 	char	*line;
+	char	last_char;
 
 	line = get_first_line(fd);
+	//the first line should only have space or ones
+	check_walls(line);
+	push_back(&(g->map), line);
+	while (line)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		last_char = line[ft_strlen(line) - 1];
+		check_allowed_char(line);
+		if (!ft_strncmp(line, "\n", 1))
+			throw_error("new line should not be here!", 1);
+		push_back(&(g->map), line);
+		get_player(&(g->map), line);
+	}	
+	//printf("line==%d**\n", last_char);
+	if (last_char == 10 || (is_full_space(g->map.data[g->map.map_size - 1])))
+		throw_error("map should not end with new line", 1);
+	check_walls(g->map.data[g->map.map_size - 1]);
+	 if (!g->map.player)
+	 	throw_error("there is no player!", 1);
+	if ( g->map.player != 'N' && g->map.player != 'S' 
+		&& g->map.player != 'E' && g->map.player != 'W')
+				throw_error("there more then one player", 1);
+	// the player should be just onece in the map
 	
+	// any new line here is error
+
+	// the first char in each line should be a 1 and also tha last non space one
+
+	// the last line should have only ones ans space and not containe new line
 	(void)g;
 	printf("%s\n", line);
+}
+
+void print_map(t_map *map)
+{
+	int	i;
+	
+	i = 0;
+	while (map->data[i])
+	{
+		printf("%s\n", map->data[i]);
+		i++;
+	}
+}
+
+
+void	check_if_close(t_map *map, int i, int j)
+{
+	size_t	tmp;
+
+	// check left
+	tmp = j;
+	while (tmp >= 0)
+	{
+		if (map->data[i][tmp] == '1')
+			break ;
+		if (map->data[i][tmp] == 32)
+			throw_error("map should be closed", 1);
+		tmp--;
+	}
+	if (++tmp == 0 && map->data[i][tmp] != '1')
+		throw_error("map should be closed", 1);
+	
+	// check right
+	tmp = j;
+	while (tmp < ft_strlen(map->data[i]))
+	{
+		if (map->data[i][tmp] == '1')
+			break ;
+		if (map->data[i][tmp] == 32)
+			throw_error("map should be closed", 1);
+		tmp++;
+	}
+	if (tmp == ft_strlen(map->data[i]) && map->data[i][tmp - 1] != '1')
+		throw_error("map should be closed", 1);
+	// checck up
+	tmp = i;
+	while (tmp >= 0)
+	{
+		//printf("char in testing : %c\n", map->data[tmp][j]);
+		if (map->data[tmp][j] == '1')
+			break ;
+		if (map->data[tmp][j] == 32)
+			throw_error("map should be closed", 1);
+		tmp--;
+	}
+	if (++tmp == 0 && map->data[tmp][j] != '1')
+		throw_error("map should be closed", 1);
+
+	// check down
+	tmp = i;
+	while (tmp < (size_t)map->map_size)
+	{
+		//printf("char in testing : %c\n", map->data[tmp][j]);
+		if (map->data[tmp][j] == '1')
+			break ;
+		if (map->data[tmp][j] == 32)
+			throw_error("map should be closed", 1);
+		tmp++;
+	}
+	if (tmp == (size_t)map->map_size && map->data[tmp - 1][j] != '1')
+		throw_error("map should be closed", 1);
+
+}
+
+void	check_map(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while(map->data[i])
+	{
+		j = 0;
+		while (map->data[i][j])
+		{
+			if (map->data[i][j] == '0')
+				check_if_close(map, i, j);
+			j++;
+		}
+		i++;
+	}
 }
 
 int	parse_map(const char *path, t_cub *g)
@@ -170,8 +382,11 @@ int	parse_map(const char *path, t_cub *g)
 
 	fd = open_file(path);
 	get_identifiers(fd, &(g->idn));
-	//get_map(fd, g);
+	get_map(fd, g);
+	check_map(&(g->map));
 	print_idn(&(g->idn));
+	print_map(&(g->map));
+	//printf("%d\n", g->map.map_size);
 	// (void)g;
 	// char	tmp[1000];
 	// char	*str;

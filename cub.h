@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/12 15:28:31 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/13 13:28:35 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@
 # define EXT_LEN 4
 # define EXT ".cub"
 # define IDENTIFIERS_NUMBER 6
+# define N 1
+# define S 2
+# define E 3
+# define W 4
 
 typedef struct s_idn
 {
@@ -35,10 +39,18 @@ typedef struct s_idn
 	char	*_c;
 }	t_idn;
 
+typedef struct s_map
+{
+	char	**data;
+	int		map_capacity;
+	int		map_size;
+	int		player;
+}	t_map;
+
 // Gloabl struct
 typedef struct s_cub
 {
-	char	**map;
+	t_map	map;
 	t_idn	idn;
 }	t_cub;
 
