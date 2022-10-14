@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:01:05 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/14 17:15:18 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/14 17:46:14 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ char *check_rgb(char *tmp)
 	cop[j] = '\0';
 	if (cop[0] == ',' || cop[ft_strlen(cop) - 1] == ',')
 		throw_error("error!", 1);
-	if (comma > 2)
+	if (comma != 2)
 		throw_error("erro7", 1);
 	return (cop);
 }
@@ -112,6 +112,7 @@ void set_rgb(t_idn *idn,char *key, char *value)
 	char	**line;
 
 	line = ft_split(value, ',');
+
 	if (!ft_strncmp(key, "F", 2))
 	{
 		idn->_f[0] = ft_atoi(line[0]);
