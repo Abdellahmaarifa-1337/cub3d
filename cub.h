@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/13 13:28:35 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/14 16:25:26 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ typedef struct s_idn
 	char	*_so;
 	char	*_we;
 	char	*_ea;
-	char	*_f;
-	char	*_c;
+	int		_f[3];
+	int		_c[3];
 }	t_idn;
 
 typedef struct s_map
