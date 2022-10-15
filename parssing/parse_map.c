@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:01:05 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/15 16:22:15 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/15 19:35:01 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -364,7 +364,7 @@ void	get_map(int fd, t_cub *g)
 	// any new line here is error
 
 	// the first char in each line should be a 1 and also tha last non space one
-
+	g->map.data[g->map.map_size] = NULL;
 	// the last line should have only ones ans space and not containe new line
 	(void)g;
 }
@@ -452,10 +452,12 @@ void	check_map(t_map *map)
 	while(map->data[i])
 	{
 		j = 0;
+		//ft_strlen(map->data[i]);
 		while (map->data[i][j])
 		{
-			if (map->data[i][j] == '0'|| map->data[i][j] == map->player)
-				check_if_close(map, i, j);
+		//printf("%d\n",j);
+			// if (map->data[i][j] == '0'|| map->data[i][j] == map->player)
+			// 	check_if_close(map, i, j);
 			j++;
 		}
 		i++;
