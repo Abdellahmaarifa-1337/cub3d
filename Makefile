@@ -3,17 +3,20 @@ CFLAGS = -Werror -Wextra -Wall
 NAME = cube3d
 
 SRC = ./main.c ./parssing/parse_map.c handel_error/throw_error.c \
-		./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c
-OBJ = ${SRC:.c=.o} 
+		./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c \
+		./render_game/render_game.c
+
+OBJ = ${SRC:.c=.o}
+
 LIB = ./libft/libft.a
 
 .c.o :
-	${CC} ${CFLAGS} -c $< -o $@
+	${CC} ${CFLAGS} -Imlx -c $< -o $@
 
 all: ${NAME}
 
 ${NAME} : ${OBJ} ${LIB}
-		${CC} ${CFLAGS} ${OBJ} ${LIB} -o ${NAME}
+		${CC} ${CFLAGS} ${OBJ} ${LIB} -Lmlx -lmlx -framework OpenGL -framework AppKit -o ${NAME}
 
 ${LIB} :
 		make -C ./libft

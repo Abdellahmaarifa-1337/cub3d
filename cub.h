@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/14 16:25:26 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/15 09:33:58 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "./libft/libft.h"
 # include "./get_next_line/get_next_line.h"
 # include "fcntl.h"
+# include "./minilibx/mlx.h"
 
 // GAME VARIBALES
 
@@ -56,5 +57,5 @@ typedef struct s_cub
 
 int		parse_map(const char *path, t_cub *g);
 void	throw_error(const char *error, int _ex);
-
+void render_game(t_cub *cub);
 #endif

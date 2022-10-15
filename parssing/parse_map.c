@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:01:05 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/14 17:46:14 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/15 08:16:02 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -379,6 +379,8 @@ void	check_if_close(t_map *map, int i, int j)
 	{
 		if (map->data[i][tmp] == '1')
 			break ;
+		if (map->data[i][tmp] == '0' && map->data[i][j]  == map->player)
+			break ;
 		if (map->data[i][tmp] == 32)
 			throw_error("map should be closed", 1);
 		tmp--;
@@ -392,6 +394,8 @@ void	check_if_close(t_map *map, int i, int j)
 	{
 		if (map->data[i][tmp] == '1')
 			break ;
+		if (map->data[i][tmp] == '0' && map->data[i][j]  == map->player)
+			break ;
 		if (map->data[i][tmp] == 32)
 			throw_error("map should be closed", 1);
 		tmp++;
@@ -403,9 +407,12 @@ void	check_if_close(t_map *map, int i, int j)
 	while (tmp >= 0)
 	{
 		//printf("char in testing : %c\n", map->data[tmp][j]);
-		if ((size_t)j >= ft_strlen(map->data[tmp]) && map->data[tmp + 1][j] != '1')
+		if ((size_t)j >= ft_strlen(map->data[tmp])
+			&& map->data[tmp + 1][j] != '1')
 			throw_error("map should be closed", 1);
 		if (map->data[tmp][j] == '1')
+			break ;
+		if (map->data[tmp][j] == '0' && map->data[i][j]  == map->player)
 			break ;
 		if (map->data[tmp][j] == 32)
 			throw_error("map should be closed", 1);
@@ -422,6 +429,8 @@ void	check_if_close(t_map *map, int i, int j)
 		if ((size_t)j >= ft_strlen(map->data[tmp]) && map->data[tmp - 1][j] != '1')
 			throw_error("map should be closed", 1);
 		if (map->data[tmp][j] == '1')
+			break ;
+		if (map->data[tmp][j] == '0' && map->data[i][j] == map->player)
 			break ;
 		if (map->data[tmp][j] == 32)
 			throw_error("map should be closed", 1);
@@ -443,12 +452,20 @@ void	check_map(t_map *map)
 		j = 0;
 		while (map->data[i][j])
 		{
-			if (map->data[i][j] == '0')
+			if (map->data[i][j] == '0'|| map->data[i][j] == map->player)
 				check_if_close(map, i, j);
 			j++;
 		}
 		i++;
 	}
+}
+
+
+void check_idn(t_idn *idn)
+{
+	if (open(idn->_ea, O_RDONLY) == -1 || open(idn->_no, O_RDONLY) == -1 
+		|| open(idn->_so, O_RDONLY) == -1  || open(idn->_we, O_RDONLY) == -1 )
+		throw_error("file not exist", 1);
 }
 
 int	parse_map(const char *path, t_cub *g)
@@ -461,6 +478,7 @@ int	parse_map(const char *path, t_cub *g)
 		throw_error("Identifier error!", 1);
 	get_map(fd, g);
 	check_map(&(g->map));
+	check_idn(&(g->idn));
 	print_idn(&(g->idn));
 	print_map(&(g->map));
 	//printf("%d\n", g->map.map_size);
