@@ -6,11 +6,22 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:01:05 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/15 08:16:02 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/15 16:22:15 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
+void print_map(t_map *map)
+{
+	int	i;
+	
+	i = 0;
+	while (map->data[i])
+	{
+		printf("%s\n", map->data[i]);
+		i++;
+	}
+}
 
 int	open_file(const char *path)
 {
@@ -193,7 +204,8 @@ int		is_full_space(char *tmp)
 {
 	int	i;
 
-	tmp[ft_strlen(tmp) - 1] = '\0';
+	if (tmp[ft_strlen(tmp) - 1] == '\n')
+		tmp[ft_strlen(tmp) - 1] = '\0';
 	i = 0;
 	while (tmp[i])
 	{
@@ -335,8 +347,10 @@ void	get_map(int fd, t_cub *g)
 			throw_error("new line should not be here!", 1);
 		push_back(&(g->map), line);
 		get_player(&(g->map), line);
+		//printf("%s\n", line);
 	}	
 	//printf("line==%d**\n", last_char);
+	//print_map(&(g->map));
 	if (last_char == 10 || (is_full_space(g->map.data[g->map.map_size - 1])))
 		throw_error("map should not end with new line", 1);
 	check_walls(g->map.data[g->map.map_size - 1]);
@@ -353,20 +367,8 @@ void	get_map(int fd, t_cub *g)
 
 	// the last line should have only ones ans space and not containe new line
 	(void)g;
-	printf("%s\n", line);
 }
 
-void print_map(t_map *map)
-{
-	int	i;
-	
-	i = 0;
-	while (map->data[i])
-	{
-		printf("%s\n", map->data[i]);
-		i++;
-	}
-}
 
 
 void	check_if_close(t_map *map, int i, int j)
