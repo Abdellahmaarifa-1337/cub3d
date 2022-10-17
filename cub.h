@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/15 09:33:58 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/17 20:46:21 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,6 @@ typedef struct s_cub
 int		parse_map(const char *path, t_cub *g);
 void	throw_error(const char *error, int _ex);
 void render_game(t_cub *cub);
+void	get_identifiers(int fd, t_idn *idn);
+void	get_map(int fd, t_cub *g);
 #endif
