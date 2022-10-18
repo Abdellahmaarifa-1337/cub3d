@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:01:05 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/18 15:31:31 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/18 22:24:08 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	open_file(const char *path)
 	size_t		path_len;
 	int			fd;
 	const char	*tmp;
+	char		*path_ext;
 
 	fd = 0;
 	path_len = ft_strlen(path);
@@ -27,10 +28,8 @@ int	open_file(const char *path)
 	}
 	else
 		tmp = path;
-	printf("tmp: %s\n", tmp);
-	if (path_len > EXT_LEN
-		&& !ft_strncmp(EXT
-			, ft_substr(tmp, path_len - EXT_LEN, EXT_LEN), EXT_LEN))
+	path_ext = ft_substr(tmp, path_len - EXT_LEN, EXT_LEN);
+	if (path_len > EXT_LEN && !ft_strncmp(EXT, path_ext, EXT_LEN))
 	{
 		fd = open(path, O_RDONLY);
 		if (fd == -1)
@@ -38,6 +37,7 @@ int	open_file(const char *path)
 	}
 	else
 		throw_error("error file extention!\n", 1);
+	free(path_ext);
 	return (fd);
 }
 

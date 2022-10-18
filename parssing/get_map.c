@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 11:06:47 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/18 12:05:43 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/18 22:23:40 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	get_map(int fd, t_cub *g)
 	push_back(&(g->map), line);
 	while (line)
 	{
+		free(line);
 		line = get_next_line(fd);
 		if (!line)
 			break ;

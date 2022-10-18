@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 11:06:54 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/18 11:20:35 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/18 22:20:49 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	realloc_map(t_map *map)
 	while (i < map->map_size)
 	{
 		new_data[i] = ft_strdup(map->data[i]);
-		free (map->data[i]);
+		free(map->data[i]);
 		i++;
 	}
 	new_data[i] = NULL;

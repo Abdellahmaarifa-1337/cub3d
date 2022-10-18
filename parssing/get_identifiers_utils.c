@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 11:30:55 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/18 12:12:56 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/18 22:27:38 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	free_line(char **line)
 {
 	int	i;
 
-	i = 0;
-	while (line[i++])
+	i = -1;
+	while (line[++i])
 		free(line[i]);
 }
 
@@ -70,9 +70,8 @@ void	set_rgb(t_idn *idn, char *key, char *value)
 		idn->_f[0] = ft_atoi(line[0]);
 		idn->_f[1] = ft_atoi(line[1]);
 		idn->_f[2] = ft_atoi(line[2]);
-		if ((idn->_f[0] < 0 || idn->_f[0] > 255)
-			|| (idn->_f[1] < 0 || idn->_f[1] > 255)
-			|| (idn->_f[2] < 0 || idn->_f[2] > 255))
+		if ((idn->_f[0] < 0 || idn->_f[0] > 255) || (idn->_f[1] < 0
+				|| idn->_f[1] > 255) || (idn->_f[2] < 0 || idn->_f[2] > 255))
 			throw_error("err99", 1);
 	}
 	if (!ft_strncmp(key, "C", 2))
@@ -80,9 +79,11 @@ void	set_rgb(t_idn *idn, char *key, char *value)
 		idn->_c[0] = ft_atoi(line[0]);
 		idn->_c[1] = ft_atoi(line[1]);
 		idn->_c[2] = ft_atoi(line[2]);
-		if ((idn->_c[0] < 0 || idn->_c[0] > 255)
-			|| (idn->_c[1] < 0 || idn->_c[1] > 255)
-			|| (idn->_c[2] < 0 || idn->_c[2] > 255))
+		if ((idn->_c[0] < 0 || idn->_c[0] > 255) || (idn->_c[1] < 0
+				|| idn->_c[1] > 255) || (idn->_c[2] < 0 || idn->_c[2] > 255))
 			throw_error("err99", 1);
 	}
+	free_line(line);
+	free(line);
+	free(value);
 }
