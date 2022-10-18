@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/18 13:04:48 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/18 14:14:47 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,8 @@ int		calc_line_length(char **line);
 char	*check_rgb(char *tmp);
 void	set_rgb(t_idn *idn, char *key, char *value);
 
+//temp functions
+
+void	print_map(t_map *map);
+void	print_idn(t_idn *idn);
 #endif

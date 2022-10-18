@@ -6,35 +6,11 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:01:05 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/18 12:57:24 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/18 15:31:31 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
-
-/***************** PRINT MAP/IDENTIFIERS ********************/
-void	print_map(t_map *map)
-{
-	int	i;
-
-	i = 0;
-	while (map->data[i])
-	{
-		printf("%s\n", map->data[i]);
-		i++;
-	}
-}
-
-void	print_idn(t_idn *idn)
-{
-	printf("NO = %s\n", idn->_no);
-	printf("SO = %s\n", idn->_so);
-	printf("WE = %s\n", idn->_we);
-	printf("EA = %s\n", idn->_ea);
-	printf("F = %d %d %d\n", idn->_f[0], idn->_f[1], idn->_f[2]);
-	printf("C = %d %d %d\n", idn->_c[0], idn->_c[1], idn->_c[2]);
-}
-/***********************************************************/
 
 int	open_file(const char *path)
 {
@@ -58,85 +34,12 @@ int	open_file(const char *path)
 	{
 		fd = open(path, O_RDONLY);
 		if (fd == -1)
-		{
-			perror(NULL);
-			throw_error(NULL, 1);
-		}
+			throw_error("file error!", 1);
 	}
 	else
 		throw_error("error file extention!\n", 1);
 	return (fd);
 }
-
-// void	check_if_close(t_map *map, int i, int j)
-// {
-// 	size_t	tmp;
-
-// 	// check left
-// 	tmp = j;
-// 	while (tmp >= 0)
-// 	{
-// 		if (map->data[i][tmp] == '1')
-// 			break ;
-// 		if (map->data[i][tmp] == '0' && map->data[i][j] == map->player)
-// 			break ;
-// 		if (map->data[i][tmp] == 32)
-// 			throw_error("map should be closed", 1);
-// 		tmp--;
-// 	}
-// 	if (++tmp == 0 && map->data[i][tmp] != '1')
-// 		throw_error("map should be closed", 1);
-// 	// check right
-// 	tmp = j;
-// 	while (tmp < ft_strlen(map->data[i]))
-// 	{
-// 		if (map->data[i][tmp] == '1')
-// 			break ;
-// 		if (map->data[i][tmp] == '0' && map->data[i][j] == map->player)
-// 			break ;
-// 		if (map->data[i][tmp] == 32)
-// 			throw_error("map should be closed", 1);
-// 		tmp++;
-// 	}
-// 	if (tmp == ft_strlen(map->data[i]) && map->data[i][tmp - 1] != '1')
-// 		throw_error("map should be closed", 1);
-// 	// checck up
-// 	tmp = i;
-// 	while (tmp >= 0)
-// 	{
-// 		//printf("char in testing : %c\n", map->data[tmp][j]);
-// 		if ((size_t)j >= ft_strlen(map->data[tmp])
-// 			&& map->data[tmp + 1][j] != '1')
-// 			throw_error("map should be closed", 1);
-// 		if (map->data[tmp][j] == '1')
-// 			break ;
-// 		if (map->data[tmp][j] == '0' && map->data[i][j] == map->player)
-// 			break ;
-// 		if (map->data[tmp][j] == 32)
-// 			throw_error("map should be closed", 1);
-// 		tmp--;
-// 	}
-// 	if (++tmp == 0 && map->data[tmp][j] != '1')
-// 		throw_error("map should be closed", 1);
-// 	// check down
-// 	tmp = i;
-// 	while (tmp < (size_t)map->map_size)
-// 	{
-// 		//printf("char in testing : %c\n", map->data[tmp][j]);
-// 		if ((size_t)j >= ft_strlen(map->data[tmp])
-// 			&& map->data[tmp - 1][j] != '1')
-// 			throw_error("map should be closed", 1);
-// 		if (map->data[tmp][j] == '1')
-// 			break ;
-// 		if (map->data[tmp][j] == '0' && map->data[i][j] == map->player)
-// 			break ;
-// 		if (map->data[tmp][j] == 32)
-// 			throw_error("map should be closed", 1);
-// 		tmp++;
-// 	}
-// 	if (tmp == (size_t)map->map_size && map->data[tmp - 1][j] != '1')
-// 		throw_error("map should be closed", 1);
-// }
 
 void	check_map(t_map *map)
 {
@@ -147,10 +50,8 @@ void	check_map(t_map *map)
 	while (map->data[i])
 	{
 		j = 0;
-		//ft_strlen(map->data[i]);
 		while (map->data[i][j])
 		{
-		//printf("%d\n",j);
 			if (map->data[i][j] == '0' || map->data[i][j] == map->player)
 				check_if_close(map, i, j);
 			j++;
@@ -180,19 +81,5 @@ int	parse_map(const char *path, t_cub *g)
 	check_map(&(g->map));
 	print_idn(&(g->idn));
 	print_map(&(g->map));
-	//printf("%d\n", g->map.map_size);
-	// (void)g;
-	// char	tmp[1000];
-	// char	*str;
-	// char	*t;
-
-	// str = ft_strdup("");
-	// while (read(fd, tmp, 1000) > 0)
-	// {
-	// 	t = str;
-	// 	str = ft_strjoin(str, tmp);
-	// 	free(t);
-	// }
-	// printf("\nmap: \n%s\n", str);
 	return (0);
 }
