@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/18 14:14:47 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/19 02:23:11 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "./libft/libft.h"
 # include "./get_next_line/get_next_line.h"
 # include "./minilibx/mlx.h"
+# include "./manage_player/manage_player.h"
 
 // GAME VARIBALES
 
@@ -43,16 +44,25 @@ typedef struct s_idn
 typedef struct s_map
 {
 	char	**data;
+	size_t	width;
+	size_t	height;
 	int		map_capacity;
 	int		map_size;
 	int		player;
 }	t_map;
 
+typedef struct s_player
+{
+	int		x;
+	int		y;
+}	t_player;
+
 // Gloabl struct
 typedef struct s_cub
 {
-	t_map	map;
-	t_idn	idn;
+	t_map		map;
+	t_idn		idn;
+	t_player	p;
 }	t_cub;
 
 int		parse_map(const char *path, t_cub *g);
@@ -85,4 +95,5 @@ void	set_rgb(t_idn *idn, char *key, char *value);
 
 void	print_map(t_map *map);
 void	print_idn(t_idn *idn);
+
 #endif
