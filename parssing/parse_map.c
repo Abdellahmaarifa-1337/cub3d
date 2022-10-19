@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:01:05 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/19 02:50:45 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/19 13:52:28 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int	open_file(const char *path)
 
 void	check_map(t_cub *cub)
 {
-	int	i;
-	int	j;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	while (cub->map.data[i])
@@ -60,8 +60,11 @@ void	check_map(t_cub *cub)
 			}
 			j++;
 		}
+		if (cub->map.width < j)
+			cub->map.width = j;
 		i++;
 	}
+	cub->map.height = i;
 }
 
 void	check_idn(t_idn *idn)

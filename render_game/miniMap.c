@@ -3,34 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   miniMap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/19 02:46:15 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/19 14:06:54 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./miniMap.h"
-
-void	get_WidthHeight(t_cub *cub)
-{
-	size_t	i;
-	size_t	j;
-
-	MAP.width = 0;
-	MAP.height = 0;
-	i = 0;
-	while (MAP.data[i])
-	{
-		j = 0;
-		while (MAP.data[i][j])
-			j++;
-		if (MAP.width < j)
-			MAP.width = j;
-		i++;
-	}
-	MAP.height = i;
-}
 
 void	putPixels(void* mlx, void* mlx_win, size_t i[2], size_t axe[2], int unit)
 {
@@ -89,8 +69,8 @@ void	renderingTheMap(void* mlx, void* mlx_win, t_cub* cub)
 			else if (MAP.data[i[0]][i[1]] == '0'
 				|| ft_strchr("NSWE", MAP.data[i[0]][i[1]]))
 				putPixels(mlx, mlx_win, i, axe, 0);
-			// if (ft_strchr("NSWE", MAP.data[i[0]][i[1]]))
-			// 	putPlayer(mlx, mlx_win, axe);
+			if (ft_strchr("NSWE", MAP.data[i[0]][i[1]]))
+				putPlayer(mlx, mlx_win, cub);
 			i[1]++;
 			axe[0] += CELL;
 		}
@@ -101,9 +81,8 @@ void	renderingTheMap(void* mlx, void* mlx_win, t_cub* cub)
 
 void	execute_MiniMap(void* mlx, void* mlx_win, t_cub* cub)
 {
-	get_WidthHeight(cub);
 	renderingTheMap(mlx, mlx_win, cub);
-	putPlayer(mlx, mlx_win, cub);
+	// putPlayer(mlx, mlx_win, cub);
 }
 
 

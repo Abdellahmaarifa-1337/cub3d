@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_game.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 08:58:40 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/19 02:52:36 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/19 13:55:07 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void render_game(t_cub *cub)
 	void*	mlx = NULL;
 	void*	mlx_win;
 
+	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, MAP.width * CELL, MAP.height * CELL, "miniMap");
 
-	mlx = mlx_init();
-	execute_MiniMap(mlx, cub);
+	execute_MiniMap(mlx, mlx_win, cub);
 	// mlx_key_hook(mlx_win, player_moves, cub);
 	
 	// (void)cub;
