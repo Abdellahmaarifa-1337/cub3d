@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:01:05 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/18 22:24:08 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/19 11:04:57 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,10 @@ void	check_map(t_map *map)
 
 void	check_idn(t_idn *idn)
 {
-	if (open(idn->_ea, O_RDONLY) == -1 || open(idn->_no, O_RDONLY) == -1
-		|| open(idn->_so, O_RDONLY) == -1 || open(idn->_we, O_RDONLY) == -1)
+	if ((idn->_ea && open(idn->_ea, O_RDONLY) == -1)
+		|| (idn->_no && open(idn->_no, O_RDONLY) == -1)
+		|| (idn->_so && open(idn->_so, O_RDONLY) == -1)
+		|| (idn->_we && open(idn->_we, O_RDONLY) == -1))
 		throw_error("file not exist", 1);
 }
 
