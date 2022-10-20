@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 12:10:26 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/17 20:49:03 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/19 18:41:42 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,3 +38,8 @@ int	ft_atoi(const char	*str)
 	}
 	return (res * ng);
 }
+
+
+
+
+
