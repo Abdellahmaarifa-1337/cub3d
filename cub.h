@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/20 13:00:12 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/20 13:24:01 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,6 @@ void	print_map(t_map *map);
 void	print_idn(t_idn *idn);
 
 // Manage Player
-void	set_player_position(t_cub *cub);
+void	set_map_attribute(t_cub *cub);
 
 #endif

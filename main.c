@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:50 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/20 12:07:31 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/20 13:23:47 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int ac, char **av)
 	g.map.player = 0;
 	g.map.data[g.map.map_capacity] = NULL;
 	parse_map(av[1], &g);
-	set_player_position(&g);
+	set_map_attribute(&g);
 	render_game(&g);
 	return (0);
 }
