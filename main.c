@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:50 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/19 13:48:53 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/18 22:34:37 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,11 @@ int	main(int ac, char **av)
 	*(g.idn._f) = -1;
 	g.idn._so = NULL;
 	g.idn._we = NULL;
-	g.map.height = 0;
-	g.map.width = 0;
 	g.map.data = (char **)(malloc(sizeof(char *) * 2));
 	g.map.map_size = 0;
 	g.map.map_capacity = 1;
 	g.map.player = 0;
 	g.map.data[g.map.map_capacity] = NULL;
 	parse_map(av[1], &g);
-	render_game(&g);
 	return (0);
 }

@@ -2,11 +2,11 @@ CC = CC
 CFLAGS = -Werror -Wextra -Wall
 NAME = cube3d
 
-SRC = ./main.c ./parssing/parse_map.c handel_error/throw_error.c \
+SRC = ./main.c ./parsing/parse_map.c handel_error/throw_error.c \
 		./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c \
-		./render_game/render_game.c ./parssing/get_identifiers.c ./parssing/get_map.c \
-		./parssing/utils.c ./parssing/get_map_utils.c ./parssing/get_identifiers_utils.c \
-		./parssing/check_if_close.c ./temp_functions.c render_game/miniMap.c
+		./render_game/render_game.c ./parsing/get_identifiers.c ./parsing/get_map.c \
+		./parsing/utils.c ./parsing/get_map_utils.c ./parsing/get_identifiers_utils.c \
+		./parsing/check_if_close.c ./temp_functions.c
 
 OBJ = ${SRC:.c=.o}
 
