@@ -6,17 +6,19 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/20 12:05:53 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/20 13:09:32 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./miniMap.h"
 
-void	set_player_position(t_cub *cub)
+void	set_map_attribute(t_cub *cub)
 {
 	size_t	i;
 	size_t	j;
 
+	MAP.width = 0;
+	MAP.height = 0;
 	i = 0;
 	while (MAP.data[i])
 	{
@@ -30,6 +32,8 @@ void	set_player_position(t_cub *cub)
 			}
 			j++;
 		}
+		if (MAP.width < j)
+			MAP.width = j;
 		i++;
 	}
 	MAP.height = i;
@@ -69,7 +73,8 @@ void	putPlayer(t_cub *cub)
 		x = 0;
 		while (x < CELL / 6)
 		{
-			mlx_pixel_put(cub->mlx, cub->mlx_win, PLY.x + a + x, PLY.y + a + y, PLAYER);
+			mlx_pixel_put(cub->mlx, cub->mlx_win,
+				PLY.x + a + x, PLY.y + a + y, PLAYER);
 			x++;
 		}
 		y++;

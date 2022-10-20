@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:01:05 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/20 12:10:25 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/19 11:04:57 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,36 +41,31 @@ int	open_file(const char *path)
 	return (fd);
 }
 
-void	check_map(t_cub *cub)
+void	check_map(t_map *map)
 {
-	size_t	i;
-	size_t	j;
+	int	i;
+	int	j;
 
 	i = 0;
-	while (cub->map.data[i])
+	while (map->data[i])
 	{
 		j = 0;
-		while (cub->map.data[i][j])
+		while (map->data[i][j])
 		{
-			if (cub->map.data[i][j] == '0'
-				|| cub->map.data[i][j] == cub->map.player) {
-				check_if_close(&(cub->map), i, j);
-				cub->p.x = j;
-				cub->p.y = i;
-			}
+			if (map->data[i][j] == '0' || map->data[i][j] == map->player)
+				check_if_close(map, i, j);
 			j++;
 		}
-		if (cub->map.width < j)
-			cub->map.width = j;
 		i++;
 	}
-	cub->map.height = i;
 }
 
 void	check_idn(t_idn *idn)
 {
-	if (open(idn->_ea, O_RDONLY) == -1 || open(idn->_no, O_RDONLY) == -1
-		|| open(idn->_so, O_RDONLY) == -1 || open(idn->_we, O_RDONLY) == -1)
+	if ((idn->_ea && open(idn->_ea, O_RDONLY) == -1)
+		|| (idn->_no && open(idn->_no, O_RDONLY) == -1)
+		|| (idn->_so && open(idn->_so, O_RDONLY) == -1)
+		|| (idn->_we && open(idn->_we, O_RDONLY) == -1))
 		throw_error("file not exist", 1);
 }
 
@@ -85,7 +80,7 @@ int	parse_map(const char *path, t_cub *g)
 		|| !g->idn._so || !g->idn._we)
 		throw_error("Identifier error!", 1);
 	get_map(fd, g);
-	check_map(g);
+	check_map(&(g->map));
 	print_idn(&(g->idn));
 	print_map(&(g->map));
 	return (0);

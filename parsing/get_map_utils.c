@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 11:18:15 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/18 11:53:42 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/19 11:06:56 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	check_walls(char *line)
 	while (line[i])
 	{
 		if (line[i] != '1' && line[i] != 32)
-			throw_error("the map should be closed by walls!", 1);
+			throw_error("Invalid map", 1);
 		i++;
 	}
 }
