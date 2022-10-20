@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   manage_player.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaarifa <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/01 16:43:05 by amaarifa          #+#    #+#             */
-/*   Updated: 2021/11/01 16:48:09 by amaarifa         ###   ########.fr       */
+/*   Created: 2022/10/19 19:43:55 by mkabissi          #+#    #+#             */
+/*   Updated: 2022/10/19 20:46:32 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_toupper(int c)
-{
-	if (c >= 97 && c <= 122)
-		return (c - 32);
-	return (c);
-}
+
+#ifndef MANAGE_PLAYER_H
+# define MANAGE_PLAYER_H
+
+# include "../cub.h"
+# include "../render_game/miniMap.h"
+
+int	player_moves(int keycode, t_cub *cub);
+
+#endif

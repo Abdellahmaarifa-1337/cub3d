@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   lib.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaarifa <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/01 16:43:05 by amaarifa          #+#    #+#             */
-/*   Updated: 2021/11/01 16:48:09 by amaarifa         ###   ########.fr       */
+/*   Created: 2022/10/18 11:28:13 by mkabissi          #+#    #+#             */
+/*   Updated: 2022/10/18 14:00:20 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_toupper(int c)
-{
-	if (c >= 97 && c <= 122)
-		return (c - 32);
-	return (c);
-}
+#ifndef	LIB_H
+#define	LIB_H
+
+#include "../cub.h"
+
+struct	t_idn;
+struct	t_map;
+struct	t_cub;
+
+int	rgbToInt(int r, int g, int b);
+
+#endif
