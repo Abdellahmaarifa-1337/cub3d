@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/20 12:02:23 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/20 12:42:55 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,10 @@ typedef struct s_idn
 typedef struct s_map
 {
 	char	**data;
-	size_t	width;
-	size_t	height;
 	int		map_capacity;
 	int		map_size;
 	int		player;
 }	t_map;
-
-typedef struct s_player
-{
-	int		x;
-	int		y;
-}	t_player;
 
 // Gloabl struct
 typedef struct s_cub

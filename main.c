@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:50 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/20 12:07:31 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/20 12:44:51 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ int	main(int ac, char **av)
 	*(g.idn._f) = -1;
 	g.idn._so = NULL;
 	g.idn._we = NULL;
-	g.map.height = 0;
-	g.map.width = 0;
 	g.map.data = (char **)(malloc(sizeof(char *) * 2));
 	g.map.map_size = 0;
 	g.map.map_capacity = 1;
