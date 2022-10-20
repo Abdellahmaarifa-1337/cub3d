@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/19 22:18:39 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/20 12:05:53 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,3 @@ int	execute_MiniMap(t_cub* cub)
 	putPlayer(cub);
 	return (0);
 }
-
-
-
