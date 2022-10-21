@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:47:57 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/21 04:33:33 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/21 05:41:14 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define WALL		0xE1E6E6
 # define PLAYER	0xF5DC50
 # define LINE		0xFF7D2D
-# define CELL		35
+# define CELL		52
 
 # define	PI		3.14159265359
 
