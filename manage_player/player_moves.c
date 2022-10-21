@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 23:23:04 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/20 11:21:30 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/21 05:16:58 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,63 @@
 void	move_up(t_cub *cub)
 {
 	// if (MAP.data[(PLY.x / CELL) - 1][PLY.y / CELL] == '0')
-		PLY.y = roundf(PLY.y - 5);
+		PLY.x += PLY.dx;
+		PLY.y += PLY.dy;
 }
 
 void	move_down(t_cub *cub)
 {
 	// if (MAP.data[(PLY.x / CELL) + 1][PLY.y / CELL] == '0')
-		PLY.y = roundf(PLY.y + 5);
+		PLY.x -= PLY.dx;
+		PLY.y -= PLY.dy;
 }
 
 void	move_right(t_cub *cub)
 {
-	// if (MAP.data[PLY.x / CELL][(PLY.y / CELL) + 1] == '0')
-		PLY.x = roundf(PLY.x + 5);
+	float	dx;
+	float	dy;
+	float	pa;
+
+	pa = PLY.pa + PI / 2;
+	if (pa > (2 * PI))
+		pa -= (2 * PI);
+	dx = cos(pa) * 5; 
+	dy = sin(pa) * 5;
+	PLY.x += dx;
+	PLY.y += dy;
 }
 
 void	move_left(t_cub *cub)
 {
-	// if (MAP.data[PLY.x][PLY.y - 1] == '0')
-		PLY.x = roundf(PLY.x - 5);
+	float	dx;
+	float	dy;
+	float	pa;
+
+	pa = PLY.pa - PI / 2;
+	if (pa < 0)
+		pa += (2 * PI);
+	dx = cos(pa) * 5;
+	dy = sin(pa) * 5;
+	PLY.x += dx;
+	PLY.y += dy;
+}
+     
+void	look_right(t_cub *cub)
+{
+	PLY.pa += 0.1;
+	if (PLY.pa > (2 * PI))
+		PLY.pa -= (2 * PI);
+	PLY.dx += cos(PLY.pa) * 5; 
+	PLY.dy += sin(PLY.pa) * 5;
+}
+
+void	look_left(t_cub *cub)
+{   
+	PLY.pa -= 0.1;
+	if (PLY.pa < 0)
+		PLY.pa += (2 * PI);
+	PLY.dx += cos(PLY.pa) * 5;
+	PLY.dy += sin(PLY.pa) * 5;
 }
 
 int	player_moves(int keycode, t_cub *cub)
@@ -43,14 +81,18 @@ int	player_moves(int keycode, t_cub *cub)
 	if (keycode == 13 || keycode == 1 || keycode == 2 || keycode == 0 \
 	|| keycode == 124 || keycode == 123)
 	{
-		if (keycode == 13/* || keycode == 126*/)
+		if (keycode == 13)
 			move_up(cub);
-		if (keycode == 1 /*|| keycode == 125*/)
+		if (keycode == 1)
 			move_down(cub);
-		if (keycode == 2 /*|| keycode == 124*/)
+		if (keycode == 2)
 			move_right(cub);
-		if (keycode == 0 /*|| keycode == 123*/)
+		if (keycode == 0)
 			move_left(cub);
+		if (keycode == 124)
+			look_right(cub);
+		if (keycode == 123)
+			look_left(cub);
 	}
 	if (keycode == 53)
 		exit(0);

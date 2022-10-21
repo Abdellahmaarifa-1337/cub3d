@@ -6,11 +6,23 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/20 13:09:32 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/21 04:58:45 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./miniMap.h"
+
+double	get_player_view_angle(t_cub *cub, int i, int j)
+{
+	if (MAP.data[i][j] == 'N')
+		return ((3 * PI) / 2);
+	if (MAP.data[i][j] == 'S')
+		return (PI / 2);
+	if (MAP.data[i][j] == 'E')
+		return (0);
+	else
+		return (PI);
+}
 
 void	set_map_attribute(t_cub *cub)
 {
@@ -29,6 +41,8 @@ void	set_map_attribute(t_cub *cub)
 			{
 				PLY.x = j * CELL;
 				PLY.y = i * CELL;
+				PLY.pa = get_player_view_angle(cub, i, j);
+				MAP.data[i][j] = '0';
 			}
 			j++;
 		}
@@ -37,6 +51,30 @@ void	set_map_attribute(t_cub *cub)
 		i++;
 	}
 	MAP.height = i;
+}
+
+void	draw_line(t_cub *cub)
+{
+	int		pixels;
+	float	dx;
+	float	dy;
+	float	px;
+	float	py;
+
+	dx = PLY.dx * 5;
+	dy = PLY.dy * 5;
+	pixels = sqrt((dx * dx) + (dy * dy));
+	dx /= pixels;
+	dy /= pixels;
+	px = PLY.x + CELL / 2;
+	py = PLY.y + CELL / 2;
+	while (pixels)
+	{
+		mlx_pixel_put(cub->mlx, cub->mlx_win, px, py, LINE);
+		px += dx;
+		py += dy;
+		--pixels;
+	}
 }
 
 void	putPixels(t_cub *cub, size_t i[2], size_t axe[2], int unit)
@@ -108,8 +146,12 @@ void	renderingTheMap(t_cub* cub)
 
 int	execute_MiniMap(t_cub* cub)
 {
+	PLY.dx = cos(PLY.pa) * 5;
+	PLY.dy = sin(PLY.pa) * 5;
+
 	mlx_clear_window(cub->mlx, cub->mlx_win);
 	renderingTheMap(cub);
 	putPlayer(cub);
+	draw_line(cub);
 	return (0);
 }
