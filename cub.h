@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/20 13:24:01 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/20 18:00:45 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,11 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	int		x;
-	int		y;
+	float	x;
+	float	y;
+	float	dx;
+	float	dy;
+	float	pa;
 }	t_player;
 
 // Gloabl struct
