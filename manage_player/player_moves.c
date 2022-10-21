@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 23:23:04 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/21 05:16:58 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/21 05:45:11 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,24 +77,19 @@ void	look_left(t_cub *cub)
 
 int	player_moves(int keycode, t_cub *cub)
 {
-	(void)cub;
-	if (keycode == 13 || keycode == 1 || keycode == 2 || keycode == 0 \
-	|| keycode == 124 || keycode == 123)
-	{
-		if (keycode == 13)
-			move_up(cub);
-		if (keycode == 1)
-			move_down(cub);
-		if (keycode == 2)
-			move_right(cub);
-		if (keycode == 0)
-			move_left(cub);
-		if (keycode == 124)
-			look_right(cub);
-		if (keycode == 123)
-			look_left(cub);
-	}
-	if (keycode == 53)
+	if (keycode == 13)
+		move_up(cub);
+	else if (keycode == 1)
+		move_down(cub);
+	else if (keycode == 2)
+		move_right(cub);
+	else if (keycode == 0)
+		move_left(cub);
+	else if (keycode == 124)
+		look_right(cub);
+	else if (keycode == 123)
+		look_left(cub);
+	else if (keycode == 53)
 		exit(0);
 	return (0);
 }
