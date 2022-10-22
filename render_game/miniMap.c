@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/21 06:23:11 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/21 17:42:30 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ void	draw_line(t_cub *cub, float pa)
 	py = PLY.y + CELL / 2;
 	while (pixels)
 	{
-		mlx_pixel_put(cub->mlx, cub->mlx_win, px, py, LINE);
+		my_mlx_pixel_put(cub, px, py, LINE);
+		// mlx_pixel_put(cub->mlx, cub->mlx_win, px, py, LINE);
 		px += dx;
 		py += dy;
 		--pixels;
@@ -89,9 +90,11 @@ void	putPixels(t_cub *cub, size_t i[2], size_t axe[2], int unit)
 		while (x < (i[1] + 1) * CELL - 1)
 		{
 			if (unit)
-				mlx_pixel_put(cub->mlx, cub->mlx_win, x, y, WALL);
+				my_mlx_pixel_put(cub, x, y, WALL);
+				// mlx_pixel_put(cub->mlx, cub->mlx_win, x, y, WALL);
 			else
-				mlx_pixel_put(cub->mlx, cub->mlx_win, x, y, EMPTY);
+				my_mlx_pixel_put(cub, x, y, EMPTY);
+				// mlx_pixel_put(cub->mlx, cub->mlx_win, x, y, EMPTY);
 			x++;
 		}
 		y++;
@@ -111,8 +114,9 @@ void	putPlayer(t_cub *cub)
 		x = 0;
 		while (x < CELL / 6)
 		{
-			mlx_pixel_put(cub->mlx, cub->mlx_win,
-				PLY.x + a + x, PLY.y + a + y, PLAYER);
+			my_mlx_pixel_put(cub, PLY.x + a + x, PLY.y + a + y, PLAYER);
+			// mlx_pixel_put(cub->mlx, cub->mlx_win,
+			// 	PLY.x + a + x, PLY.y + a + y, PLAYER);
 			x++;
 		}
 		y++;
@@ -146,29 +150,30 @@ void	renderingTheMap(t_cub* cub)
 
 int	execute_MiniMap(t_cub* cub)
 {
-	// int	pa;
 
 	PLY.dx = cos(PLY.pa) * 5;
 	PLY.dy = sin(PLY.pa) * 5;
 	mlx_clear_window(cub->mlx, cub->mlx_win);
 	renderingTheMap(cub);
 	putPlayer(cub);
-		// draw_line(cub, PLY.pa);
+	// draw_line(cub, PLY.pa);
 		// draw_line(cub, PLY.pa + (PI / 12));
 		// draw_line(cub, PLY.pa - (PI / 12));
 		// draw_line(cub, PLY.pa + (PI / 6));
-		// draw_line(cub, PLY.pa - (PI / 6));
+	// 	draw_line(cub, PLY.pa - (PI / 6));
+	// int	pa;
 	// pa = PLY.pa;
 	// while (pa >= PLY.pa - (PI / 6))
 	// {
 	// 	draw_line(cub, pa);
-	// 	pa -= 0.5;
+	// 	pa += 0.1;
 	// }
-	// pa = PLY.pa + 0.5;
+	// pa = PLY.pa + 0.1;
 	// while (pa <= PLY.pa + (PI / 6))
 	// {
 	// 	draw_line(cub, pa);
-	// 	pa += 0.5;
+	// 	pa -= 0.1;
 	// }
 	return (0);
 }
+

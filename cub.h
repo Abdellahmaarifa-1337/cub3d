@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/20 18:00:45 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/21 17:22:48 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@
 
 // GAME VARIBALES
 
+# define	MAP	cub->map
+# define	PLY cub->p
+# define	IMG	cub->img
+
 # define EXT_LEN 4
 # define EXT ".cub"
 # define IDENTIFIERS_NUMBER 6
@@ -29,6 +33,14 @@
 # define S 2
 # define E 3
 # define W 4
+
+typedef struct	s_img {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_img;
 
 typedef struct s_idn
 {
@@ -65,6 +77,7 @@ typedef struct s_cub
 	t_map		map;
 	t_idn		idn;
 	t_player	p;
+	t_img		img;
 	void*		mlx;
 	void*		mlx_win;
 }	t_cub;
