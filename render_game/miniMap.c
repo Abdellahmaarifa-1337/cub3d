@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniMap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/22 15:32:23 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/22 17:27:13 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ int	execute_MiniMap(t_cub* cub)
 	mlx_clear_window(cub->mlx, cub->mlx_win);
 	renderingTheMap(cub);
 	putPlayer(cub);
-	// draw_line(cub, PLY.pa);
+	draw_line(cub, PLY.pa);
 	// 	draw_line(cub, PLY.pa + (PI / 12));
 	// 	draw_line(cub, PLY.pa - (PI / 12));
 	// 	draw_line(cub, PLY.pa + (PI / 6));
