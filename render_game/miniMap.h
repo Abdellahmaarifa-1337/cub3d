@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:47:57 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/22 12:50:47 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/22 15:42:44 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define WALL		0xE1E6E6
 # define PLAYER	0xF5DC50
 # define LINE		0xFF7D2D
-# define CELL		54
+# define CELL		52
 
 # define	PI		3.14159265359
 

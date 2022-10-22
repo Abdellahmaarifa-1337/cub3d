@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/21 17:42:30 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/22 15:32:23 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	set_map_attribute(t_cub *cub)
 		{
 			if (ft_strchr("NSWE", MAP.data[i][j]))
 			{
-				PLY.x = j * CELL;
-				PLY.y = i * CELL;
+				PLY.x = roundf(j * CELL + CELL / 2);
+				PLY.y = roundf(i * CELL + CELL / 2);
 				PLY.pa = get_player_view_angle(cub, i, j);
 				MAP.data[i][j] = '0';
 			}
@@ -66,12 +66,11 @@ void	draw_line(t_cub *cub, float pa)
 	pixels = sqrt((dx * dx) + (dy * dy));
 	dx /= pixels;
 	dy /= pixels;
-	px = PLY.x + CELL / 2;
-	py = PLY.y + CELL / 2;
+	px = PLY.x;
+	py = PLY.y;
 	while (pixels)
 	{
 		my_mlx_pixel_put(cub, px, py, LINE);
-		// mlx_pixel_put(cub->mlx, cub->mlx_win, px, py, LINE);
 		px += dx;
 		py += dy;
 		--pixels;
@@ -91,10 +90,8 @@ void	putPixels(t_cub *cub, size_t i[2], size_t axe[2], int unit)
 		{
 			if (unit)
 				my_mlx_pixel_put(cub, x, y, WALL);
-				// mlx_pixel_put(cub->mlx, cub->mlx_win, x, y, WALL);
 			else
 				my_mlx_pixel_put(cub, x, y, EMPTY);
-				// mlx_pixel_put(cub->mlx, cub->mlx_win, x, y, EMPTY);
 			x++;
 		}
 		y++;
@@ -103,20 +100,16 @@ void	putPixels(t_cub *cub, size_t i[2], size_t axe[2], int unit)
 
 void	putPlayer(t_cub *cub)
 {
-	size_t	a;
-	size_t	x;
-	size_t	y;
+	int	x = 0;
+	int	y = 0;
 
-	a = roundf((5 * CELL) / 12);
-	y = 0;
-	while (y < CELL / 6)
+	y = - (CELL / 12);
+	while (y < (CELL / 12))
 	{
-		x = 0;
-		while (x < CELL / 6)
+		x = - (CELL / 12);
+		while (x < (CELL / 12))
 		{
-			my_mlx_pixel_put(cub, PLY.x + a + x, PLY.y + a + y, PLAYER);
-			// mlx_pixel_put(cub->mlx, cub->mlx_win,
-			// 	PLY.x + a + x, PLY.y + a + y, PLAYER);
+			my_mlx_pixel_put(cub, PLY.x + x, PLY.y + y, PLAYER);
 			x++;
 		}
 		y++;
@@ -148,19 +141,37 @@ void	renderingTheMap(t_cub* cub)
 	}
 }
 
+void	my_mlx_clear_image(t_cub *cub)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	while (i < MAP.height * CELL) {
+		j = 0;
+		while (j < MAP.width * CELL) {
+			my_mlx_pixel_put(cub, j, i, 0x0);
+			j++;
+		}
+		i++;
+	}
+}
+
 int	execute_MiniMap(t_cub* cub)
 {
 
 	PLY.dx = cos(PLY.pa) * 5;
 	PLY.dy = sin(PLY.pa) * 5;
+	my_mlx_clear_image(cub);
 	mlx_clear_window(cub->mlx, cub->mlx_win);
 	renderingTheMap(cub);
 	putPlayer(cub);
 	// draw_line(cub, PLY.pa);
-		// draw_line(cub, PLY.pa + (PI / 12));
-		// draw_line(cub, PLY.pa - (PI / 12));
-		// draw_line(cub, PLY.pa + (PI / 6));
+	// 	draw_line(cub, PLY.pa + (PI / 12));
+	// 	draw_line(cub, PLY.pa - (PI / 12));
+	// 	draw_line(cub, PLY.pa + (PI / 6));
 	// 	draw_line(cub, PLY.pa - (PI / 6));
+	
 	// int	pa;
 	// pa = PLY.pa;
 	// while (pa >= PLY.pa - (PI / 6))
@@ -174,6 +185,8 @@ int	execute_MiniMap(t_cub* cub)
 	// 	draw_line(cub, pa);
 	// 	pa -= 0.1;
 	// }
+	
+	mlx_put_image_to_window(cub->mlx, cub->mlx_win, IMG.img, 0, 0);
 	return (0);
 }
 
