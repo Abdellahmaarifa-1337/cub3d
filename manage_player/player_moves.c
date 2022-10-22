@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 23:23:04 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/21 05:45:11 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/21 16:50:10 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	move_right(t_cub *cub)
 	pa = PLY.pa + PI / 2;
 	if (pa > (2 * PI))
 		pa -= (2 * PI);
-	dx = cos(pa) * 5; 
-	dy = sin(pa) * 5;
+	dx = cos(pa); 
+	dy = sin(pa);
 	PLY.x += dx;
 	PLY.y += dy;
 }
@@ -51,28 +51,28 @@ void	move_left(t_cub *cub)
 	pa = PLY.pa - PI / 2;
 	if (pa < 0)
 		pa += (2 * PI);
-	dx = cos(pa) * 5;
-	dy = sin(pa) * 5;
+	dx = cos(pa);
+	dy = sin(pa);
 	PLY.x += dx;
 	PLY.y += dy;
 }
      
 void	look_right(t_cub *cub)
 {
-	PLY.pa += 0.1;
+	PLY.pa += 0.05;
 	if (PLY.pa > (2 * PI))
 		PLY.pa -= (2 * PI);
-	PLY.dx += cos(PLY.pa) * 5; 
-	PLY.dy += sin(PLY.pa) * 5;
+	PLY.dx += cos(PLY.pa); 
+	PLY.dy += sin(PLY.pa);
 }
 
 void	look_left(t_cub *cub)
 {   
-	PLY.pa -= 0.1;
+	PLY.pa -= 0.05;
 	if (PLY.pa < 0)
 		PLY.pa += (2 * PI);
-	PLY.dx += cos(PLY.pa) * 5;
-	PLY.dy += sin(PLY.pa) * 5;
+	PLY.dx += cos(PLY.pa);
+	PLY.dy += sin(PLY.pa);
 }
 
 int	player_moves(int keycode, t_cub *cub)
