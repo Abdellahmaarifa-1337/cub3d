@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 08:58:40 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/22 14:17:05 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/23 17:47:41 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void render_game(t_cub *cub)
 	cub->mlx = mlx_init();
 	cub->mlx_win = mlx_new_window(cub->mlx, MAP.width * CELL,
 		MAP.height * CELL, "miniMap");
+	// cub->mlx_win = mlx_new_window(cub->mlx, 1080, 720, "miniMap");
 	IMG.img = mlx_new_image(cub->mlx, MAP.width * CELL, MAP.height * CELL);
 	IMG.addr = mlx_get_data_addr(IMG.img, &IMG.bits_per_pixel, &IMG.line_length,
 		&IMG.endian);

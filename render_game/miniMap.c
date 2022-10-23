@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/23 12:22:09 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/23 20:45:05 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,28 +53,49 @@ void	set_map_attribute(t_cub *cub)
 	MAP.height = i;
 }
 
+void	ray_drawing(t_cub *cub, float *p, float *d, int pixels)
+{
+	pixels = sqrt((d[0] * d[0]) + (d[1] * d[1]));
+	d[0] /= pixels;
+	d[1] /= pixels;
+	while (pixels)
+	{
+		my_mlx_pixel_put(cub, p[0], p[1], LINE);
+		p[0] += d[0];
+		p[1] += d[1];
+		--pixels;
+	}
+}
 void	draw_line(t_cub *cub, float pa)
 {
 	int		pixels;
-	float	dx;
-	float	dy;
-	float	px;
-	float	py;
+	float	dl;
+	float	d[2];
+	float	p[2];
 
-	dx = cos(pa) * 5 * (CELL / 2);
-	dy = sin(pa) * 5 * (CELL / 2);
-	pixels = sqrt((dx * dx) + (dy * dy));
-	dx /= pixels;
-	dy /= pixels;
-	px = PLY.x;
-	py = PLY.y;
-	while (pixels)
+	pixels = 0;
+	RAY.rayLenght = 12;
+	dl = 12;
+	d[0] = 0;
+	d[1] = 0;
+	p[0] = PLY.x;
+	p[1] = PLY.y;
+	while (dl > 0)
 	{
-		my_mlx_pixel_put(cub, px, py, LINE);
-		px += dx;
-		py += dy;
-		--pixels;
+		d[0] = cos(pa) * RAY.rayLenght;
+		d[1] = sin(pa) * RAY.rayLenght;
+		if (MAP.data[(int)(p[1] + d[1]) / CELL][(int)(p[0] + d[0]) / CELL] == '0')
+		{
+			ray_drawing(cub, p, d, pixels);
+			printf("px: %d\tpy: %d\n", (int)(p[0]) / CELL, (int)(p[1]) / CELL);
+		}
+		else
+			dl /= 2;
+		RAY.rayLenght += dl;
 	}
+	d[0] = cos(pa) * RAY.rayLenght;
+	d[1] = sin(pa) * RAY.rayLenght;
+	ray_drawing(cub, p, d, pixels);
 }
 
 void	putPixels(t_cub *cub, size_t i[2], size_t axe[2], int unit)

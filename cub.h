@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/21 17:22:48 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/23 17:52:31 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@
 # include "./get_next_line/get_next_line.h"
 # include "./minilibx/mlx.h"
 
-// GAME VARIBALES
 
 # define	MAP	cub->map
 # define	PLY cub->p
+# define	RAY cub->ray
 # define	IMG	cub->img
+
+// GAME VARIBALES
 
 # define EXT_LEN 4
 # define EXT ".cub"
@@ -62,6 +64,12 @@ typedef struct s_map
 	int		player;
 }	t_map;
 
+typedef	struct s_ray
+{
+	float	rayLenght;
+}	t_ray;
+
+
 typedef struct s_player
 {
 	float	x;
@@ -77,6 +85,7 @@ typedef struct s_cub
 	t_map		map;
 	t_idn		idn;
 	t_player	p;
+	t_ray		ray;
 	t_img		img;
 	void*		mlx;
 	void*		mlx_win;
