@@ -6,63 +6,32 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 23:23:04 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/22 17:31:14 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/23 12:08:26 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./manage_player.h"
 #include <math.h>
 
-int is_wall(t_cub *cub, int dx, int dy, int not)
+
+int is_wall(t_cub *cub, int x, int y)
 {
-	int xcell;
-	int ycell;
-	float	pa;
+	int px1, px2, py1, py2;
 
-	// test up
-	xcell = ((PLY.x + (PLY.dx - CELL / 12)) / CELL);
-	ycell = ((PLY.y	+ (PLY.dy - CELL / 12)) / CELL);
-	if (cub->map.data[ycell][xcell] == '1' && not != N)
-		return (1);
-
-	// test down
-	xcell = ((PLY.x - (PLY.dx - CELL / 12)) / CELL);
-	ycell = ((PLY.y	- (PLY.dy - CELL / 12)) / CELL);
-	if (cub->map.data[ycell][xcell] == '1' && not != S)
-		return (1);
-	// test right
-	if (!dx && !dy && not != E)
-	{
-		pa = PLY.pa + PI / 2;
-		if (pa > (2 * PI))
-			pa -= (2 * PI);
-		dx = cos(pa);
-		dy = sin(pa);
-	}
-	xcell = ((PLY.x + (dx + CELL / 12)) / CELL);
-	ycell = ((PLY.y	+ (dy + CELL / 12)) / CELL);
-	if (cub->map.data[ycell][xcell] == '1'  && not != E)
-		return (1);
-	// test left
-	if (!dx && !dy && not != W)
-	{
-		pa = PLY.pa - PI / 2;
-		if (pa < 0)
-			pa += (2 * PI);
-		dx = cos(pa);
-		dy = sin(pa);
-	}
-	xcell = ((PLY.x + (dx - CELL / 12)) / CELL);
-	ycell = ((PLY.y	+ (dy - CELL / 12)) / CELL);
-	if (cub->map.data[ycell][xcell] == '1' && not != W)
+	px1 = (x - PLY_WIDTH / 2) / CELL;
+	px2 = (x + PLY_WIDTH / 2) / CELL;
+	py1 = (y - PLY_WIDTH / 2) / CELL;
+	py2 = (y + PLY_WIDTH / 2) / CELL;
+	if (cub->map.data[y / CELL][px1] == '1' || cub->map.data[y / CELL][px2] == '1'
+	|| cub->map.data[py1][x / CELL] == '1' || cub->map.data[py2][x / CELL] == '1')
 		return (1);
 	return (0);
+
 }
 
 void	move_up(t_cub *cub)
 {
-	// if (MAP.data[(PLY.x / CELL) - 1][PLY.y / CELL] == '0')
-	if (!is_wall(cub, 0 , 0 , S))
+	if (!is_wall(cub, PLY.x + PLY.dx, PLY.y + PLY.dy))
 	{
 		PLY.x += PLY.dx;
 		PLY.y += PLY.dy;
@@ -71,9 +40,7 @@ void	move_up(t_cub *cub)
 
 void	move_down(t_cub *cub)
 {
-	// if (MAP.data[(PLY.x / CELL) + 1][PLY.y / CELL] == '0')
-
-	if (!is_wall(cub, 0, 0, N))
+	if (!is_wall(cub, PLY.x - PLY.dx, PLY.y - PLY.dy))
 	{
 		PLY.x -= PLY.dx;
 		PLY.y -= PLY.dy;
@@ -91,7 +58,7 @@ void	move_right(t_cub *cub)
 		pa -= (2 * PI);
 	dx = cos(pa);
 	dy = sin(pa);
-	if (!is_wall(cub, dx ,dy, W))
+	if (!is_wall(cub,  PLY.x + dx, PLY.y + dy))
 	{
 		PLY.x += dx;
 		PLY.y += dy;
@@ -110,7 +77,7 @@ void	move_left(t_cub *cub)
 	dx = cos(pa);
 	dy = sin(pa);
 
-	if (!is_wall(cub, dx, dy, E))
+	if (!is_wall(cub, PLY.x + dx, PLY.y + dy))
 	{
 		PLY.x += dx;
 		PLY.y += dy;
