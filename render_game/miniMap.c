@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/23 12:18:26 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/23 12:22:09 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	set_map_attribute(t_cub *cub)
 				PLY.y = i * CELL + (float)((float)CELL / 2);
 				PLY.pa = get_player_view_angle(cub, i, j);
 				MAP.data[i][j] = '0';
-	printf("x: %.2f\ty: %.2f\n", PLY.x, PLY.y);
 			}
 			j++;
 		}
@@ -52,7 +51,6 @@ void	set_map_attribute(t_cub *cub)
 		i++;
 	}
 	MAP.height = i;
-	exit(0);
 }
 
 void	draw_line(t_cub *cub, float pa)
