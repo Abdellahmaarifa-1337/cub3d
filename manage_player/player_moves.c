@@ -6,25 +6,45 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 23:23:04 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/23 12:09:27 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/23 12:18:02 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./manage_player.h"
 #include <math.h>
 
-void	move_up(t_cub *cub) 
+
+int is_wall(t_cub *cub, int x, int y)
 {
-	// if (MAP.data[(PLY.x / CELL) - 1][PLY.y / CELL] == '0')
+	int px1, px2, py1, py2;
+
+	px1 = (x - PLY_WIDTH / 2) / CELL;
+	px2 = (x + PLY_WIDTH / 2) / CELL;
+	py1 = (y - PLY_WIDTH / 2) / CELL;
+	py2 = (y + PLY_WIDTH / 2) / CELL;
+	if (cub->map.data[y / CELL][px1] == '1' || cub->map.data[y / CELL][px2] == '1'
+	|| cub->map.data[py1][x / CELL] == '1' || cub->map.data[py2][x / CELL] == '1')
+		return (1);
+	return (0);
+
+}
+
+void	move_up(t_cub *cub)
+{
+	if (!is_wall(cub, PLY.x + PLY.dx, PLY.y + PLY.dy))
+	{
 		PLY.x += PLY.dx;
 		PLY.y += PLY.dy;
+	}
 }
 
 void	move_down(t_cub *cub)
 {
-	// if (MAP.data[(PLY.x / CELL) + 1][PLY.y / CELL] == '0')
+	if (!is_wall(cub, PLY.x - PLY.dx, PLY.y - PLY.dy))
+	{
 		PLY.x -= PLY.dx;
 		PLY.y -= PLY.dy;
+	}
 }
 
 void	move_right(t_cub *cub)
@@ -36,10 +56,13 @@ void	move_right(t_cub *cub)
 	pa = PLY.pa + PI / 2;
 	if (pa > (2 * PI))
 		pa -= (2 * PI);
-	dx = cos(pa); 
+	dx = cos(pa);
 	dy = sin(pa);
-	PLY.x += dx;
-	PLY.y += dy;
+	if (!is_wall(cub,  PLY.x + dx, PLY.y + dy))
+	{
+		PLY.x += dx;
+		PLY.y += dy;
+	}
 }
 
 void	move_left(t_cub *cub)
@@ -53,8 +76,12 @@ void	move_left(t_cub *cub)
 		pa += (2 * PI);
 	dx = cos(pa);
 	dy = sin(pa);
-	PLY.x += dx;
-	PLY.y += dy;
+
+	if (!is_wall(cub, PLY.x + dx, PLY.y + dy))
+	{
+		PLY.x += dx;
+		PLY.y += dy;
+	}
 }
      
 void	look_right(t_cub *cub)
@@ -62,7 +89,7 @@ void	look_right(t_cub *cub)
 	PLY.pa += 0.05;
 	if (PLY.pa > (2 * PI))
 		PLY.pa -= (2 * PI);
-	PLY.dx += cos(PLY.pa); 
+	PLY.dx += cos(PLY.pa);
 	PLY.dy += sin(PLY.pa);
 }
 
