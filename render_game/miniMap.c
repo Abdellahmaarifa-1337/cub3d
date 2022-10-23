@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/22 15:32:23 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/22 19:16:22 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,11 @@ void	set_map_attribute(t_cub *cub)
 		{
 			if (ft_strchr("NSWE", MAP.data[i][j]))
 			{
-				PLY.x = roundf(j * CELL + CELL / 2);
-				PLY.y = roundf(i * CELL + CELL / 2);
+				PLY.x = j * CELL + (float)((float)CELL / 2);
+				PLY.y = i * CELL + (float)((float)CELL / 2);
 				PLY.pa = get_player_view_angle(cub, i, j);
 				MAP.data[i][j] = '0';
+	printf("x: %.2f\ty: %.2f\n", PLY.x, PLY.y);
 			}
 			j++;
 		}
@@ -51,6 +52,7 @@ void	set_map_attribute(t_cub *cub)
 		i++;
 	}
 	MAP.height = i;
+	exit(0);
 }
 
 void	draw_line(t_cub *cub, float pa)

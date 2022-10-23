@@ -6,14 +6,14 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 23:23:04 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/21 16:50:10 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/23 12:09:27 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./manage_player.h"
 #include <math.h>
 
-void	move_up(t_cub *cub)
+void	move_up(t_cub *cub) 
 {
 	// if (MAP.data[(PLY.x / CELL) - 1][PLY.y / CELL] == '0')
 		PLY.x += PLY.dx;
