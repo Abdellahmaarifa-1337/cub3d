@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/25 12:10:33 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/25 13:51:52 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,6 @@ void	putPlayer(t_cub *cub, float px, float py)
 	}
 }
 
-int is_wall_ray(t_cub *cub, int x, int y)
-{
-	if (cub->map.data[(int)(y / CELL)][(int)(x / CELL)] == '1')
-		return 1;
-	return (0);
-}
 
 int is_ray_up(t_cub *cub)
 {
@@ -107,6 +101,26 @@ int is_ray_right(t_cub *cub)
 	return (2);
 }
 
+int is_wall_ray(t_cub *cub, int x, int y)
+{
+
+	printf("om checck : x: %d y :%d\n", x/CELL, y/CELL);
+	if (cub->map.data[(int)(y / CELL)][(int)(x / CELL)] == '1')
+		return 1;
+	// printf("between : %d %d and %d %d\n",(y) / CELL,(x + 5)/ CELL,  (y + 5) / CELL, (x - 5) / CELL);
+	if ( is_ray_up(cub) &&  !is_ray_right(cub) && cub->map.data[(int)((y) / CELL)][(int)((x + 5) / CELL)] == '1' && cub->map.data[(int)((y + 5) / CELL)][(int)((x - 5) / CELL)] == '1')
+		return 1;
+	if ( !is_ray_up(cub) &&  !is_ray_right(cub) && cub->map.data[(int)((y - 5) / CELL)][(int)((x) / CELL)] == '1' && cub->map.data[(int)((y + 5) / CELL)][(int)((x + 5) / CELL)] == '1')
+		return 1;
+	if ( !is_ray_up(cub) &&  is_ray_right(cub) && cub->map.data[(int)((y - 5) / CELL)][(int)((x) / CELL)] == '1' && cub->map.data[(int)((y + 5) / CELL)][(int)((x - 5) / CELL)] == '1')
+		return 1;
+	if ( is_ray_up(cub) &&  is_ray_right(cub) && cub->map.data[(int)((y - 5) / CELL)][(int)((x - 5) / CELL)] == '1' && cub->map.data[(int)((y + 5) / CELL)][(int)((x + 5) / CELL)] == '1')
+	{
+		printf("between : %d %d and %d %d\n",(x - 5) / CELL,(y - 5)/ CELL,  (x +5) / CELL, (y + 5) / CELL);
+		return 1;
+	}
+	return (0);
+}
 void get_ray_ver(t_cub *cub, int *ray)
 {
 	float fptx = 0;
