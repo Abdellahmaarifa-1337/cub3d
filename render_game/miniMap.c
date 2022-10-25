@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/25 10:23:09 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/25 11:28:00 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,12 +142,12 @@ void get_ray_ver(t_cub *cub, int *ray)
 		fpty = PLY.y + fabs((PLY.x - (float)fptx)) * tan(PLY.pa) * xas;
 	
 	// printf("size of the line : %zu\n", ft_strlen(cub->map.data[fpty / CELL]) * CELL);
-	// if (is_out(cub, fptx, fpty) )
-	// {
-	// 	ray[0] = -1;
-	// 	ray[1] = -1;	
-	// 	return ;
-	// }
+	if (is_out(cub, fptx, fpty) )
+	{
+		ray[0] = -1;
+		ray[1] = -1;	
+		return ;
+	}
 	printf("p : %f %f\n", PLY.x , PLY.y );
 	printf("%f %f\n",fptx / CELL , fpty / CELL);
 	
