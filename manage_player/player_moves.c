@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 23:23:04 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/23 12:08:26 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/25 00:42:24 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	move_left(t_cub *cub)
      
 void	look_right(t_cub *cub)
 {
-	PLY.pa += 0.05;
+	PLY.pa += INC_PA;
 	if (PLY.pa > (2 * PI))
 		PLY.pa -= (2 * PI);
 	PLY.dx += cos(PLY.pa);
@@ -95,7 +95,7 @@ void	look_right(t_cub *cub)
 
 void	look_left(t_cub *cub)
 {   
-	PLY.pa -= 0.05;
+	PLY.pa -= INC_PA;
 	if (PLY.pa < 0)
 		PLY.pa += (2 * PI);
 	PLY.dx += cos(PLY.pa);
