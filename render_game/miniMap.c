@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/25 01:41:24 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/25 10:23:09 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,13 @@ void	putPlayer(t_cub *cub, float px, float py)
 	}
 }
 
+int is_wall_ray(t_cub *cub, int x, int y)
+{
+	if (cub->map.data[(int)(y / CELL)][(int)(x / CELL)] == '1')
+		return 1;
+	return (0);
+}
+
 int is_ray_up(t_cub *cub)
 {
 	if (PLY.pa > 0 && PLY.pa < PI)
@@ -132,17 +139,17 @@ void get_ray_ver(t_cub *cub, int *ray)
 	if (PLY.pa == 0 || PLY.pa == PI)
 		fpty = PLY.y;
 	else
-		fpty = fabs(PLY.y + fabs((PLY.x - (float)fptx)) * tan(PLY.pa) * xas);
+		fpty = PLY.y + fabs((PLY.x - (float)fptx)) * tan(PLY.pa) * xas;
 	
 	// printf("size of the line : %zu\n", ft_strlen(cub->map.data[fpty / CELL]) * CELL);
-	if (is_out(cub, fptx, fpty))
-	{
-		ray[0] = -1;
-		ray[1] = -1;	
-		return ;
-	}
+	// if (is_out(cub, fptx, fpty) )
+	// {
+	// 	ray[0] = -1;
+	// 	ray[1] = -1;	
+	// 	return ;
+	// }
 	printf("p : %f %f\n", PLY.x , PLY.y );
-	printf("%f %f\n",fptx, fpty);
+	printf("%f %f\n",fptx / CELL , fpty / CELL);
 	
 	my_mlx_pixel_put(cub, (int)(fptx ), (int)(fpty), WALL);
 	//return ;
@@ -151,7 +158,7 @@ void get_ray_ver(t_cub *cub, int *ray)
 	while (1)
 	{
 		// printf("p : %f %f\n", px / CELL, py / CELL);
-
+		printf("max == %lu\n", cub->map.width * CELL);
 		printf(".......... px: %f\tpy: %f\n", px / CELL, py / CELL);
 		if (is_out(cub, px, py))
 		{
@@ -159,7 +166,7 @@ void get_ray_ver(t_cub *cub, int *ray)
 			ray[1] = -1;
 			printf("hohohohohohhohohohohohohohohhohohohohohohoho\n");
 			break ;
-		}if (cub->map.data[(int)(py / CELL)][(int)(px / CELL)] == '1')
+		}if (is_wall_ray(cub, px, py))
 		{
 			ray[0] = px;
 			ray[1] = py;
@@ -224,7 +231,7 @@ void get_ray(t_cub *cub, int *ray)
 			ray[1] = -1;
 			break ;
 		}
-		if (cub->map.data[(int)(py / CELL)][(int)(px / CELL)] == '1')
+		if (is_wall_ray(cub, px, py))
 		{
 			ray[0] = px;
 			ray[1] = py;
