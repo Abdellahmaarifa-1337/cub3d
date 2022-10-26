@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/26 22:49:45 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/26 22:53:22 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,13 +187,14 @@ void get_ray_ver(t_cub *cub, int *ray)
 		{
 			ray[0] = px;
 			ray[1] = py;
-			putPlayer(cub, px, py);
+			my_mlx_pixel_put(cub, px, py, WALL);
+			//putPlayer(cub, px, py);
 			break ;
 		}
 		else
 		{
-			//printf("^^^^hor^^^^\n");
-			putPlayer(cub, px, py);
+			//putPlayer(cub, px, py);
+			my_mlx_pixel_put(cub, px, py, WALL);
 			px += xa;
 			py += ya;
 			
@@ -248,7 +249,7 @@ void get_ray(t_cub *cub, int *ray)
 		{
 			ray[0] = px;
 			ray[1] = py;
-			putPlayer(cub, px, py);
+			//putPlayer(cub, px, py);
 			break ;
 		}
 		printf("^^^^hor^^^^\n");
@@ -256,12 +257,14 @@ void get_ray(t_cub *cub, int *ray)
 		{
 			ray[0] = px;
 			ray[1] = py;
-			putPlayer(cub, px, py);
+			my_mlx_pixel_put(cub, px, py, WALL);
+			//putPlayer(cub, px, py);
 			break ;
 		}
 		else
 		{
-			putPlayer(cub, px, py);
+			my_mlx_pixel_put(cub, px, py, WALL);
+			//putPlayer(cub, px, py);
 			px += xa;
 			py += ya;
 			
