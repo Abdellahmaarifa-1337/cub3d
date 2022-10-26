@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/25 13:51:52 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/25 22:52:07 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,18 +105,18 @@ int is_wall_ray(t_cub *cub, int x, int y)
 {
 
 	printf("om checck : x: %d y :%d\n", x/CELL, y/CELL);
-	if (cub->map.data[(int)(y / CELL)][(int)(x / CELL)] == '1')
-		return 1;
 	// printf("between : %d %d and %d %d\n",(y) / CELL,(x + 5)/ CELL,  (y + 5) / CELL, (x - 5) / CELL);
-	if ( is_ray_up(cub) &&  !is_ray_right(cub) && cub->map.data[(int)((y) / CELL)][(int)((x + 5) / CELL)] == '1' && cub->map.data[(int)((y + 5) / CELL)][(int)((x - 5) / CELL)] == '1')
+	if (MAP.data[(int)roundf(y / CELL)][(int)roundf(x / CELL)] == '1')
 		return 1;
-	if ( !is_ray_up(cub) &&  !is_ray_right(cub) && cub->map.data[(int)((y - 5) / CELL)][(int)((x) / CELL)] == '1' && cub->map.data[(int)((y + 5) / CELL)][(int)((x + 5) / CELL)] == '1')
+	if ( is_ray_up(cub) &&  !is_ray_right(cub) && MAP.data[(int)roundf((y) / CELL)][(int)roundf((x + 5) / CELL)] == '1' && MAP.data[(int)roundf((y + 5) / CELL)][(int)roundf((x - 5) / CELL)] == '1')
 		return 1;
-	if ( !is_ray_up(cub) &&  is_ray_right(cub) && cub->map.data[(int)((y - 5) / CELL)][(int)((x) / CELL)] == '1' && cub->map.data[(int)((y + 5) / CELL)][(int)((x - 5) / CELL)] == '1')
+	if ( !is_ray_up(cub) &&  !is_ray_right(cub) && MAP.data[(int)roundf((y - 5) / CELL)][(int)roundf((x) / CELL)] == '1' && MAP.data[(int)roundf((y + 5) / CELL)][(int)roundf((x + 5) / CELL)] == '1')
 		return 1;
-	if ( is_ray_up(cub) &&  is_ray_right(cub) && cub->map.data[(int)((y - 5) / CELL)][(int)((x - 5) / CELL)] == '1' && cub->map.data[(int)((y + 5) / CELL)][(int)((x + 5) / CELL)] == '1')
+	if ( !is_ray_up(cub) &&  is_ray_right(cub) && MAP.data[(int)roundf((y - 5) / CELL)][(int)roundf((x) / CELL)] == '1' && MAP.data[(int)roundf((y + 5) / CELL)][(int)roundf((x - 5) / CELL)] == '1')
+		return 1;
+	if ( is_ray_up(cub) &&  is_ray_right(cub) && MAP.data[(int)roundf((y - 5) / CELL)][(int)roundf((x - 5) / CELL)] == '1' && MAP.data[(int)roundf((y + 5) / CELL)][(int)roundf((x + 5) / CELL)] == '1')
 	{
-		printf("between : %d %d and %d %d\n",(x - 5) / CELL,(y - 5)/ CELL,  (x +5) / CELL, (y + 5) / CELL);
+		// printf("between : %d %d and %d %d\n",(x - 5) / CELL * (y - 5)/ CELL, (x + 5) / CELL, (y + 5) / CELL);
 		return 1;
 	}
 	return (0);
@@ -165,7 +165,7 @@ void get_ray_ver(t_cub *cub, int *ray)
 	printf("p : %f %f\n", PLY.x , PLY.y );
 	printf("%f %f\n",fptx / CELL , fpty / CELL);
 	
-	my_mlx_pixel_put(cub, (int)(fptx ), (int)(fpty), WALL);
+	my_mlx_pixel_put(cub, (int)roundf(fptx ), (int)roundf(fpty), WALL);
 	//return ;
 	px = fptx ;
 	py = fpty ;
@@ -173,14 +173,16 @@ void get_ray_ver(t_cub *cub, int *ray)
 	{
 		// printf("p : %f %f\n", px / CELL, py / CELL);
 		printf("max == %lu\n", cub->map.width * CELL);
-		printf(".......... px: %f\tpy: %f\n", px / CELL, py / CELL);
-		if (is_out(cub, px, py))
+		printf(".......... px: %f\tpy: %f\n", roundf(px / CELL), roundf(py / CELL));
+		if (is_out(cub, roundf(px), roundf(py)))
 		{
 			ray[0] = -1;
 			ray[1] = -1;
 			printf("hohohohohohhohohohohohohohohhohohohohohohoho\n");
 			break ;
-		}if (is_wall_ray(cub, px, py))
+		}
+		printf("^^^^ver^^^^\n");
+		if (is_wall_ray(cub, roundf(px), py))
 		{
 			ray[0] = px;
 			ray[1] = py;
@@ -189,6 +191,7 @@ void get_ray_ver(t_cub *cub, int *ray)
 		}
 		else
 		{
+			//printf("^^^^hor^^^^\n");
 			putPlayer(cub, px, py);
 			px += xa;
 			py += ya;
@@ -245,6 +248,7 @@ void get_ray(t_cub *cub, int *ray)
 			ray[1] = -1;
 			break ;
 		}
+		printf("^^^^hor^^^^\n");
 		if (is_wall_ray(cub, px, py))
 		{
 			ray[0] = px;
@@ -291,17 +295,22 @@ void	draw_line(t_cub *cub, float pa)
 		smpx = pix;
 	else
 		smpx = pixels;
-	if (ray[0] == -1 && ray[1] == -1)
+	if (ray[0] == rayver[0] && ray[1] == rayver[1])
 	{
 		smpx = pix;
 		pixels = 0;
 	}
-	if (rayver[0] == -1 && rayver[1] == -1)
-	{
-		smpx = pixels;
-		pix = 0;
-	}
-	printf("ver: %d\thor: %d\n", pix, pixels);
+	// if (ray[0] == -1 && ray[1] == -1)
+	// {
+	// 	smpx = pix;
+	// 	pixels = 0;
+	// }
+	// if (rayver[0] == -1 && rayver[1] == -1)
+	// {
+	// 	smpx = pixels;
+	// 	pix = 0;
+	// }
+	printf("ver: %d\thor: %d\n  +++++ %d ++++++\n", pix, pixels, smpx);
 	// dx /= pixels;
 	// dy /= pixels;
 
@@ -310,8 +319,8 @@ void	draw_line(t_cub *cub, float pa)
 	while (smpx)
 	{
 		//printf("pa: %f\n", pa);
-		if (is_out(cub, px, py))
-			break;
+		// if (is_out(cub, px, py))
+		// 	break;
 		my_mlx_pixel_put(cub, px, py, LINE);
 		px += dx;
 		py += dy;

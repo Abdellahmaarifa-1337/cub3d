@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 23:23:04 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/25 12:10:01 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/25 22:30:50 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	move_right(t_cub *cub)
 	pa = PLY.pa + PI / 2;
 	if (pa > (2 * PI))
 		pa -= (2 * PI);
-	dx = cos(pa);
-	dy = sin(pa);
+	dx = cos(pa) * 5;
+	dy = sin(pa) * 5;
 	if (!is_wall(cub,  PLY.x + dx, PLY.y + dy))
 	{
 		PLY.x += dx;
@@ -74,8 +74,8 @@ void	move_left(t_cub *cub)
 	pa = PLY.pa - PI / 2;
 	if (pa < 0)
 		pa += (2 * PI);
-	dx = cos(pa);
-	dy = sin(pa);
+	dx = cos(pa) * 5;
+	dy = sin(pa) * 5;
 
 	if (!is_wall(cub, PLY.x + dx, PLY.y + dy))
 	{
@@ -89,8 +89,8 @@ void	look_right(t_cub *cub)
 	PLY.pa += INC_PA;
 	if (PLY.pa > (2 * PI))
 		PLY.pa -= (2 * PI);
-	PLY.dx += cos(PLY.pa);
-	PLY.dy += sin(PLY.pa);
+	PLY.dx += cos(PLY.pa) * 5;
+	PLY.dy += sin(PLY.pa) * 5;
 }
 
 void	look_left(t_cub *cub)
@@ -98,8 +98,8 @@ void	look_left(t_cub *cub)
 	PLY.pa -= INC_PA;
 	if (PLY.pa < 0)
 		PLY.pa += (2 * PI);
-	PLY.dx += cos(PLY.pa);
-	PLY.dy += sin(PLY.pa);
+	PLY.dx += cos(PLY.pa) * 5;
+	PLY.dy += sin(PLY.pa) * 5;
 }
 
 int	player_moves(int keycode, t_cub *cub)
@@ -120,3 +120,5 @@ int	player_moves(int keycode, t_cub *cub)
 		exit(0);
 	return (0);
 }
+
+
