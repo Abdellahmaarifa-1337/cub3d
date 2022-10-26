@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniMap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/25 23:59:38 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/26 15:38:06 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ void	putPlayer(t_cub *cub, float px, float py)
 	int	x = 0;
 	int	y = 0;
 
-	y = - (CELL / 12);
+	y =- (CELL / 12);
 	while (y < (CELL / 12))
 	{
-		x = - (CELL / 12);
+		x =- (CELL / 12);
 		while (x < (CELL / 12))
 		{
 			my_mlx_pixel_put(cub, px + x, py + y, PLAYER);
