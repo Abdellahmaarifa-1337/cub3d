@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/26 16:44:22 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:04:03 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ void	putPlayer(t_cub *cub, float px, float py)
 	int	x = 0;
 	int	y = 0;
 
-	y = - (CELL / 12);
+	y =- (CELL / 12);
 	while (y < (CELL / 12))
 	{
-		x = - (CELL / 12);
+		x =- (CELL / 12);
 		while (x < (CELL / 12))
 		{
 			my_mlx_pixel_put(cub, px + x, py + y, PLAYER);
