@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/25 12:58:00 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/25 23:59:38 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,11 +176,14 @@ void get_ray_ver(t_cub *cub, int *ray)
 		printf(".......... px: %f\tpy: %f\n", px / CELL, py / CELL);
 		if (is_out(cub, px, py))
 		{
+
 			ray[0] = -1;
 			ray[1] = -1;
 			printf("hohohohohohhohohohohohohohohhohohohohohohoho\n");
 			break ;
-		}if (is_wall_ray(cub, px, py))
+		}
+		printf("*******VERTICAL********\n");
+		if (is_wall_ray(cub, px, py))
 		{
 			ray[0] = px;
 			ray[1] = py;
@@ -194,6 +197,7 @@ void get_ray_ver(t_cub *cub, int *ray)
 			py += ya;
 			
 		}
+		printf("/**************************/\n");
 	}
 	
 	//my_mlx_pixel_put(cub, fptx + xa, fpty + ya, WALL);
@@ -241,8 +245,9 @@ void get_ray(t_cub *cub, int *ray)
 		// printf("p : %f %f\n", px / CELL, py / CELL);
 		if (is_out(cub, px, py))
 		{
-			ray[0] = -1;
-			ray[1] = -1;
+			ray[0] = px;
+			ray[1] = py;
+			putPlayer(cub, px, py);
 			break ;
 		}
 		if (is_wall_ray(cub, px, py))
