@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/25 22:52:07 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/26 16:09:00 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ void	putPlayer(t_cub *cub, float px, float py)
 	int	x = 0;
 	int	y = 0;
 
-	y = - (CELL / 12);
+	y =- (CELL / 12);
 	while (y < (CELL / 12))
 	{
-		x = - (CELL / 12);
+		x =- (CELL / 12);
 		while (x < (CELL / 12))
 		{
 			my_mlx_pixel_put(cub, px + x, py + y, PLAYER);
@@ -176,13 +176,14 @@ void get_ray_ver(t_cub *cub, int *ray)
 		printf(".......... px: %f\tpy: %f\n", roundf(px / CELL), roundf(py / CELL));
 		if (is_out(cub, roundf(px), roundf(py)))
 		{
+
 			ray[0] = -1;
 			ray[1] = -1;
 			printf("hohohohohohhohohohohohohohohhohohohohohohoho\n");
 			break ;
 		}
-		printf("^^^^ver^^^^\n");
-		if (is_wall_ray(cub, roundf(px), py))
+		printf("*******VERTICAL********\n");
+		if (is_wall_ray(cub, px, py))
 		{
 			ray[0] = px;
 			ray[1] = py;
@@ -197,6 +198,7 @@ void get_ray_ver(t_cub *cub, int *ray)
 			py += ya;
 			
 		}
+		printf("/**************************/\n");
 	}
 	
 	//my_mlx_pixel_put(cub, fptx + xa, fpty + ya, WALL);
@@ -244,8 +246,9 @@ void get_ray(t_cub *cub, int *ray)
 		// printf("p : %f %f\n", px / CELL, py / CELL);
 		if (is_out(cub, px, py))
 		{
-			ray[0] = -1;
-			ray[1] = -1;
+			ray[0] = px;
+			ray[1] = py;
+			putPlayer(cub, px, py);
 			break ;
 		}
 		printf("^^^^hor^^^^\n");
