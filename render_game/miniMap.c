@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/26 16:09:00 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/26 22:49:45 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ void	set_map_attribute(t_cub *cub)
 
 void	putPlayer(t_cub *cub, float px, float py)
 {
-	int	x = 0;
-	int	y = 0;
+	int	x;
+	int	y;
 
-	y =- (CELL / 12);
+	y = - (CELL / 12);
 	while (y < (CELL / 12))
 	{
-		x =- (CELL / 12);
+		x = - (CELL / 12);
 		while (x < (CELL / 12))
 		{
 			my_mlx_pixel_put(cub, px + x, py + y, PLAYER);

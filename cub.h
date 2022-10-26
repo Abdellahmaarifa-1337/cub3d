@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/25 12:10:23 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/26 22:00:35 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef struct s_cub
 	t_img		img;
 	void*		mlx;
 	void*		mlx_win;
+	int			keys[6];
 }	t_cub;
 
 int		parse_map(const char *path, t_cub *g);
