@@ -20,7 +20,7 @@ LIB = ./libft/libft.a
 all: ${NAME}
 
 ${NAME} : ${OBJ} ${LIB}
-		${CC} -fsanitize=address -g ${CFLAGS}  ${OBJ} ${LIB}  -lmlx -framework OpenGL -framework AppKit -o ${NAME}
+		${CC} -g ${CFLAGS}  ${OBJ} ${LIB}  -lmlx -framework OpenGL -framework AppKit -o ${NAME}
 
 ${LIB} :
 		make -C ./libft

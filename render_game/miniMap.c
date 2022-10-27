@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/27 01:08:46 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/27 01:30:52 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ int get_ray_distance(t_cub *cub)
 	set_horizontal_ray(cub, ray_h);
 	dist_h = sqrt((ray_h[0] - PLY.x)*(ray_h[0] - PLY.x) + (ray_h[1] - PLY.y) * (ray_h[1] - PLY.y));
 	dist_v = sqrt((ray_v[0] - PLY.x)*(ray_v[0] - PLY.x) + (ray_v[1] - PLY.y) * (ray_v[1] - PLY.y));
-	printf("ray hor : %d\n", dist_h);
-	printf("ray vec : %d\n", dist_v);
+	// printf("ray hor : %d\n", dist_h);
+	// printf("ray vec : %d\n", dist_v);
 	if (dist_v < dist_h)
 		dist = dist_v;
 	else
@@ -103,18 +103,20 @@ int get_ray_distance(t_cub *cub)
 	return (dist);
 }
 
-void	draw_line(t_cub *cub, int dist, float an)
+void	draw_line(t_cub *cub, float an)
 {
 	float	dx;
 	float	dy;
 	float	px;
 	float	py;
+	int		dist;
 
 	cub->map.ray_pa = an;
 	if (cub->map.ray_pa < 0)
 		cub->map.ray_pa += 2 * PI;
 	else if (cub->map.ray_pa > 2*PI)
 		cub->map.ray_pa -= 2 * PI;
+	dist = get_ray_distance(cub);
 	dx = cos(cub->map.ray_pa);
 	dy = sin(cub->map.ray_pa);
 	px = PLY.x;
@@ -132,7 +134,6 @@ void	draw_line(t_cub *cub, int dist, float an)
 
 void draw_rays(t_cub *cub)
 {
-	int dist;
 	float dp;
 	float an;
 	
@@ -143,14 +144,13 @@ void draw_rays(t_cub *cub)
 	// 	cub->map.ray_pa -= 2 * PI;
 	//printf("angle: %f\n", cub->map.ray_pa);
 	//draw_line(cub);
-	dp = (float)(PI / 3) / (float)WIN_WIDHT;
+	dp = (float)(PI / (3.0 * (float)WIN_WIDHT));
 	// printf("....%.152f\n", dp);
 	an = PLY.pa;
 	an -= PI / 6;
 	while (an < PLY.pa + PI / 6)
 	{
-		dist = get_ray_distance(cub);
-		draw_line(cub, dist, an);
+		draw_line(cub, an);
 		an += dp;
 	}
 }
