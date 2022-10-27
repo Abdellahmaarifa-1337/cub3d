@@ -7,7 +7,8 @@ SRC = ./main.c ./parsing/parse_map.c handel_error/throw_error.c \
 		./render_game/render_game.c ./parsing/get_identifiers.c ./parsing/get_map.c \
 		./parsing/utils.c ./parsing/get_map_utils.c ./parsing/get_identifiers_utils.c \
 		./parsing/check_if_close.c ./temp_functions.c render_game/miniMap.c \
-		./manage_player/player_moves.c 
+		./manage_player/player_moves.c ./render_game/set_vertical_ray.c ./render_game/ray_utils.c \
+		./render_game/set_horizontal_ray.c
 
 OBJ = ${SRC:.c=.o}
 
