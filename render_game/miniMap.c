@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/26 22:53:22 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/26 23:44:55 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,14 +287,15 @@ void	draw_line(t_cub *cub, float pa)
 	int ray[2];
 	int rayver[2];
 	int smpx;
-	// (void)pa;
+	(void)pa;
 
 	get_ray_ver(cub, rayver);
 	get_ray(cub, ray);
 
+	PLY.pa += 0.6;
 	//float	drh = sqrt((pow(PLY.x - ray[0])));
-	dx = cos(pa);
-	dy = sin(pa);
+	dx = cos(PLY.pa);
+	dy = sin(PLY.pa);
 	pixels = sqrt((ray[0] - PLY.x)*(ray[0] - PLY.x) + (ray[1] - PLY.y) * (ray[1] - PLY.y));
 	int pix = sqrt((rayver[0] - PLY.x)*(rayver[0] - PLY.x) + (rayver[1] - PLY.y) * (rayver[1] - PLY.y));
 	if (pix < pixels)
