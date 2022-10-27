@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/27 02:09:19 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/27 03:24:49 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 double	get_player_view_angle(t_cub *cub, int i, int j)
 {
+	return (7 * PI / 4);
 	if (MAP.data[i][j] == 'N')
 		return ((3 * PI) / 2);
 	if (MAP.data[i][j] == 'S')
@@ -137,15 +138,14 @@ void draw_rays(t_cub *cub)
 	float dp;
 	float an;
 	
-	//float final = cub->map.ray_pa + 0.5;
-	// draw_line(cub);
-	//cub->map.ray_pa += 0.6;
+	// float final = cub->map.ray_pa + 0.5;
+	// draw_line(cub, an);
+	// cub->map.ray_pa += 0.6;
 	// while (cub->map.ray_pa > 2 * PI)
 	// 	cub->map.ray_pa -= 2 * PI;
-	//printf("angle: %f\n", cub->map.ray_pa);
-	//draw_line(cub);
+	// printf("angle: %f\n", cub->map.ray_pa);
+	// draw_line(cub, an);
 	dp = (float)(PI / (3.0 * (float)WIN_WIDHT));
-	// printf("....%.152f\n", dp);
 	an = PLY.pa;
 	an -= PI / 6;
 	while (an < PLY.pa + PI / 6)

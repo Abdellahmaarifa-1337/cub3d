@@ -16,6 +16,6 @@ int main()
 	// test("A", "Z");
 	// printf(">> %lu, %lu\n", sizeof(char *), sizeof(int *));
 	// printf("%d\n", memcmp("ACE", "ACK" , 3));
-	printf("%d\n", memcmp(s1, s2 , 3));
+	// printf("%d\n", memcmp(s1, s2 , 3));
 	return 0;
 }
