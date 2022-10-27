@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/26 23:44:55 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/27 02:09:19 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,266 +72,86 @@ void	putPlayer(t_cub *cub, float px, float py)
 }
 
 
-int is_ray_up(t_cub *cub)
+int get_ray_distance(t_cub *cub)
 {
-	if (PLY.pa > 0 && PLY.pa < PI)
-		return (0);
-	else if (PLY.pa > PI && PLY.pa < PI*2)
-		return (1);
-	return (2);
-}
+	int	ray_h[2];
+	int ray_v[2];
+	int dist_h;
+	int dist_v;
+	int dist;
 
-
-int is_out(t_cub *cub ,int x, int y)
-{
-	if (y / CELL < 0 || (size_t)y  >= MAP.height * CELL)
-		return (1);
-	if (x / CELL < 0 || (size_t)x >= ft_strlen(cub->map.data[y / CELL]) * CELL)
-		return (1);
-	// if (x / CELL < 0 || (size_t)x >= MAP.width * CELL)
-	return (0);
-}
-
-int is_ray_right(t_cub *cub)
-{
-	if (PLY.pa > PI/2 && PLY.pa < 3 * PI/2)
-		return (0);
-	else if (PLY.pa < PI/2 || PLY.pa > 3 * PI/2)
-		return (1);
-	return (2);
-}
-
-int is_wall_ray(t_cub *cub, int x, int y)
-{
-
-	printf("om checck : x: %d y :%d\n", x/CELL, y/CELL);
-	// printf("between : %d %d and %d %d\n",(y) / CELL,(x + 5)/ CELL,  (y + 5) / CELL, (x - 5) / CELL);
-	if (MAP.data[(int)roundf(y / CELL)][(int)roundf(x / CELL)] == '1')
-		return 1;
-	if ( is_ray_up(cub) &&  !is_ray_right(cub) && MAP.data[(int)roundf((y) / CELL)][(int)roundf((x + 5) / CELL)] == '1' && MAP.data[(int)roundf((y + 5) / CELL)][(int)roundf((x - 5) / CELL)] == '1')
-		return 1;
-	if ( !is_ray_up(cub) &&  !is_ray_right(cub) && MAP.data[(int)roundf((y - 5) / CELL)][(int)roundf((x) / CELL)] == '1' && MAP.data[(int)roundf((y + 5) / CELL)][(int)roundf((x + 5) / CELL)] == '1')
-		return 1;
-	if ( !is_ray_up(cub) &&  is_ray_right(cub) && MAP.data[(int)roundf((y - 5) / CELL)][(int)roundf((x) / CELL)] == '1' && MAP.data[(int)roundf((y + 5) / CELL)][(int)roundf((x - 5) / CELL)] == '1')
-		return 1;
-	if ( is_ray_up(cub) &&  is_ray_right(cub) && MAP.data[(int)roundf((y - 5) / CELL)][(int)roundf((x - 5) / CELL)] == '1' && MAP.data[(int)roundf((y + 5) / CELL)][(int)roundf((x + 5) / CELL)] == '1')
-	{
-		// printf("between : %d %d and %d %d\n",(x - 5) / CELL * (y - 5)/ CELL, (x + 5) / CELL, (y + 5) / CELL);
-		return 1;
-	}
-	return (0);
-}
-void get_ray_ver(t_cub *cub, int *ray)
-{
-	float fptx = 0;
-	float fpty = 0;
-	float ya = 0;
-	float xa = 0;
-	float px , py;
-	float xas = 1;
-	ray[0] = -1;
-	ray[1] = -1;
-	// get the first intersection
-	if (is_ray_right(cub) == 1) 
-	{
-		printf("right\n");
-		fptx = (int)(PLY.x / CELL) * CELL + CELL;
-		xa = CELL;	
-		//xas = -1;
-	}
-	else if (is_ray_right(cub) == 0)
-	{
-		printf("left\n");
-		xa = -CELL;
-		fptx = (int)(PLY.x / CELL) * CELL - 1 ;
-		xas = -1;
-	}
-	else 
-		return ;
-
-	ya = (float)(xas * CELL) * (tan(PLY.pa));
-	if (PLY.pa == 0 || PLY.pa == PI)
-		fpty = PLY.y;
+	set_vertical_ray(cub, ray_v);
+	set_horizontal_ray(cub, ray_h);
+	dist_h = sqrt((ray_h[0] - PLY.x)*(ray_h[0] - PLY.x) + (ray_h[1] - PLY.y) * (ray_h[1] - PLY.y));
+	dist_v = sqrt((ray_v[0] - PLY.x)*(ray_v[0] - PLY.x) + (ray_v[1] - PLY.y) * (ray_v[1] - PLY.y));
+	// printf("ray hor : %d\n", dist_h);
+	// printf("ray vec : %d\n", dist_v);
+	if (dist_v < dist_h)
+		dist = dist_v;
 	else
-		fpty = PLY.y + fabs((PLY.x - (float)fptx)) * tan(PLY.pa) * xas;
-	
-	// printf("size of the line : %zu\n", ft_strlen(cub->map.data[fpty / CELL]) * CELL);
-	if (is_out(cub, fptx, fpty) )
+		dist = dist_h;
+	if (ray_h[0] == -1 && ray_h[1] == -1)
 	{
-		ray[0] = -1;
-		ray[1] = -1;	
-		return ;
+		dist = dist_v;
+		dist_h = 0;
 	}
-	printf("p : %f %f\n", PLY.x , PLY.y );
-	printf("%f %f\n",fptx / CELL , fpty / CELL);
-	
-	my_mlx_pixel_put(cub, (int)roundf(fptx ), (int)roundf(fpty), WALL);
-	//return ;
-	px = fptx ;
-	py = fpty ;
-	while (1)
+	if (ray_v[0] == -1 && ray_v[1] == -1)
 	{
-		// printf("p : %f %f\n", px / CELL, py / CELL);
-		printf("max == %lu\n", cub->map.width * CELL);
-		printf(".......... px: %f\tpy: %f\n", roundf(px / CELL), roundf(py / CELL));
-		if (is_out(cub, roundf(px), roundf(py)))
-		{
-
-			ray[0] = -1;
-			ray[1] = -1;
-			printf("hohohohohohhohohohohohohohohhohohohohohohoho\n");
-			break ;
-		}
-		printf("*******VERTICAL********\n");
-		if (is_wall_ray(cub, px, py))
-		{
-			ray[0] = px;
-			ray[1] = py;
-			my_mlx_pixel_put(cub, px, py, WALL);
-			//putPlayer(cub, px, py);
-			break ;
-		}
-		else
-		{
-			//putPlayer(cub, px, py);
-			my_mlx_pixel_put(cub, px, py, WALL);
-			px += xa;
-			py += ya;
-			
-		}
-		printf("/**************************/\n");
+		dist = dist_h;
+		dist_v = 0;
 	}
-	
-	//my_mlx_pixel_put(cub, fptx + xa, fpty + ya, WALL);
-	printf("max == %lu\n", cub->map.width * CELL);
-	printf(">>>> %f %f -- %f, %f\n", PLY.x / CELL, PLY.y / CELL, fptx / CELL, fpty / CELL);
-	(void)ray;
+	return (dist);
 }
 
-void get_ray(t_cub *cub, int *ray)
+void	draw_line(t_cub *cub, float an)
 {
-	float fptx = 0;
-	float fpty = 0;
-	float ya = 0;
-	float xa = 0;
-	float px , py;
-	float xas = 1;
-	// get the first intersection
-	ray[0] = -1;
-	ray[1] = -1;
-	if (is_ray_up(cub) == 1) 
-	{
-		fpty = (int)(PLY.y / CELL) * CELL - 1;
-		ya = -CELL;	
-		xas = -1;
-	}
-	else if (is_ray_up(cub) == 0)
-	{
-		ya = +CELL;
-		fpty = (int)(PLY.y / CELL) * CELL + CELL;
-	}
-	else 
-	{
-		return ;
-	}
-	xa = (float)(xas * CELL) / tan(PLY.pa);
-	fptx = PLY.x + ((float)fpty - PLY.y)/tan(PLY.pa);
-	
-	// printf("size of the line : %zu\n", ft_strlen(cub->map.data[fpty / CELL]) * CELL);
-	// if (is_out(cub, fptx, fpty))
-	// return ;
-	px = fptx ;
-	py = fpty ;
-	while (1)
-	{
-		// printf("p : %f %f\n", px / CELL, py / CELL);
-		if (is_out(cub, px, py))
-		{
-			ray[0] = px;
-			ray[1] = py;
-			//putPlayer(cub, px, py);
-			break ;
-		}
-		printf("^^^^hor^^^^\n");
-		if (is_wall_ray(cub, px, py))
-		{
-			ray[0] = px;
-			ray[1] = py;
-			my_mlx_pixel_put(cub, px, py, WALL);
-			//putPlayer(cub, px, py);
-			break ;
-		}
-		else
-		{
-			my_mlx_pixel_put(cub, px, py, WALL);
-			//putPlayer(cub, px, py);
-			px += xa;
-			py += ya;
-			
-		}
-	}
-	
-	//my_mlx_pixel_put(cub, fptx + xa, fpty + ya, WALL);
-	printf("max == %lu\n", cub->map.width * CELL);
-	printf("%f %f -- %f, %f\n", PLY.x, PLY.y, fptx, fpty);
-	(void)ray;
-}
-
-void	draw_line(t_cub *cub, float pa)
-{
-	int		pixels;
 	float	dx;
 	float	dy;
 	float	px;
 	float	py;
-	int ray[2];
-	int rayver[2];
-	int smpx;
-	(void)pa;
+	int		dist;
 
-	get_ray_ver(cub, rayver);
-	get_ray(cub, ray);
-
-	PLY.pa += 0.6;
-	//float	drh = sqrt((pow(PLY.x - ray[0])));
-	dx = cos(PLY.pa);
-	dy = sin(PLY.pa);
-	pixels = sqrt((ray[0] - PLY.x)*(ray[0] - PLY.x) + (ray[1] - PLY.y) * (ray[1] - PLY.y));
-	int pix = sqrt((rayver[0] - PLY.x)*(rayver[0] - PLY.x) + (rayver[1] - PLY.y) * (rayver[1] - PLY.y));
-	if (pix < pixels)
-		smpx = pix;
-	else
-		smpx = pixels;
-	if (ray[0] == rayver[0] && ray[1] == rayver[1])
-	{
-		smpx = pix;
-		pixels = 0;
-	}
-	// if (ray[0] == -1 && ray[1] == -1)
-	// {
-	// 	smpx = pix;
-	// 	pixels = 0;
-	// }
-	// if (rayver[0] == -1 && rayver[1] == -1)
-	// {
-	// 	smpx = pixels;
-	// 	pix = 0;
-	// }
-	printf("ver: %d\thor: %d\n  +++++ %d ++++++\n", pix, pixels, smpx);
-	// dx /= pixels;
-	// dy /= pixels;
-
+	cub->map.ray_pa = an;
+	if (cub->map.ray_pa < 0)
+		cub->map.ray_pa += 2 * PI;
+	else if (cub->map.ray_pa > 2*PI)
+		cub->map.ray_pa -= 2 * PI;
+	dist = get_ray_distance(cub);
+	dx = cos(cub->map.ray_pa);
+	dy = sin(cub->map.ray_pa);
 	px = PLY.x;
 	py = PLY.y;
-	while (smpx)
+	while (dist)
 	{
-		//printf("pa: %f\n", pa);
-		// if (is_out(cub, px, py))
-		// 	break;
+		if (is_out(cub, px, py))
+			break;
 		my_mlx_pixel_put(cub, px, py, LINE);
 		px += dx;
 		py += dy;
-		--smpx;
+		--dist;
+	}
+}
+
+void draw_rays(t_cub *cub)
+{
+	float dp;
+	float an;
+	
+	//float final = cub->map.ray_pa + 0.5;
+	// draw_line(cub);
+	//cub->map.ray_pa += 0.6;
+	// while (cub->map.ray_pa > 2 * PI)
+	// 	cub->map.ray_pa -= 2 * PI;
+	//printf("angle: %f\n", cub->map.ray_pa);
+	//draw_line(cub);
+	dp = (float)(PI / (3.0 * (float)WIN_WIDHT));
+	// printf("....%.152f\n", dp);
+	an = PLY.pa;
+	an -= PI / 6;
+	while (an < PLY.pa + PI / 6)
+	{
+		draw_line(cub, an);
+		an += dp;
 	}
 }
 
@@ -406,7 +226,8 @@ int	execute_MiniMap(t_cub* cub)
 	mlx_clear_window(cub->mlx, cub->mlx_win);
 	renderingTheMap(cub);
 	putPlayer(cub, PLY.x, PLY.y);
-	draw_line(cub, PLY.pa);
+	draw_rays(cub);
+	//draw_line(cub, PLY.pa);
 	// 	draw_line(cub, PLY.pa + (PI / 12));
 	// 	draw_line(cub, PLY.pa - (PI / 12));
 	// 	draw_line(cub, PLY.pa + (PI / 6));

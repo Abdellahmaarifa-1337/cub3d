@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/26 22:00:35 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/27 02:10:06 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # define S 2
 # define E 3
 # define W 4
+# define WIN_WIDHT	1080
+# define WIN_HEIGHT	720
 
 typedef struct	s_img {
 	void	*img;
@@ -62,6 +64,7 @@ typedef struct s_map
 	int		map_capacity;
 	int		map_size;
 	int		player;
+	float	ray_pa;
 }	t_map;
 
 typedef	struct s_ray
