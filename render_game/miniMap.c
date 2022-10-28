@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/27 01:30:52 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/28 18:26:20 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,86 +72,31 @@ void	putPlayer(t_cub *cub, float px, float py)
 }
 
 
-int get_ray_distance(t_cub *cub)
-{
-	int	ray_h[2];
-	int ray_v[2];
-	int dist_h;
-	int dist_v;
-	int dist;
-
-	set_vertical_ray(cub, ray_v);
-	set_horizontal_ray(cub, ray_h);
-	dist_h = sqrt((ray_h[0] - PLY.x)*(ray_h[0] - PLY.x) + (ray_h[1] - PLY.y) * (ray_h[1] - PLY.y));
-	dist_v = sqrt((ray_v[0] - PLY.x)*(ray_v[0] - PLY.x) + (ray_v[1] - PLY.y) * (ray_v[1] - PLY.y));
-	// printf("ray hor : %d\n", dist_h);
-	// printf("ray vec : %d\n", dist_v);
-	if (dist_v < dist_h)
-		dist = dist_v;
-	else
-		dist = dist_h;
-	if (ray_h[0] == -1 && ray_h[1] == -1)
-	{
-		dist = dist_v;
-		dist_h = 0;
-	}
-	if (ray_v[0] == -1 && ray_v[1] == -1)
-	{
-		dist = dist_h;
-		dist_v = 0;
-	}
-	return (dist);
-}
-
-void	draw_line(t_cub *cub, float an)
-{
-	float	dx;
-	float	dy;
-	float	px;
-	float	py;
-	int		dist;
-
-	cub->map.ray_pa = an;
-	if (cub->map.ray_pa < 0)
-		cub->map.ray_pa += 2 * PI;
-	else if (cub->map.ray_pa > 2*PI)
-		cub->map.ray_pa -= 2 * PI;
-	dist = get_ray_distance(cub);
-	dx = cos(cub->map.ray_pa);
-	dy = sin(cub->map.ray_pa);
-	px = PLY.x;
-	py = PLY.y;
-	while (dist)
-	{
-		if (is_out(cub, px, py))
-			break;
-		my_mlx_pixel_put(cub, px, py, LINE);
-		px += dx;
-		py += dy;
-		--dist;
-	}
-}
-
 void draw_rays(t_cub *cub)
 {
-	float dp;
-	float an;
-	
-	//float final = cub->map.ray_pa + 0.5;
-	// draw_line(cub);
-	//cub->map.ray_pa += 0.6;
-	// while (cub->map.ray_pa > 2 * PI)
-	// 	cub->map.ray_pa -= 2 * PI;
-	//printf("angle: %f\n", cub->map.ray_pa);
-	//draw_line(cub);
-	dp = (float)(PI / (3.0 * (float)WIN_WIDHT));
-	// printf("....%.152f\n", dp);
-	an = PLY.pa;
-	an -= PI / 6;
-	while (an < PLY.pa + PI / 6)
+	int		i;
+	float	p[2];
+	float	d[2];
+	int		dist;
+
+	i = 0;
+	while (i < WIN_WIDHT + 1)
 	{
-		draw_line(cub, an);
-		an += dp;
+		d[0] = cos(cub->rays[i].pa);
+		d[1] = sin(cub->rays[i].pa);
+		p[0] = PLY.x;
+		p[1] = PLY.y;
+		dist = cub->rays[i].ray_dist;
+		while (dist)
+		{
+			if (is_out(cub, p[0], p[1]))
+				break;
+			my_mlx_pixel_put(cub, p[0], p[1], LINE);
+			p[0] += d[0];
+			p[1] += d[1];
+			--dist;
+		}
+		i++;
 	}
 }
 
@@ -226,6 +171,7 @@ int	execute_MiniMap(t_cub* cub)
 	mlx_clear_window(cub->mlx, cub->mlx_win);
 	renderingTheMap(cub);
 	putPlayer(cub, PLY.x, PLY.y);
+	set_rays(cub);
 	draw_rays(cub);
 	//draw_line(cub, PLY.pa);
 	// 	draw_line(cub, PLY.pa + (PI / 12));

@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/27 00:43:26 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/28 18:16:27 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,15 @@ typedef struct s_player
 	float	pa;
 }	t_player;
 
+typedef struct s_rays
+{
+	/* data */
+	float	pa;
+	int		x;
+	int		y;
+	float	ray_dist;
+} t_rays;
+
 // Gloabl struct
 typedef struct s_cub
 {
@@ -81,6 +90,7 @@ typedef struct s_cub
 	t_idn		idn;
 	t_player	p;
 	t_img		img;
+	t_rays		rays[WIN_WIDHT + 1];
 	void*		mlx;
 	void*		mlx_win;
 }	t_cub;
