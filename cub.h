@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/28 18:16:27 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/29 17:55:05 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,9 @@ typedef struct s_cub
 	t_rays		rays[WIN_WIDHT + 1];
 	void*		mlx;
 	void*		mlx_win;
+	void*		mlx3d;
+	void*		mlx3d_win;
+	t_img		img3d;
 }	t_cub;
 
 int		parse_map(const char *path, t_cub *g);

@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/28 18:26:20 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/29 17:51:52 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,18 @@ void	my_mlx_clear_image(t_cub *cub)
 	}
 }
 
+void init_rays(t_cub *cub)
+{
+	int	i;
+
+	i = 0;
+	while (i < WIN_WIDHT + 1)
+	{
+		cub->rays[i].ray_dist = 0;
+		i++;
+	}
+}
+
 int	execute_MiniMap(t_cub* cub)
 {
 
@@ -171,8 +183,10 @@ int	execute_MiniMap(t_cub* cub)
 	mlx_clear_window(cub->mlx, cub->mlx_win);
 	renderingTheMap(cub);
 	putPlayer(cub, PLY.x, PLY.y);
+	init_rays(cub);
 	set_rays(cub);
 	draw_rays(cub);
+	//render_scene(cub);
 	//draw_line(cub, PLY.pa);
 	// 	draw_line(cub, PLY.pa + (PI / 12));
 	// 	draw_line(cub, PLY.pa - (PI / 12));

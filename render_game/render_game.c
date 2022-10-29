@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_game.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 08:58:40 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/22 14:17:05 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/29 18:01:18 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	my_mlx_pixel_put(t_cub *cub, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void render_game(t_cub *cub)
+
+void	init_miniMap(t_cub *cub)
 {
 	cub->mlx = mlx_init();
 	cub->mlx_win = mlx_new_window(cub->mlx, MAP.width * CELL,
@@ -36,8 +37,33 @@ void render_game(t_cub *cub)
 	IMG.img = mlx_new_image(cub->mlx, MAP.width * CELL, MAP.height * CELL);
 	IMG.addr = mlx_get_data_addr(IMG.img, &IMG.bits_per_pixel, &IMG.line_length,
 		&IMG.endian);
+};
+
+void	init_3d(t_cub *cub)
+{
+	cub->mlx3d = mlx_init();
+	cub->mlx3d_win = mlx_new_window(cub->mlx, WIN_WIDHT ,
+		WIN_HEIGHT , "miniMap");
+	cub->img3d.img = mlx_new_image(cub->mlx, WIN_WIDHT , WIN_HEIGHT );
+	cub->img3d.addr = mlx_get_data_addr(cub->img3d.img, &cub->img3d.bits_per_pixel, &cub->img3d.line_length,
+		&cub->img3d.endian);
+}
+
+void render_game(t_cub *cub)
+{
+
+	init_miniMap(cub);
+	init_3d(cub);
+	// mini map hooks
 	mlx_loop_hook(cub->mlx, execute_MiniMap, cub);
 	mlx_hook(cub->mlx_win, 2, 1L << 0, player_moves, cub);
 	mlx_hook(cub->mlx_win, 17, 1L << 5, ft_close, cub);
 	mlx_loop(cub->mlx);
+
+
+	// 3d hooks
+	mlx_loop_hook(cub->mlx3d, render_scene, cub);
+	mlx_hook(cub->mlx3d_win, 2, 1L << 0, player_moves, cub);
+	mlx_hook(cub->mlx3d_win, 17, 1L << 5, ft_close, cub);
+	mlx_loop(cub->mlx3d);
 }

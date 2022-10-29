@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:47:57 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/28 17:50:54 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/29 18:00:27 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,5 @@ int is_ray_up(t_cub *cub);
 int is_ray_right(t_cub *cub);
 int is_wall_ray(t_cub *cub, int x, int y);
 void set_rays(t_cub *cub);
+int render_scene(t_cub *cub);
 #endif
