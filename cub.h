@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/29 17:55:05 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/29 18:17:41 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,39 @@
 # include <fcntl.h>
 # include "./libft/libft.h"
 # include "./get_next_line/get_next_line.h"
-# include "./minilibx/mlx.h"
-
-// GAME VARIBALES
+#include "./mlx/mlx.h"
 
 # define	MAP	cub->map
 # define	PLY cub->p
+# define	RAY cub->ray
 # define	IMG	cub->img
 
-# define EXT_LEN 4
-# define EXT ".cub"
-# define IDENTIFIERS_NUMBER 6
-# define N 1
-# define S 2
-# define E 3
-# define W 4
+// GAME VARIBALES
+
+# define EXT_LEN	4
+# define EXT	".cub"
+# define IDENTIFIERS_NUMBER	6
+# define N	1
+# define S	2
+# define E	3
+# define W	4
+
 # define WIN_WIDHT	1080
 # define WIN_HEIGHT	720
+# define CELL		32
+# define PLY_WIDTH	CELL/6
+# define PI			3.14159265359
+# define INC_PA		0.02
+
+// COLORS
+
+# define PRUPLE		0xFB2576
+# define EMPTY		0x494949
+# define WALL		0xE1E6E6
+# define PLAYER		0xF5DC50
+# define LINE		0xFF7D2D
+
+
 
 typedef struct	s_img {
 	void	*img;
@@ -65,6 +81,12 @@ typedef struct s_map
 	float	ray_pa;
 }	t_map;
 
+typedef	struct s_ray
+{
+	float	rayLenght;
+}	t_ray;
+
+
 typedef struct s_player
 {
 	float	x;
@@ -72,6 +94,7 @@ typedef struct s_player
 	float	dx;
 	float	dy;
 	float	pa;
+	float	inc_pa;
 }	t_player;
 
 typedef struct s_rays
@@ -89,6 +112,7 @@ typedef struct s_cub
 	t_map		map;
 	t_idn		idn;
 	t_player	p;
+	t_ray		ray;
 	t_img		img;
 	t_rays		rays[WIN_WIDHT + 1];
 	void*		mlx;
@@ -96,6 +120,9 @@ typedef struct s_cub
 	void*		mlx3d;
 	void*		mlx3d_win;
 	t_img		img3d;
+	int			keys[6];
+	int			mouse_on;
+	int			prev_x_mouse;
 }	t_cub;
 
 int		parse_map(const char *path, t_cub *g);

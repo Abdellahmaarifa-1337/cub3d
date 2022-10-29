@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:50 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/25 22:46:05 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/29 13:07:30 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	main(int ac, char **av)
 	g.map.width = 0;
 	g.map.player = 0;
 	g.map.data[g.map.map_capacity] = NULL;
+	g.p.inc_pa = INC_PA;
 	parse_map(av[1], &g);
 	set_map_attribute(&g);
 	render_game(&g);

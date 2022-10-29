@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/29 17:51:52 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/29 18:16:53 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 double	get_player_view_angle(t_cub *cub, int i, int j)
 {
+	return (7 * PI / 4);
 	if (MAP.data[i][j] == 'N')
 		return ((3 * PI) / 2);
 	if (MAP.data[i][j] == 'S')
@@ -39,8 +40,8 @@ void	set_map_attribute(t_cub *cub)
 		{
 			if (ft_strchr("NSWE", MAP.data[i][j]))
 			{
-				PLY.x = roundf(j * CELL + CELL / 2);
-				PLY.y = roundf(i * CELL + CELL / 2);
+				PLY.x = j * CELL + (float)((float)CELL / 2);
+				PLY.y = i * CELL + (float)((float)CELL / 2);
 				PLY.pa = get_player_view_angle(cub, i, j);
 				MAP.data[i][j] = '0';
 			}
@@ -55,8 +56,8 @@ void	set_map_attribute(t_cub *cub)
 
 void	putPlayer(t_cub *cub, float px, float py)
 {
-	int	x = 0;
-	int	y = 0;
+	int	x;
+	int	y;
 
 	y = - (CELL / 12);
 	while (y < (CELL / 12))
@@ -176,7 +177,6 @@ void init_rays(t_cub *cub)
 
 int	execute_MiniMap(t_cub* cub)
 {
-
 	PLY.dx = cos(PLY.pa) * 5;
 	PLY.dy = sin(PLY.pa) * 5;
 	my_mlx_clear_image(cub);

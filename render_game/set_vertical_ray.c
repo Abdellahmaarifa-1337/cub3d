@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:06:13 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/28 18:08:11 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/29 18:19:02 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void set_vertical_ray(t_cub * cub, int *ray)
 
 	set_fpt(cub, fpt);
 	set_vertical_distance(cub, dist);
+	// printf("px: %f\tpy: %f\n", fpt[0] / CELL, fpt[1] / CELL);
 	if (is_out(cub, fpt[0], fpt[1]))
 	{
 		ray[0] = -1;
