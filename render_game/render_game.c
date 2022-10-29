@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 08:58:40 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/29 18:18:36 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/29 18:29:47 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,20 +69,20 @@ void render_game(t_cub *cub)
 	init_3d(cub);
 	// mini map hooks
 	mlx_loop_hook(cub->mlx, execute_MiniMap, cub);
-	mlx_hook(cub->mlx_win, 2, 1L << 0, pressed_keys, cub);
-	mlx_hook(cub->mlx_win, 3, 1L << 1, released_keys, cub);
+	// mlx_hook(cub->mlx_win, 2, 1L << 0, pressed_keys, cub);
+	// mlx_hook(cub->mlx_win, 3, 1L << 1, released_keys, cub);
 	
 	cub->mouse_on = 0;
-	mlx_hook(cub->mlx_win, 4, 1L<<2, mouse_switcher, cub);
-	mlx_hook(cub->mlx_win, 6, 0L, mouse_hook, cub);
+	mlx_hook(cub->mlx3d_win, 4, 1L<<2, mouse_switcher, cub);
+	mlx_hook(cub->mlx3d_win, 6, 0L, mouse_hook, cub);
 
 	mlx_hook(cub->mlx_win, 17, 1L << 5, ft_close, cub);
-	mlx_loop(cub->mlx);
 
 
 	// 3d hooks
 	mlx_loop_hook(cub->mlx3d, render_scene, cub);
-	mlx_hook(cub->mlx3d_win, 2, 1L << 0, player_moves, cub);
-	mlx_hook(cub->mlx3d_win, 17, 1L << 5, ft_close, cub);
+	mlx_hook(cub->mlx3d_win, 2, 1L << 0, pressed_keys, cub);
+	mlx_hook(cub->mlx3d_win, 3, 1L << 1, released_keys, cub);
+	mlx_loop(cub->mlx);
 	mlx_loop(cub->mlx3d);
-}
+} 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_moves_management.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 22:26:12 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/29 13:17:08 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/29 18:21:14 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
