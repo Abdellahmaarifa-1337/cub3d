@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:43:55 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/26 22:45:46 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/28 16:39:51 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 
 # include "../cub.h"
 # include "../render_game/miniMap.h"
+
+/***************** MOUSE HOOK ******************/
+int		mouse_hook(int x, int y, t_cub *cub);
+int		mouse_switcher(int button, int x, int y, t_cub *cub);
 
 /********** PLAYER MOVES MANAGEMENT ************/
 int		pressed_keys(int keycode, t_cub *cub);

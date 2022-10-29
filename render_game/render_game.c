@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 08:58:40 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/26 22:15:52 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/29 13:21:38 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	initializing_keys(t_cub *cub)
 	cub->keys[3] = 0;
 	cub->keys[4] = 0;
 	cub->keys[5] = 0;
+	cub->prev_x_mouse = WIN_WIDHT / 2;
 }
 
 int	ft_close()
@@ -51,6 +52,11 @@ void render_game(t_cub *cub)
 	mlx_loop_hook(cub->mlx, execute_MiniMap, cub);
 	mlx_hook(cub->mlx_win, 2, 1L << 0, pressed_keys, cub);
 	mlx_hook(cub->mlx_win, 3, 1L << 1, released_keys, cub);
+	
+	cub->mouse_on = 0;
+	mlx_hook(cub->mlx_win, 4, 1L<<2, mouse_switcher, cub);
+	mlx_hook(cub->mlx_win, 6, 0L, mouse_hook, cub);
+
 	mlx_hook(cub->mlx_win, 17, 1L << 5, ft_close, cub);
 	mlx_loop(cub->mlx);
 }

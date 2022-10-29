@@ -1,4 +1,4 @@
-CC = CC
+mCC = CC
 CFLAGS = -Werror -Wextra -Wall
 NAME = cube3d
 
@@ -9,7 +9,7 @@ SRC = ./main.c ./parsing/parse_map.c handel_error/throw_error.c \
 		./parsing/check_if_close.c ./temp_functions.c render_game/miniMap.c \
 		./manage_player/player_moves.c ./manage_player/player_moves_management.c \
 		./render_game/set_vertical_ray.c ./render_game/ray_utils.c ./render_game/set_horizontal_ray.c\
-		./manage_player/player_eyesight.c
+		./manage_player/player_eyesight.c ./manage_player/mouse_hook.c
 
 OBJ = ${SRC:.c=.o}
 
@@ -21,7 +21,7 @@ LIB = ./libft/libft.a
 all: ${NAME}
 
 ${NAME} : ${OBJ} ${LIB}
-		${CC} -g ${CFLAGS}  ${OBJ} ${LIB}  -lmlx -framework OpenGL -framework AppKit -o ${NAME}
+		${CC} -g ${CFLAGS} ${OBJ} ${LIB} -lmlx -framework OpenGL -framework AppKit -o ${NAME}
 
 ${LIB} :
 		make -C ./libft

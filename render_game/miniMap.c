@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/27 03:24:49 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/29 12:50:16 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,6 @@ int get_ray_distance(t_cub *cub)
 	set_horizontal_ray(cub, ray_h);
 	dist_h = sqrt((ray_h[0] - PLY.x)*(ray_h[0] - PLY.x) + (ray_h[1] - PLY.y) * (ray_h[1] - PLY.y));
 	dist_v = sqrt((ray_v[0] - PLY.x)*(ray_v[0] - PLY.x) + (ray_v[1] - PLY.y) * (ray_v[1] - PLY.y));
-	// printf("ray hor : %d\n", dist_h);
-	// printf("ray vec : %d\n", dist_v);
 	if (dist_v < dist_h)
 		dist = dist_v;
 	else
@@ -219,7 +217,6 @@ void	my_mlx_clear_image(t_cub *cub)
 
 int	execute_MiniMap(t_cub* cub)
 {
-
 	PLY.dx = cos(PLY.pa) * 5;
 	PLY.dy = sin(PLY.pa) * 5;
 	my_mlx_clear_image(cub);
@@ -227,26 +224,7 @@ int	execute_MiniMap(t_cub* cub)
 	renderingTheMap(cub);
 	putPlayer(cub, PLY.x, PLY.y);
 	draw_rays(cub);
-	//draw_line(cub, PLY.pa);
-	// 	draw_line(cub, PLY.pa + (PI / 12));
-	// 	draw_line(cub, PLY.pa - (PI / 12));
-	// 	draw_line(cub, PLY.pa + (PI / 6));
-	// 	draw_line(cub, PLY.pa - (PI / 6));
-	
-	// int	pa;
-	// pa = PLY.pa;
-	// while (pa >= PLY.pa - (PI / 6))
-	// {
-	// 	draw_line(cub, pa);
-	// 	pa += 0.1;
-	// }
-	// pa = PLY.pa + 0.1;
-	// while (pa <= PLY.pa + (PI / 6))
-	// {
-	// 	draw_line(cub, pa);
-	// 	pa -= 0.1;
-	// }
-	
+	// draw_line(cub, PLY.pa);
 	mlx_put_image_to_window(cub->mlx, cub->mlx_win, IMG.img, 0, 0);
 	return (0);
 }

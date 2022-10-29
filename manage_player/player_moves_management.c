@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 22:26:12 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/26 22:30:06 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/29 13:17:08 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,18 @@ int	pressed_keys(int keycode, t_cub *cub)
 		return (0);
 }
 
+void	player_angle(int keycode, t_cub *cub)
+{
+	if (keycode == 69)
+		PLY.inc_pa += 0.01;
+	if (keycode == 78)
+		PLY.inc_pa -= 0.01;
+	if (PLY.inc_pa <= 0)
+		PLY.inc_pa = 0.01;
+	else if (PLY.inc_pa > 0.1)
+		PLY.inc_pa = 0.1;
+}
+
 int	released_keys(int keycode, t_cub *cub)
 {
 	if (keycode == 13)
@@ -77,5 +89,7 @@ int	released_keys(int keycode, t_cub *cub)
 		cub->keys[4] = 0;
 	if (keycode == 123)
 		cub->keys[5] = 0;
+	if (keycode == 69 || keycode == 78)
+		player_angle(keycode, cub);
 		return (0);
 }

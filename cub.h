@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/27 02:10:06 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/29 13:19:00 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
 # include <fcntl.h>
 # include "./libft/libft.h"
 # include "./get_next_line/get_next_line.h"
-# include "./minilibx/mlx.h"
-
+#include "./mlx/mlx.h"
 
 # define	MAP	cub->map
 # define	PLY cub->p
@@ -28,15 +27,30 @@
 
 // GAME VARIBALES
 
-# define EXT_LEN 4
-# define EXT ".cub"
-# define IDENTIFIERS_NUMBER 6
-# define N 1
-# define S 2
-# define E 3
-# define W 4
+# define EXT_LEN	4
+# define EXT	".cub"
+# define IDENTIFIERS_NUMBER	6
+# define N	1
+# define S	2
+# define E	3
+# define W	4
+
 # define WIN_WIDHT	1080
 # define WIN_HEIGHT	720
+# define CELL		32
+# define PLY_WIDTH	CELL/6
+# define PI			3.14159265359
+# define INC_PA		0.02
+
+// COLORS
+
+# define PRUPLE		0xFB2576
+# define EMPTY		0x494949
+# define WALL		0xE1E6E6
+# define PLAYER		0xF5DC50
+# define LINE		0xFF7D2D
+
+
 
 typedef struct	s_img {
 	void	*img;
@@ -80,6 +94,7 @@ typedef struct s_player
 	float	dx;
 	float	dy;
 	float	pa;
+	float	inc_pa;
 }	t_player;
 
 // Gloabl struct
@@ -93,6 +108,8 @@ typedef struct s_cub
 	void*		mlx;
 	void*		mlx_win;
 	int			keys[6];
+	int			mouse_on;
+	int			prev_x_mouse;
 }	t_cub;
 
 int		parse_map(const char *path, t_cub *g);
