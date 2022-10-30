@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/29 18:17:41 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/30 21:30:00 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,11 @@ typedef struct s_player
 typedef struct s_rays
 {
 	/* data */
-	float	pa;
+	double	pa;
 	int		x;
 	int		y;
-	float	ray_dist;
+	double	ray_dist;
+	int		is;
 } t_rays;
 
 // Gloabl struct

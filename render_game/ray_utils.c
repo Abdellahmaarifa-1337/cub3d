@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:10:49 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/27 03:26:30 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/30 22:40:27 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,27 +36,28 @@ int is_ray_right(t_cub *cub)
 	return (1);
 }
 
-int is_wall_ray(t_cub *cub, int x, int y)
+int is_wall_ray(t_cub *cub, float x, float y)
 {
 
 	// printf("x: %d\ty: %d\n", (int)((x - 5) / CELL), (int)((y - 5) / CELL));
-	if (cub->map.data[(int)(y / CELL)][(int)(x / CELL)] == '1')
+	if (cub->map.data[(int)(((y) / (float)CELL))][(int)(((x)/ (float)CELL))] == '1')
 		return 1;
-	if ( is_ray_up(cub) &&  !is_ray_right(cub)
-		&& cub->map.data[(int)((y) / CELL)][(int)((x + 5) / CELL)] == '1'
-		&& cub->map.data[(int)((y + 5) / CELL)][(int)((x - 5) / CELL)] == '1')
-		return 1;
-	if ( !is_ray_up(cub) && !is_ray_right(cub)
-		&& cub->map.data[(int)((y - 5) / CELL)][(int)((x) / CELL)] == '1'
-		&& cub->map.data[(int)((y + 5) / CELL)][(int)((x + 5) / CELL)] == '1')
-		return 1;
-	if ( !is_ray_up(cub) &&  is_ray_right(cub)
-		&& cub->map.data[(int)((y - 5) / CELL)][(int)((x) / CELL)] == '1'
-		&& cub->map.data[(int)((y + 5) / CELL)][(int)((x - 5) / CELL)] == '1')
-		return 1;
-	if ( is_ray_up(cub) && is_ray_right(cub)
-		&& cub->map.data[(int)((y - 5) / CELL)][(int)((x - 5) / CELL)] == '1'
-		&& cub->map.data[(int)((y + 5) / CELL)][(int)((x + 5) / CELL)] == '1')
-			return 1;
+	
+	// if ( is_ray_up(cub) &&  !is_ray_right(cub)
+	// 	&& cub->map.data[(int)((y) / CELL)][(int)((x + 1) / CELL)] == '1'
+	// 	&& cub->map.data[(int)((y + 1) / CELL)][(int)((x - 1) / CELL)] == '1')
+	// 	return 1;
+	// if ( !is_ray_up(cub) && !is_ray_right(cub)
+	// 	&& cub->map.data[(int)((y - 1) / CELL)][(int)((x) / CELL)] == '1'
+	// 	&& cub->map.data[(int)((y + 1) / CELL)][(int)((x + 1) / CELL)] == '1')
+	// 	return 1;
+	// if ( !is_ray_up(cub) &&  is_ray_right(cub)
+	// 	&& cub->map.data[(int)((y - 1) / CELL)][(int)((x) / CELL)] == '1'
+	// 	&& cub->map.data[(int)((y + 1) / CELL)][(int)((x - 1) / CELL)] == '1')
+	// 	return 1;
+	// if ( is_ray_up(cub) && is_ray_right(cub)
+	// 	&& cub->map.data[(int)((y - 1) / CELL)][(int)((x - 1) / CELL)] == '1'
+	// 	&& cub->map.data[(int)((y + 1) / CELL)][(int)((x + 1) / CELL)] == '1')
+	// 		return 1;
 	return (0);
 }

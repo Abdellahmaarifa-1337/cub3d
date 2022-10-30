@@ -6,15 +6,15 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/29 18:16:53 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/30 21:29:19 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./miniMap.h"
 
-double	get_player_view_angle(t_cub *cub, int i, int j)
+float	get_player_view_angle(t_cub *cub, int i, int j)
 {
-	return (7 * PI / 4);
+	return (3.850795);
 	if (MAP.data[i][j] == 'N')
 		return ((3 * PI) / 2);
 	if (MAP.data[i][j] == 'S')
@@ -65,21 +65,27 @@ void	putPlayer(t_cub *cub, float px, float py)
 		x = - (CELL / 12);
 		while (x < (CELL / 12))
 		{
-			my_mlx_pixel_put(cub, px + x, py + y, PLAYER);
+			my_mlx_pixel_put(&IMG, px + x, py + y, PLAYER);
 			x++;
 		}
 		y++;
 	}
 }
 
+float get_dist(t_cub *cub, float x, float y)
+{
+	return (sqrt((x - PLY.x)*(x - PLY.x) + (y - PLY.y) * (y - PLY.y)));
+}
 
 void draw_rays(t_cub *cub)
 {
 	int		i;
 	float	p[2];
 	float	d[2];
-	int		dist;
+	float		dist;
 
+
+	//printf("pa : %f\n", PLY.pa);
 	i = 0;
 	while (i < WIN_WIDHT + 1)
 	{
@@ -87,16 +93,20 @@ void draw_rays(t_cub *cub)
 		d[1] = sin(cub->rays[i].pa);
 		p[0] = PLY.x;
 		p[1] = PLY.y;
-		dist = cub->rays[i].ray_dist;
-		while (dist)
+		dist = (cub->rays[i].ray_dist);
+		while (get_dist(cub, p[0], p[1]) <= dist)
 		{
 			if (is_out(cub, p[0], p[1]))
 				break;
-			my_mlx_pixel_put(cub, p[0], p[1], LINE);
+			my_mlx_pixel_put(&IMG, p[0], p[1], LINE);
 			p[0] += d[0];
 			p[1] += d[1];
-			--dist;
+			//--dist;
 		}
+		// test
+		// if (i > 500)
+		// 	break ;
+		// end test
 		i++;
 	}
 }
@@ -107,15 +117,15 @@ void	putPixels(t_cub *cub, size_t i[2], size_t axe[2], int unit)
 	size_t	y;
 
 	y = axe[1];
-	while (y < (i[0] + 1) * CELL - 1)
+	while (y < (i[0] + 1) * CELL)
 	{
 		x = axe[0];
-		while (x < (i[1] + 1) * CELL - 1)
+		while (x < (i[1] + 1) * CELL)
 		{
 			if (unit)
-				my_mlx_pixel_put(cub, x, y, WALL);
+				my_mlx_pixel_put(&IMG, x, y, WALL);
 			else
-				my_mlx_pixel_put(cub, x, y, EMPTY);
+				my_mlx_pixel_put(&IMG, x, y, EMPTY);
 			x++;
 		}
 		y++;
@@ -147,16 +157,16 @@ void	renderingTheMap(t_cub* cub)
 	}
 }
 
-void	my_mlx_clear_image(t_cub *cub)
+void	my_mlx_clear_image(t_img *img, int height, int width)
 {
-	size_t	i;
-	size_t	j;
+	int	i;
+	int	j;
 
 	i = 0;
-	while (i < MAP.height * CELL) {
+	while (i < height) {
 		j = 0;
-		while (j < MAP.width * CELL) {
-			my_mlx_pixel_put(cub, j, i, 0x0);
+		while (j < width) {
+			my_mlx_pixel_put(img, j, i, 0x0);
 			j++;
 		}
 		i++;
@@ -179,12 +189,21 @@ int	execute_MiniMap(t_cub* cub)
 {
 	PLY.dx = cos(PLY.pa) * 5;
 	PLY.dy = sin(PLY.pa) * 5;
-	my_mlx_clear_image(cub);
+	my_mlx_clear_image(&(cub->img), MAP.height * CELL, MAP.width * CELL);
 	mlx_clear_window(cub->mlx, cub->mlx_win);
+	
 	renderingTheMap(cub);
 	putPlayer(cub, PLY.x, PLY.y);
 	init_rays(cub);
 	set_rays(cub);
+
+
+	// for(int u = 0; u < 30; u++)
+	// {
+	// 	//cub->rays[u].x = u;
+	// 	dprintf(2, "d = %f, x= %d, y= %d\n", cub->rays[u].ray_dist, cub->rays[u].x, cub->rays[u].y);
+	// }
+	// exit(1);
 	draw_rays(cub);
 	//render_scene(cub);
 	//draw_line(cub, PLY.pa);

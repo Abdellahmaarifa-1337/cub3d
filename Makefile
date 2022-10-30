@@ -1,5 +1,5 @@
 mCC = CC
-CFLAGS = -Werror -Wextra -Wall
+CFLAGS = #-Werror -Wextra -Wall
 NAME = cube3d
 
 SRC = ./main.c ./parsing/parse_map.c handel_error/throw_error.c \

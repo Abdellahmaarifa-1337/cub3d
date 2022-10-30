@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 08:58:40 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/29 18:29:47 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/30 21:28:50 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ int	ft_close()
 	return (0);
 }
 
-void	my_mlx_pixel_put(t_cub *cub, int x, int y, int color)
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = IMG.addr + (y * IMG.line_length + x * (IMG.bits_per_pixel / 8));
+	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
 
@@ -65,12 +65,19 @@ void	init_3d(t_cub *cub)
 void render_game(t_cub *cub)
 {
 
+	// mini map hooks
+
 	init_miniMap(cub);
 	init_3d(cub);
-	// mini map hooks
+	// for(int i = 0; i < 30; i++)
+	// 	dprintf(2, "%f from %f x : %d, y : %d\n", cub->rays[i].ray_dist, cub->rays[i].ray_dist, cub->rays[i].x, cub->rays[i].y);
+	// exit(1);
 	mlx_loop_hook(cub->mlx, execute_MiniMap, cub);
+	//execute_MiniMap(cub);
 	// mlx_hook(cub->mlx_win, 2, 1L << 0, pressed_keys, cub);
 	// mlx_hook(cub->mlx_win, 3, 1L << 1, released_keys, cub);
+	// mlx_hook(cub->mlx_win, 4, 1L<<2, mouse_switcher, cub);
+	// mlx_hook(cub->mlx_win, 6, 0L, mouse_hook, cub);
 	
 	cub->mouse_on = 0;
 	mlx_hook(cub->mlx3d_win, 4, 1L<<2, mouse_switcher, cub);
@@ -81,6 +88,7 @@ void render_game(t_cub *cub)
 
 	// 3d hooks
 	mlx_loop_hook(cub->mlx3d, render_scene, cub);
+	//render_scene(cub);
 	mlx_hook(cub->mlx3d_win, 2, 1L << 0, pressed_keys, cub);
 	mlx_hook(cub->mlx3d_win, 3, 1L << 1, released_keys, cub);
 	mlx_loop(cub->mlx);
