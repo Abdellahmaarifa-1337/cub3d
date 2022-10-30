@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_horizontal_ray.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 16:48:39 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/27 01:12:15 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/29 21:20:34 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ void set_horizontal_ray(t_cub * cub, int *ray)
 			//printf("wall in x:%d y:%d\n",(int)(px / CELL), (int)(py / CELL));
 			ray[0] = px;
 			ray[1] = py;
-			//my_mlx_pixel_put(cub, px, py, WALL);
+			//my_mlx_pixel_put(&(cub->img), px, py, WALL);
 			break ;
 		}
-		//my_mlx_pixel_put(cub, px, py, WALL);
+		//my_mlx_pixel_put(&(cub->img), px, py, WALL);
 		px += dist[0];
 		py += dist[1];
 	}

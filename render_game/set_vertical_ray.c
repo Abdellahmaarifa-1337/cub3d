@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_vertical_ray.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:06:13 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/29 18:19:02 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/29 21:20:44 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void set_vertical_ray(t_cub * cub, int *ray)
 		ray[1] = -1;
 		return ;
 	}
-	//my_mlx_pixel_put(cub, (int)(fpt[0]), (int)(fpt[1]), WALL);
+	//my_mlx_pixel_put(&(cub->img), (int)(fpt[0]), (int)(fpt[1]), WALL);
 	px = fpt[0];
 	py = fpt[1];
 	while (1)
@@ -79,10 +79,10 @@ void set_vertical_ray(t_cub * cub, int *ray)
 		{
 			ray[0] = px;
 			ray[1] = py;
-			//my_mlx_pixel_put(cub, px, py, WALL);
+			//my_mlx_pixel_put(&(cub->img), px, py, WALL);
 			break ;
 		}
-		//my_mlx_pixel_put(cub, px, py, WALL);
+		//my_mlx_pixel_put(&(cub->img), px, py, WALL);
 		px += dist[0];
 		py += dist[1];
 	}

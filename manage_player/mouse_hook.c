@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 15:29:08 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/29 13:32:18 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/10/29 23:34:44 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,9 @@ int	mouse_hook(int x, int y, t_cub *cub)
 	if (cub->mouse_on)
 	{
 		if (sign > 0)
-		{
-			PLY.pa += PLY.inc_pa;
-			if (PLY.pa > 2 * PI)
-				PLY.pa -= (2 * PI);
-			PLY.dx += cos(PLY.pa) * 5;
-			PLY.dy += sin(PLY.pa) * 5;
-		}
+			look_left(cub);
 		else if (sign < 0)
-		{
-			PLY.pa -= PLY.inc_pa;
-			if (PLY.pa < 0)
-				PLY.pa += (2 * PI);
-			PLY.dx += cos(PLY.pa) * 5;
-			PLY.dy += sin(PLY.pa) * 5;
-		}
+			look_right(cub);
 	}
 	cub->prev_x_mouse = x;
 	return (0);

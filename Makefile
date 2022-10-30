@@ -2,14 +2,15 @@ mCC = CC
 CFLAGS = -Werror -Wextra -Wall
 NAME = cube3d
 
-SRC = ./main.c ./parsing/parse_map.c handel_error/throw_error.c \
+SRC = ./main.c ./parsing/parse_map.c handel_error/throw_error.c ./lib/helpers.c \
 		./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c \
 		./render_game/render_game.c ./parsing/get_identifiers.c ./parsing/get_map.c \
 		./parsing/utils.c ./parsing/get_map_utils.c ./parsing/get_identifiers_utils.c \
 		./parsing/check_if_close.c ./temp_functions.c render_game/miniMap.c \
 		./manage_player/player_moves.c ./manage_player/player_moves_management.c \
 		./render_game/set_vertical_ray.c ./render_game/ray_utils.c ./render_game/set_horizontal_ray.c\
-		./manage_player/player_eyesight.c ./manage_player/mouse_hook.c ./render_game/set_rays.c ./render_game/render_scene.c
+		./manage_player/player_eyesight.c ./manage_player/mouse_hook.c ./render_game/set_rays.c \
+		./render_game/render_scene.c
 
 OBJ = ${SRC:.c=.o}
 

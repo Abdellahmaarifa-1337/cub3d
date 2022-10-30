@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_game.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 08:58:40 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/29 18:29:47 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/29 21:44:57 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ int	ft_close()
 	return (0);
 }
 
-void	my_mlx_pixel_put(t_cub *cub, int x, int y, int color)
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = IMG.addr + (y * IMG.line_length + x * (IMG.bits_per_pixel / 8));
+	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
 
@@ -72,17 +72,20 @@ void render_game(t_cub *cub)
 	// mlx_hook(cub->mlx_win, 2, 1L << 0, pressed_keys, cub);
 	// mlx_hook(cub->mlx_win, 3, 1L << 1, released_keys, cub);
 	
-	cub->mouse_on = 0;
-	mlx_hook(cub->mlx3d_win, 4, 1L<<2, mouse_switcher, cub);
-	mlx_hook(cub->mlx3d_win, 6, 0L, mouse_hook, cub);
-
-	mlx_hook(cub->mlx_win, 17, 1L << 5, ft_close, cub);
-
-
 	// 3d hooks
 	mlx_loop_hook(cub->mlx3d, render_scene, cub);
 	mlx_hook(cub->mlx3d_win, 2, 1L << 0, pressed_keys, cub);
 	mlx_hook(cub->mlx3d_win, 3, 1L << 1, released_keys, cub);
+
+	// Mouse Hooks
+	cub->mouse_on = 0;
+	mlx_hook(cub->mlx3d_win, 4, 1L<<2, mouse_switcher, cub);
+	mlx_hook(cub->mlx3d_win, 6, 0L, mouse_hook, cub);
+
+	// Close
+	mlx_hook(cub->mlx_win, 17, 1L << 5, ft_close, cub);
+	mlx_hook(cub->mlx3d_win, 17, 1L << 5, ft_close, cub);
+
 	mlx_loop(cub->mlx);
 	mlx_loop(cub->mlx3d);
 } 

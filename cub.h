@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/29 18:17:41 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/30 00:18:31 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 # include <fcntl.h>
 # include "./libft/libft.h"
 # include "./get_next_line/get_next_line.h"
-#include "./mlx/mlx.h"
+# include "./lib/lib.h"
+# include "./mlx/mlx.h"
 
 # define	MAP	cub->map
 # define	PLY cub->p

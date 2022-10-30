@@ -2,8 +2,8 @@ SO        ./cub.h
 NO        ./cub.h
 EA        ./cub.h
 WE        ./cub.h
-F     1   ,    58 ,   1   2
-C     111 ,   5   ,  2 5 5
+F     1   ,    58 ,   12
+C     111 ,   5   ,  255
 
 
 1                   1
