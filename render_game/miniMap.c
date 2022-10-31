@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/30 21:29:19 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/31 18:44:46 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 float	get_player_view_angle(t_cub *cub, int i, int j)
 {
-	return (3.850795);
+	//return (3.850795);
 	if (MAP.data[i][j] == 'N')
 		return ((3 * PI) / 2);
 	if (MAP.data[i][j] == 'S')
@@ -87,8 +87,11 @@ void draw_rays(t_cub *cub)
 
 	//printf("pa : %f\n", PLY.pa);
 	i = 0;
+	//printf("pa : %f\n", PLY.pa);
 	while (i < WIN_WIDHT + 1)
 	{
+		// if (i > 0)
+		// 	break ;
 		d[0] = cos(cub->rays[i].pa);
 		d[1] = sin(cub->rays[i].pa);
 		p[0] = PLY.x;

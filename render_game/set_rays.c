@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 17:13:33 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/30 21:38:27 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/31 18:51:34 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ void	save_ray(t_cub *cub, double an, int index)
 	dist_v = (double)fabs((PLY.x - (double)ray_v[0]) / cos(fabs(an)));
 	//dist_h = (sqrt((ray_h[0] - PLY.x)*(ray_h[0] - PLY.x) + (ray_h[1] - PLY.y) * (ray_h[1] - PLY.y)));
 	//dist_v = (sqrt((ray_v[0] - PLY.x)*(ray_v[0] - PLY.x) + (ray_v[1] - PLY.y) * (ray_v[1] - PLY.y)));
+	//printf("an == %f\n", an);
+	if (an == (3 * PI) / 2 || an == (PI/2))
+	{
+		printf("%f %f\n", dist_h, dist_v);
+	}
 	if (dist_v <= dist_h)
 	{
 		cub->rays[index].ray_dist = dist_v;
@@ -74,8 +79,12 @@ void set_rays(t_cub *cub)
 	dp = (float)(PI / (3.0 * (float)WIN_WIDHT));
 	an = PLY.pa - PI / 6;
 	index = 0;
+	// cub->rays[0].pa= PLY.pa;
+	// save_ray(cub, PLY.pa, index);
+	// return ;
 	while (an < PLY.pa + PI / 6)
 	{
+		
 		cub->rays[index].pa= an;
 		//save_ray_tmp(cub, an, index);
 		save_ray(cub, an, index);
