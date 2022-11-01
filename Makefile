@@ -17,12 +17,10 @@ LIB = ./libft/libft.a
 
 .c.o :
 	${CC} ${CFLAGS} -Imlx -c $< -o $@
-
 all: ${NAME}
 
 ${NAME} : ${OBJ} ${LIB}
 		${CC} -fsanitize=address -g ${CFLAGS}  ${OBJ} ${LIB}  -lmlx -framework OpenGL -framework AppKit -o ${NAME}
-
 
 ${LIB} :
 		make -C ./libft
@@ -34,6 +32,7 @@ clean:
 fclean: clean
 	make fclean -C ./libft
 	rm -rf ${NAME}
+
 re: fclean all
 
 .PHONY: all clean fclean

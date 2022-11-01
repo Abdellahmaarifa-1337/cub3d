@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 17:13:33 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/31 18:51:34 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/11/01 10:36:25 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,37 +29,19 @@ void	save_ray(t_cub *cub, double an, int index)
 	set_vertical_ray(cub, ray_v);
 	set_horizontal_ray(cub, ray_h);
 	
-	dist_h = (double)fabs((PLY.x - (double)ray_h[0]) / cos(fabs(an)));
-	dist_v = (double)fabs((PLY.x - (double)ray_v[0]) / cos(fabs(an)));
-	//dist_h = (sqrt((ray_h[0] - PLY.x)*(ray_h[0] - PLY.x) + (ray_h[1] - PLY.y) * (ray_h[1] - PLY.y)));
-	//dist_v = (sqrt((ray_v[0] - PLY.x)*(ray_v[0] - PLY.x) + (ray_v[1] - PLY.y) * (ray_v[1] - PLY.y)));
-	//printf("an == %f\n", an);
-	if (an == (3 * PI) / 2 || an == (PI/2))
-	{
-		printf("%f %f\n", dist_h, dist_v);
-	}
-	if (dist_v <= dist_h)
+	//dist_h = (double)fabs((PLY.x - (double)ray_h[0]) / cos(fabs(an)));
+	//dist_v = (double)fabs((PLY.x - (double)ray_v[0]) / cos(fabs(an)));
+	dist_h = (sqrt((ray_h[0] - PLY.x)*(ray_h[0] - PLY.x) + (ray_h[1] - PLY.y) * (ray_h[1] - PLY.y)));
+	dist_v = (sqrt((ray_v[0] - PLY.x)*(ray_v[0] - PLY.x) + (ray_v[1] - PLY.y) * (ray_v[1] - PLY.y)));
+
+	if (dist_v <= dist_h || (ray_h[0] == -1 && ray_h[1] == -1))
 	{
 		cub->rays[index].ray_dist = dist_v;
 		cub->rays[index].x = ray_v[0];
 		cub->rays[index].y = ray_v[1];
 		cub->rays[index].is = 1;
 	}
-	else
-	{
-		cub->rays[index].ray_dist = dist_h;
-		cub->rays[index].x = ray_h[0];
-		cub->rays[index].y = ray_h[1];
-		cub->rays[index].is = -1;
-	}
-	if (ray_h[0] == -1 && ray_h[1] == -1)
-	{
-		cub->rays[index].ray_dist = dist_v;
-		cub->rays[index].x = ray_v[0];
-		cub->rays[index].y = ray_v[1];
-		cub->rays[index].is = 1;
-	}
-	if (ray_v[0] == -1 && ray_v[1] == -1)
+	else if (dist_v > dist_h || (ray_v[0] == -1 && ray_v[1] == -1 )) 
 	{
 		cub->rays[index].ray_dist = dist_h;
 		cub->rays[index].x = ray_h[0];
@@ -95,5 +77,6 @@ void set_rays(t_cub *cub)
 		index++;
 		an += dp;
 	}
+	//exit(1);
 
 }

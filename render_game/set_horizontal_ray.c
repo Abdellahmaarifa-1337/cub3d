@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 16:48:39 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/31 18:44:58 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/11/01 08:06:29 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,12 @@ void set_horizontal_ray(t_cub * cub, double *ray)
 	set_horizontal_distance(cub, dist);
 	px = fpt[0];
 	py = fpt[1];
-	if (is_out_h(cub, px, py))
-	{
-		ray[0] = -1;
-		ray[1] = -1;	
-		return  ;
-	}
+	// if (is_out_h(cub, px, py))
+	// {
+	// 	ray[0] = -1;
+	// 	ray[1] = -1;	
+	// 	return  ;
+	// }
 	//my_mlx_pixel_put(&cub->img, px, py, WALL);
 	while (1)
 	{

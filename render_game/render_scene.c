@@ -6,13 +6,13 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 17:21:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/31 14:37:40 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/11/01 10:39:05 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./miniMap.h"
 
-#define DPP 277
+#define DPP 255
 #define SH	3*CELL
 
 void draw_slice(t_cub *cub, int psh, int i, int is)
