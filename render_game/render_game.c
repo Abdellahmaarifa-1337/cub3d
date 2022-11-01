@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 08:58:40 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/31 17:44:29 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/11/01 18:47:42 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,13 @@ void	init_3d(t_cub *cub)
 
 void render_game(t_cub *cub)
 {
-
-	// mini map hooks
-
+	int d;
+	// textures 
+	cub->textuers = malloc(sizeof(t_img));
+	cub->textuers->img = mlx_xpm_file_to_image(cub->mlx, "../textuer/wall.xpm", &d, &d);
+	cub->textuers->addr = mlx_get_data_addr(&(cub->textuers->img), &(cub->textuers->bits_per_pixel),
+	 	&(cub->textuers->line_length), &(cub->textuers->endian));
+	printf("%d\n", cub->textuers->bits_per_pixel);
 	init_miniMap(cub);
 	init_3d(cub);
 	// for(int i = 0; i < 30; i++)

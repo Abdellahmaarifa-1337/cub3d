@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 17:21:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/11/01 12:36:19 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/11/01 17:19:55 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ void draw_slice(t_cub *cub, int psh, int i, int is)
 	end = start + psh;
 	while (start < end && start < WIN_HEIGHT && start >= 0)
 	{
-		if (is == 1)
-			my_mlx_pixel_put(&(cub->img3d), i, start, PLAYER);
-		else
-			my_mlx_pixel_put(&(cub->img3d), i, start, PRUPLE);
+		// if (is == 1)
+		// 	my_mlx_pixel_put(&(cub->img3d), i, start, PLAYER);
+		// else
+		// 	my_mlx_pixel_put(&(cub->img3d), i, start, PRUPLE);
+		my_mlx_pixel_put(&(cub->img3d), i , start, get_color_from_textuer(cub, i, start));
 		start++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/11/01 11:40:01 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/11/01 18:44:01 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ typedef struct s_cub
 	int			keys[6];
 	int			mouse_on;
 	int			prev_x_mouse;
+	t_img		*textuers;
 }	t_cub;
 
 int		parse_map(const char *path, t_cub *g);
