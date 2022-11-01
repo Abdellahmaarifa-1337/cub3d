@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 16:48:39 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/11/01 08:06:29 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/11/01 11:12:04 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,49 +80,31 @@ void set_horizontal_distance(t_cub * cub, double *dist)
 }
 
 // set the horizontal ray
-void set_horizontal_ray(t_cub * cub, double *ray)
+double set_horizontal_ray(t_cub * cub)
 {
 	double	fpt[2];
 	double	dist[2];
 	double	px;
 	double	py;
 
-	ray[0] = -1;
-	ray[1] = -1;
 	set_fpt_h(cub, fpt);
 	set_horizontal_distance(cub, dist);
 	px = fpt[0];
 	py = fpt[1];
-	// if (is_out_h(cub, px, py))
-	// {
-	// 	ray[0] = -1;
-	// 	ray[1] = -1;	
-	// 	return  ;
-	// }
-	//my_mlx_pixel_put(&cub->img, px, py, WALL);
 	while (1)
 	{
 		if (is_out_h(cub, px, py))
 		{
-			ray[0] = -1;
-			ray[1] = -1;	
+			px = -1;
+			py = -1;	
 			break ;
 		}
 		if (is_wall_ray_h(cub, px, py))
-		{
-			//printf("wall in x:%d y:%d\n",(int)(px / CELL), (int)(py / CELL));
-			//printf("wall: x :: dist[0] %f wall:y :: dist[1] %f\n", dist[0], dist[1]);
-			ray[0] = px;
-			ray[1] = py;
-			//my_mlx_pixel_put(&cub->img, px, py, PRUPLE);
 			break ;
-		}
-		//printf("x :: dist[0] %f y :: dist[1] %f\n", dist[0], dist[1]);
-		///set_horizontal_distance(cub, dist);
-		//set_horizontal_distance(cub, dist);
 		px += dist[0];
 		py += dist[1];
-		//my_mlx_pixel_put(&cub->img, px, py, PRUPLE);
-
 	}
+	if (px == -1 && py == -1)
+		return (INT_MAX);
+	return (sqrt((px - PLY.x)*(px - PLY.x) + (py - PLY.y) * (py - PLY.y)));
 }

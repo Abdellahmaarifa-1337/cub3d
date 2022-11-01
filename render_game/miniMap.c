@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/31 18:44:46 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/11/01 12:12:05 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,20 +83,21 @@ void draw_rays(t_cub *cub)
 	float	p[2];
 	float	d[2];
 	float		dist;
+	double	dp;
+	double an;
 
-
-	//printf("pa : %f\n", PLY.pa);
 	i = 0;
-	//printf("pa : %f\n", PLY.pa);
-	while (i < WIN_WIDHT + 1)
+	dp = (float)(PI / (3.0 * (float)WIN_WIDHT));
+	an = PLY.pa - PI / 6;
+	while (an < PLY.pa + PI / 6  && i < WIN_WIDHT )
 	{
-		// if (i > 0)
-		// 	break ;
-		d[0] = cos(cub->rays[i].pa);
-		d[1] = sin(cub->rays[i].pa);
+
 		p[0] = PLY.x;
 		p[1] = PLY.y;
-		dist = (cub->rays[i].ray_dist);
+		cub->map.ray_pa = an;
+		dist = get_ray_dist(cub)/ fabs(cos(fabs(PLY.pa - cub->map.ray_pa)));
+		d[0] = cos(cub->map.ray_pa);
+		d[1] = sin(cub->map.ray_pa);
 		while (get_dist(cub, p[0], p[1]) <= dist)
 		{
 			if (is_out(cub, p[0], p[1]))
@@ -104,14 +105,12 @@ void draw_rays(t_cub *cub)
 			my_mlx_pixel_put(&IMG, p[0], p[1], LINE);
 			p[0] += d[0];
 			p[1] += d[1];
-			//--dist;
 		}
-		// test
-		// if (i > 500)
-		// 	break ;
-		// end test
+		an += dp;
 		i++;
 	}
+
+
 }
 
 void	putPixels(t_cub *cub, size_t i[2], size_t axe[2], int unit)
@@ -197,8 +196,8 @@ int	execute_MiniMap(t_cub* cub)
 	
 	renderingTheMap(cub);
 	putPlayer(cub, PLY.x, PLY.y);
-	init_rays(cub);
-	set_rays(cub);
+	//init_rays(cub);
+	//set_rays(cub);
 
 
 	// for(int u = 0; u < 30; u++)

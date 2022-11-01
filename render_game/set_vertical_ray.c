@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:06:13 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/31 17:54:01 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/11/01 11:12:57 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void set_vertical_distance(t_cub * cub, double *dist)
 }
 
 // set the vertical ray
-void set_vertical_ray(t_cub * cub, double *ray)
+double set_vertical_ray(t_cub * cub)
 {
 	double	fpt[2];
 	double	dist[2];
@@ -88,35 +88,22 @@ void set_vertical_ray(t_cub * cub, double *ray)
 
 	set_fpt(cub, fpt);
 	set_vertical_distance(cub, dist);
-	// printf("px: %f\tpy: %f\n", fpt[0] / CELL, fpt[1] / CELL);
-	if (is_out(cub, fpt[0], fpt[1]))
-	{
-		ray[0] = -1;
-		ray[1] = -1;
-		return ;
-	}
 	px = fpt[0];
 	py = fpt[1];
-	//my_mlx_pixel_put(&cub->img, px, py, WALL);
-	//return ;
 	while (1)
 	{
 		if (is_out_v(cub, px, py))
 		{
-			ray[0] = -1;
-			ray[1] = -1;	
+			px = -1;
+			py = -1;	
 			break ;
 		}
 		if (is_wall_ray_v(cub, px, py))
-		{
-			ray[0] = px;
-			ray[1] = py;
-			//my_mlx_pixel_put(&cub->img, px, py, PRUPLE);
 			break ;
-		}
-		//my_mlx_pixel_put(&cub->img, px, py, PRUPLE);
-		//set_vertical_distance(cub, dist);
 		px += dist[0];
 		py += dist[1];
 	}
+	if (px == -1 && py == -1)
+		return (INT_MAX);
+	return (sqrt((px - PLY.x)*(px - PLY.x) + (py - PLY.y) * (py - PLY.y)));
 }

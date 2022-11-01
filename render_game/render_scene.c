@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 17:21:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/11/01 10:39:05 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/11/01 12:36:19 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,61 +17,43 @@
 
 void draw_slice(t_cub *cub, int psh, int i, int is)
 {
-	int j;
-	int y;
-	// draw up
-	j = psh / 2;
-	y = WIN_HEIGHT / 2;
-	while(j > 0 && y >=0)
-	{
-		if (is == 1)
-			my_mlx_pixel_put(&(cub->img3d), i, y, PLAYER);
-		else
-			my_mlx_pixel_put(&(cub->img3d), i, y, PRUPLE);
-		y--;
-		j--;
-	}
+	int start;
+	int	end;
 
-	// draw down
-	j = psh / 2;
-	y = WIN_HEIGHT / 2;
-	while (j > 0 && y < WIN_HEIGHT)
+	if (psh > WIN_HEIGHT)
+		psh = WIN_HEIGHT;
+	start = WIN_HEIGHT / 2 - psh / 2;
+	end = start + psh;
+	while (start < end && start < WIN_HEIGHT && start >= 0)
 	{
 		if (is == 1)
-			my_mlx_pixel_put(&(cub->img3d), i, y, PLAYER);
+			my_mlx_pixel_put(&(cub->img3d), i, start, PLAYER);
 		else
-			my_mlx_pixel_put(&(cub->img3d), i, y, PRUPLE);
-		y++;
-		j--;
+			my_mlx_pixel_put(&(cub->img3d), i, start, PRUPLE);
+		start++;
 	}
 }
 
+
 int render_scene(t_cub *cub)
 {
-	int	i;
-	float psh;
+	double		dp;
+	double		an;
+	double		dist;
+	int			i;
 
 	my_mlx_clear_image(&(cub->img3d),WIN_HEIGHT, WIN_WIDHT);
-	psh = 0;
 	i = 0;
-	//printf("middle ray: %f\n", cub->rays[539].ray_dist);
-	while (i < WIN_WIDHT)
+	dp = (float)(PI / (3.0 * (float)WIN_WIDHT));
+	an = PLY.pa - PI / 6;
+	while (an < PLY.pa + PI / 6 && i < WIN_WIDHT)
 	{
-		cub->rays[i].ray_dist = (cub->rays[i].ray_dist * fabs(cos(fabs(PLY.pa - cub->rays[i].pa))));
-
-		if (!cub->rays[i].ray_dist)
-		{
-			i++;
-			continue ;
-		}
-		psh = (float)((((float)SH / cub->rays[i].ray_dist) * (float)DPP));
-		//dprintf(2, "%f from %f x : %d, y : %d\n", psh, cub->rays[i].ray_dist, cub->rays[i].x, cub->rays[i].y);
-		draw_slice(cub, (int)(psh), i, cub->rays[i].is);
-		// if (i > 500)
-		// 	break ;
+		cub->map.ray_pa = an;
+		dist = get_ray_dist(cub);
+		draw_slice(cub, ((float)SH / dist) * (float)DPP, i, is_ver);
+		an += dp;
 		i++;
 	}
-	//exit(1);
 	mlx_put_image_to_window(cub->mlx3d, cub->mlx3d_win, cub->img3d.img, 0, 0);
 	return 0;
 }

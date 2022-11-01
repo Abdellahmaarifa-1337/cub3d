@@ -9,7 +9,7 @@ SRC = ./main.c ./parsing/parse_map.c handel_error/throw_error.c \
 		./parsing/check_if_close.c ./temp_functions.c render_game/miniMap.c \
 		./manage_player/player_moves.c ./manage_player/player_moves_management.c \
 		./render_game/set_vertical_ray.c ./render_game/ray_utils.c ./render_game/set_horizontal_ray.c\
-		./manage_player/player_eyesight.c ./manage_player/mouse_hook.c ./render_game/set_rays.c ./render_game/render_scene.c
+		./manage_player/player_eyesight.c ./manage_player/mouse_hook.c ./render_game/set_rays.c ./render_game/render_scene.c ./render_game/get_ray_dist.c
 
 OBJ = ${SRC:.c=.o}
 

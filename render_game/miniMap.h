@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:47:57 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/30 19:24:52 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/11/01 12:13:09 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@
 int		execute_MiniMap(t_cub *cub);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
-void set_horizontal_ray(t_cub * cub, double *ray);
-
-void set_vertical_ray(t_cub * cub, double *ray);
+double set_horizontal_ray(t_cub * cub);
+double set_vertical_ray(t_cub * cub);
 int is_out(t_cub *cub ,int x, int y);
 int is_ray_up(t_cub *cub);
 int is_ray_right(t_cub *cub);
@@ -35,4 +34,5 @@ void set_rays(t_cub *cub);
 int render_scene(t_cub *cub);
 void	my_mlx_clear_image(t_img *img, int height, int width);
 void init_rays(t_cub *cub);
+double	get_ray_dist(t_cub *cub);
 #endif

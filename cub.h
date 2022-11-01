@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/30 21:30:00 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/11/01 11:40:01 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "./libft/libft.h"
 # include "./get_next_line/get_next_line.h"
 #include "./mlx/mlx.h"
+#include "limits.h"
 
 # define	MAP	cub->map
 # define	PLY cub->p
@@ -155,6 +156,11 @@ void	set_rgb(t_idn *idn, char *key, char *value);
 
 void	print_map(t_map *map);
 void	print_idn(t_idn *idn);
+
+
+// temp global vars
+
+int is_ver;
 
 // Manage Player
 void	set_map_attribute(t_cub *cub);
