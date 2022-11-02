@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:47:57 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/11/01 17:19:15 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/11/02 10:35:56 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,5 @@ int render_scene(t_cub *cub);
 void	my_mlx_clear_image(t_img *img, int height, int width);
 void init_rays(t_cub *cub);
 double	get_ray_dist(t_cub *cub);
-int	get_color_from_textuer(t_cub *cub, int x, int y);
+int	get_color_from_textuer(t_cub *cub, double x, double y);
 #endif

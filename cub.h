@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/11/01 18:44:01 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/11/02 12:35:59 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,15 @@ typedef struct s_rays
 	int		is;
 } t_rays;
 
+typedef struct s_intersection
+{
+	/* data */
+	int is_ver;
+	int inter_h;
+	int inter_v;
+	int inter;
+} t_intersection;
+
 // Gloabl struct
 typedef struct s_cub
 {
@@ -125,7 +134,8 @@ typedef struct s_cub
 	int			keys[6];
 	int			mouse_on;
 	int			prev_x_mouse;
-	t_img		*textuers;
+	t_img		textuers;
+	t_intersection	inter;
 }	t_cub;
 
 int		parse_map(const char *path, t_cub *g);
@@ -162,7 +172,6 @@ void	print_idn(t_idn *idn);
 // temp global vars
 
 int is_ver;
-
 // Manage Player
 void	set_map_attribute(t_cub *cub);
 

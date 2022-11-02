@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 16:48:39 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/11/01 11:12:04 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/11/02 09:37:08 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,10 @@ double set_horizontal_ray(t_cub * cub)
 			break ;
 		}
 		if (is_wall_ray_h(cub, px, py))
+		{
+			cub->inter.inter_h = px;
 			break ;
+		}
 		px += dist[0];
 		py += dist[1];
 	}
