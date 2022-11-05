@@ -106,3 +106,52 @@ int	main(void)
 	mlx_loop(cub.mlx);
 	return(0);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/************************************************************/
+/***** Fast Inverse Square Root — A Quake III Algorithm *****/
+/************************************************************/
+
+// #include <stdio.h>
+// #include <math.h>
+
+// float	rsqrt(float number)
+// {
+// 	long	i;
+// 	float	x2, y;
+// 	const float	threehalfs = 1.5F;
+
+// 	x2 = number * 0.5F;
+// 	y = number;
+// 	i = (long)y;
+// 	i = 0x5f3759df - (i >> 1);
+// 	y = *(float*) &i;
+// 	y = y * (threehalfs - (x2 * y * y));
+// 	y = y * (threehalfs - (x2 * y * y));
+// 	y = y * (threehalfs - (x2 * y * y));
+
+// 	return y;
+// }
+
+// int	main() {
+// 	float number = 17;
+
+// 	float x = 1 / rsqrt(number);
+// 	float y = sqrt(number);
+
+// 	printf("sqrt  : %f\n", x);
+// 	printf("rsqrt : %f\n", y);
+	
+// 	return 0;
+// }
