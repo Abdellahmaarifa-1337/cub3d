@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/30 00:18:31 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/11/05 19:18:13 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@
 # include <fcntl.h>
 # include "./libft/libft.h"
 # include "./get_next_line/get_next_line.h"
-# include "./lib/lib.h"
+// # include "./lib/lib.h"
 # include "./mlx/mlx.h"
+# include "limits.h"
 
 # define	MAP	cub->map
 # define	PLY cub->p
@@ -101,11 +102,21 @@ typedef struct s_player
 typedef struct s_rays
 {
 	/* data */
-	float	pa;
+	double	pa;
 	int		x;
 	int		y;
-	float	ray_dist;
+	double	ray_dist;
+	int		is;
 } t_rays;
+
+typedef struct s_intersection
+{
+	/* data */
+	int is_ver;
+	int inter_h;
+	int inter_v;
+	int inter;
+} t_intersection;
 
 // Gloabl struct
 typedef struct s_cub
@@ -124,6 +135,8 @@ typedef struct s_cub
 	int			keys[6];
 	int			mouse_on;
 	int			prev_x_mouse;
+	t_img		textuers;
+	t_intersection	inter;
 }	t_cub;
 
 int		parse_map(const char *path, t_cub *g);
@@ -156,6 +169,10 @@ void	set_rgb(t_idn *idn, char *key, char *value);
 void	print_map(t_map *map);
 void	print_idn(t_idn *idn);
 
+
+// temp global vars
+
+int is_ver;
 // Manage Player
 void	set_map_attribute(t_cub *cub);
 

@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:47:57 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/29 21:42:55 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/11/05 19:25:11 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,18 @@
 int		execute_MiniMap(t_cub *cub);
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
-void	my_mlx_clear_image(t_img *img, size_t width, size_t height);
 
-void set_horizontal_ray(t_cub * cub, int *ray);
+double	set_horizontal_ray(t_cub * cub);
+double	set_vertical_ray(t_cub * cub);
+int     is_out(t_cub *cub ,int x, int y);
+int     is_ray_up(t_cub *cub);
+int     is_ray_right(t_cub *cub);
+int     is_wall_ray(t_cub *cub, float x, float y);
+void	set_rays(t_cub *cub);
+int		render_scene(t_cub *cub);
 
-void set_vertical_ray(t_cub * cub, int *ray);
-int is_out(t_cub *cub ,int x, int y);
-int is_ray_up(t_cub *cub);
-int is_ray_right(t_cub *cub);
-int is_wall_ray(t_cub *cub, int x, int y);
-void set_rays(t_cub *cub);
-int render_scene(t_cub *cub);
-
-
+void	my_mlx_clear_image(t_img *img, int height, int width);
+void	init_rays(t_cub *cub);
+double	get_ray_dist(t_cub *cub);
+int		get_color_from_textuer(t_cub *cub, double x, double y);
 #endif

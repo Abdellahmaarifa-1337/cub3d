@@ -1,5 +1,5 @@
 mCC = CC
-CFLAGS = -Werror -Wextra -Wall
+CFLAGS = -O3#-Werror -Wextra -Wall
 NAME = cube3d
 
 SRC = ./main.c ./parsing/parse_map.c handel_error/throw_error.c ./lib/helpers.c \
@@ -10,7 +10,7 @@ SRC = ./main.c ./parsing/parse_map.c handel_error/throw_error.c ./lib/helpers.c 
 		./manage_player/player_moves.c ./manage_player/player_moves_management.c \
 		./render_game/set_vertical_ray.c ./render_game/ray_utils.c ./render_game/set_horizontal_ray.c\
 		./manage_player/player_eyesight.c ./manage_player/mouse_hook.c ./render_game/set_rays.c \
-		./render_game/render_scene.c
+		./render_game/render_scene.c ./render_game/get_ray_dist.c ./render_game/textuer.c
 
 OBJ = ${SRC:.c=.o}
 
@@ -18,12 +18,10 @@ LIB = ./libft/libft.a
 
 .c.o :
 	${CC} ${CFLAGS} -Imlx -c $< -o $@
-
 all: ${NAME}
 
 ${NAME} : ${OBJ} ${LIB}
-		${CC} -fsanitize=address -g ${CFLAGS}  ${OBJ} ${LIB}  -lmlx -framework OpenGL -framework AppKit -o ${NAME}
-
+		${CC} -fsanitize=address -g  ${CFLAGS}  ${OBJ} ${LIB}  -lmlx -framework OpenGL -framework AppKit -o ${NAME}
 
 ${LIB} :
 		make -C ./libft
@@ -35,6 +33,7 @@ clean:
 fclean: clean
 	make fclean -C ./libft
 	rm -rf ${NAME}
+
 re: fclean all
 
 .PHONY: all clean fclean

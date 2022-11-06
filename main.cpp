@@ -3,21 +3,33 @@
 
 using namespace std;
 
+
+class A 
+{
+	public:
+	int a = 1;
+	A(){};
+	void print(){cout << "A\n";}
+};
+
+class B : public A
+{
+	public:
+	int b = 2;
+	B(){};
+	void print2(){cout << "b\n";}
+};
+
 int main()
 {
-	vector<vector <char> >ss[5];
-
-	for(int i = 0; i < 5; i++)
-	{
-		vector <char> o;
-		// o.push_back('j');
-		// o.push_back('o');
-		// o.push_back('k');
-		ss[i].push_back(o);
-	}
 	
-	string res;
-	ss[0][0].push_back('l');
+	A *a = new A();
+
+	B *b = reinterpret_cast<B *> (a);
+
+	 b->print2();
+	cout << b->a << "\n";
+
 	// for(int i = 0; i < 5; i++)
 	// {
 	// 	string h;
