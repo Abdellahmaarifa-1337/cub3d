@@ -18,11 +18,9 @@ int	ft_atoi(const char	*str)
 	int				i;
 	int				ng;
 	unsigned long	res;
-	unsigned long	l_max;
 
 	i = 0;
 	ng = 1;
-	l_max = 9223372036854775807;
 	res = 0;
 	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
 		i++;
