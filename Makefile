@@ -1,6 +1,11 @@
 mCC = CC
-CFLAGS = -O3#-Werror -Wextra -Wall
-NAME = cube3d
+
+#---------- Flags ??????? 
+CFLAGS = -O3 #-Werror -Wextra -Wall
+MLX_OP = -lmlx -framework OpenGL -framework AppKit -fsanitize=address -g
+#---------- Sanitize ????
+
+NAME = cube3D
 
 SRC = ./main.c ./parsing/parse_map.c handel_error/throw_error.c ./lib/helpers.c \
 		./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c \
@@ -10,29 +15,43 @@ SRC = ./main.c ./parsing/parse_map.c handel_error/throw_error.c ./lib/helpers.c 
 		./manage_player/player_moves.c ./manage_player/player_moves_management.c \
 		./render_game/set_vertical_ray.c ./render_game/ray_utils.c ./render_game/set_horizontal_ray.c\
 		./manage_player/player_eyesight.c ./manage_player/mouse_hook.c ./render_game/set_rays.c \
-		./render_game/render_scene.c ./render_game/get_ray_dist.c ./render_game/textuer.c
+		./render_game/render_scene.c ./render_game/get_ray_dist.c ./render_game/texture.c
 
 OBJ = ${SRC:.c=.o}
 
 LIB = ./libft/libft.a
+MLX_LIB = ./mlx/libmlx.a
 
 .c.o :
-	${CC} ${CFLAGS} -Imlx -c $< -o $@
+	@${CC} ${CFLAGS} -Imlx -c $< -o $@
+	@echo -n .
 all: ${NAME}
 
-${NAME} : ${OBJ} ${LIB}
-		${CC} -fsanitize=address -g  ${CFLAGS}  ${OBJ} ${LIB}  -lmlx -framework OpenGL -framework AppKit -o ${NAME}
+${NAME} : ${OBJ} ${LIB} ${MLX_LIB}
+	@${CC} ${CFLAGS} ${OBJ} ${LIB} ${MLX_OP} ${MLX_LIB} -o ${NAME}
+	@echo
+	@echo "\033[1;32m************* DONE *************\033[0m"
+	@echo "run \033[1;32m./${NAME}\033[0m to execute program"
+	@echo "\033[1;32m********************************\033[0m"
 
 ${LIB} :
-		make -C ./libft
+	@make -sC ./libft
+	@echo -n .
+
+${MLX_LIB} :
+	@make -sC ./mlx
+	@echo .
 
 clean:
-	make clean -C ./libft
-	rm -rf ${OBJ}
+	@make clean -sC ./libft
+	@make clean -sC ./mlx
+	@rm -rf ${OBJ}
+	@echo "\033[1;31m************* Removed **************\033[0m"
 
 fclean: clean
-	make fclean -C ./libft
-	rm -rf ${NAME}
+	@make fclean -sC ./libft
+	@rm -rf ${NAME}
+	@rm -rf ${MLX_LIB}
 
 re: fclean all
 

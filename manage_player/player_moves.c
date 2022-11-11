@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_moves.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 23:23:04 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/30 18:09:15 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/11/06 19:33:35 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	move_up(t_cub *cub)
 {
-	if (!is_wall(cub, PLY.x + PLY.dx, PLY.y + PLY.dy))
+	if (!is_wall(cub, PLY.dx, PLY.dy))
 	{
 		PLY.x += PLY.dx;
 		PLY.y += PLY.dy;
@@ -24,7 +24,7 @@ void	move_up(t_cub *cub)
 
 void	move_down(t_cub *cub)
 {
-	if (!is_wall(cub, PLY.x - PLY.dx, PLY.y - PLY.dy))
+	if (!is_wall(cub, - PLY.dx, - PLY.dy))
 	{
 		PLY.x -= PLY.dx;
 		PLY.y -= PLY.dy;
@@ -42,7 +42,7 @@ void	move_right(t_cub *cub)
 		pa -= (2 * PI);
 	dx = cos(pa) * 5;
 	dy = sin(pa) * 5;
-	if (!is_wall(cub,  PLY.x + dx, PLY.y + dy))
+	if (!is_wall(cub, dx, dy))
 	{
 		PLY.x += dx;
 		PLY.y += dy;
@@ -61,7 +61,7 @@ void	move_left(t_cub *cub)
 	dx = cos(pa) * 5;
 	dy = sin(pa) * 5;
 
-	if (!is_wall(cub, PLY.x + dx, PLY.y + dy))
+	if (!is_wall(cub, dx, dy))
 	{
 		PLY.x += dx;
 		PLY.y += dy;

@@ -3,25 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   player_moves_management.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 22:26:12 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/29 18:21:14 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/11/08 15:17:59 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "manage_player.h"
 
-int is_wall(t_cub *cub, int x, int y)
+int is_wall(t_cub *cub, float dx, float dy)
 {
-	int px1, px2, py1, py2;
-
-	px1 = (x - PLY_WIDTH / 2) / CELL;
-	px2 = (x + PLY_WIDTH / 2) / CELL;
-	py1 = (y - PLY_WIDTH / 2) / CELL;
-	py2 = (y + PLY_WIDTH / 2) / CELL;
-	if (cub->map.data[y / CELL][px1] == '1' || cub->map.data[y / CELL][px2] == '1'
-	|| cub->map.data[py1][x / CELL] == '1' || cub->map.data[py2][x / CELL] == '1')
+	if (dx < 0)
+		dx -= 2;
+	else
+		dx += 2;
+	if (dy < 0)
+		dy -= 2;
+	else
+		dy += 2;
+	if (MAP.data[(int)((PLY.y + dy) / CELL)][(int)((PLY.x + dx) / CELL)] == '1'
+		|| (MAP.data[(int)(PLY.y / CELL)][(int)((PLY.x + dx) / CELL)] == '1'
+		&& MAP.data[(int)((PLY.y + dy) / CELL)][(int)(PLY.x / CELL)] == '1'))
 		return (1);
 	return (0);
 }
@@ -91,5 +94,7 @@ int	released_keys(int keycode, t_cub *cub)
 		cub->keys[5] = 0;
 	if (keycode == 69 || keycode == 78)
 		player_angle(keycode, cub);
+	if (keycode == 259 || keycode == 260)
+		mouse_switcher(cub);
 		return (0);
 }

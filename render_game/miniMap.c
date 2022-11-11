@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/11/05 19:28:03 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/11/06 18:53:39 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,10 +119,10 @@ void	putPixels(t_cub *cub, size_t i[2], size_t axe[2], int unit)
 	size_t	y;
 
 	y = axe[1];
-	while (y < (i[0] + 1) * CELL)
+	while (y < (i[0] + 1) * CELL - 1)
 	{
 		x = axe[0];
-		while (x < (i[1] + 1) * CELL)
+		while (x < (i[1] + 1) * CELL - 1)
 		{
 			if (unit)
 				my_mlx_pixel_put(&IMG, x, y, WALL);

@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/11/05 19:18:13 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/11/11 10:36:56 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define	PLY cub->p
 # define	RAY cub->ray
 # define	IMG	cub->img
+# define	IDN	cub->idn
+# define	TEX cub->textures
 
 // GAME VARIBALES
 
@@ -39,14 +41,15 @@
 
 # define WIN_WIDHT	1080
 # define WIN_HEIGHT	720
-# define CELL		32
+# define CELL		64
 # define PLY_WIDTH	CELL/6
 # define PI			3.14159265359
 # define INC_PA		0.02
 
 // COLORS
 
-# define PRUPLE		0xFB2576
+# define GREEN		0x9BBE86
+# define BMARIN		0x4B646E
 # define EMPTY		0x494949
 # define WALL		0xE1E6E6
 # define PLAYER		0xF5DC50
@@ -103,10 +106,12 @@ typedef struct s_rays
 {
 	/* data */
 	double	pa;
-	int		x;
-	int		y;
-	double	ray_dist;
-	int		is;
+	int			ray_dist;
+	float		x_hor;
+	float		y_hor;
+	float		x_ver;
+	float		y_ver;
+	float		is;
 } t_rays;
 
 typedef struct s_intersection
@@ -121,22 +126,23 @@ typedef struct s_intersection
 // Gloabl struct
 typedef struct s_cub
 {
-	t_map		map;
-	t_idn		idn;
-	t_player	p;
-	t_ray		ray;
-	t_img		img;
-	t_rays		rays[WIN_WIDHT + 1];
-	void*		mlx;
-	void*		mlx_win;
-	void*		mlx3d;
-	void*		mlx3d_win;
-	t_img		img3d;
-	int			keys[6];
-	int			mouse_on;
-	int			prev_x_mouse;
-	t_img		textuers;
+	t_map			map;
+	t_idn			idn;
+	t_player		p;
+	t_ray			ray;
+	t_img			img;
+	t_rays			rays[WIN_WIDHT + 1];
+	void*			mlx;
+	void*			mlx_win;
+	void*			mlx3d;
+	void*			mlx3d_win;
+	t_img			img3d;
+	int				keys[6];
+	int				mouse_on;
+	int				prev_x_mouse;
+	t_img			textures[4];
 	t_intersection	inter;
+	int				side;
 }	t_cub;
 
 int		parse_map(const char *path, t_cub *g);

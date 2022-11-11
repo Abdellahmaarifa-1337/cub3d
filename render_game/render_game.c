@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 08:58:40 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/11/05 19:30:14 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/11/10 16:55:40 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-
 void	init_miniMap(t_cub *cub)
 {
 	initializing_keys(cub);
@@ -62,25 +61,54 @@ void	init_3d(t_cub *cub)
 		&cub->img3d.endian);
 }
 
+void*	get_image(t_cub *cub, char *img_path, int *d)
+{
+	void*	img;
+
+	img = mlx_xpm_file_to_image(cub->mlx, img_path, d, d);
+	if (!img)
+	{
+		ft_putstr_fd(img_path, 2);
+		ft_putendl_fd(" : Invalide file", 2);
+		exit(1);
+	}
+	return (img);
+}
+
+void	init_textures(t_cub *cub, int *d)
+{
+	// NO
+	TEX[0].img = get_image(cub, IDN._no, d);
+	TEX[0].addr = mlx_get_data_addr(TEX[0].img, &(TEX[0].bits_per_pixel),
+	 	&(TEX[0].line_length), &(TEX[0].endian));
+	// SO
+	TEX[1].img = get_image(cub, IDN._so, d);
+	TEX[1].addr = mlx_get_data_addr(TEX[1].img, &(TEX[1].bits_per_pixel),
+	 	&(TEX[1].line_length), &(TEX[1].endian));
+	// EA
+	TEX[2].img = get_image(cub, IDN._ea, d);
+	TEX[2].addr = mlx_get_data_addr(TEX[2].img, &(TEX[2].bits_per_pixel),
+	 	&(TEX[2].line_length), &(TEX[2].endian));
+	// WE
+	TEX[3].img = get_image(cub, IDN._we, d);
+	TEX[3].addr = mlx_get_data_addr(TEX[3].img, &(TEX[3].bits_per_pixel),
+	 	&(TEX[3].line_length), &(TEX[3].endian));
+}
+
 void render_game(t_cub *cub)
 {
-	int d;
-	// textures 
+	int	d;
+
 	init_miniMap(cub);
 	init_3d(cub);
-	(cub->textuers).img = mlx_xpm_file_to_image(cub->mlx, "./textuer/wall.xpm", &d, &d);
-	(cub->textuers).addr = mlx_get_data_addr(cub->textuers.img, &(cub->textuers.bits_per_pixel),
-	 	&(cub->textuers.line_length), &(cub->textuers.endian));
+	init_textures(cub, &d);
+
 	// for(int i = 0; i < 30; i++)
 
 	// 	dprintf(2, "%f from %f x : %d, y : %d\n", cub->rays[i].ray_dist, cub->rays[i].ray_dist, cub->rays[i].x, cub->rays[i].y);
 	// exit(1);
+
 	mlx_loop_hook(cub->mlx, execute_MiniMap, cub);
-	//execute_MiniMap(cub);
-	// mlx_hook(cub->mlx_win, 2, 1L << 0, pressed_keys, cub);
-	// mlx_hook(cub->mlx_win, 3, 1L << 1, released_keys, cub);
-	// mlx_hook(cub->mlx_win, 4, 1L<<2, mouse_switcher, cub);
-	// mlx_hook(cub->mlx_win, 6, 0L, mouse_hook, cub);
 	
 	// 3d hooks
 	mlx_loop_hook(cub->mlx3d, render_scene, cub);
@@ -91,7 +119,6 @@ void render_game(t_cub *cub)
 
 	// Mouse Hooks
 	cub->mouse_on = 0;
-	mlx_hook(cub->mlx3d_win, 4, 1L<<2, mouse_switcher, cub);
 	mlx_hook(cub->mlx3d_win, 6, 0L, mouse_hook, cub);
 
 	// Close

@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:43:55 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/28 16:39:51 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/11/06 19:54:23 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 
 /***************** MOUSE HOOK ******************/
 int		mouse_hook(int x, int y, t_cub *cub);
-int		mouse_switcher(int button, int x, int y, t_cub *cub);
+int		mouse_switcher(t_cub *cub);
 
 /********** PLAYER MOVES MANAGEMENT ************/
 int		pressed_keys(int keycode, t_cub *cub);
 int		released_keys(int keycode, t_cub *cub);
 void	player_moves(t_cub *cub);
-int		is_wall(t_cub *cub, int x, int y);
+int		is_wall(t_cub *cub, float dx, float dy);
 
 /************** PLAYER MOVEMENTS **************/
 void	move_up(t_cub *cub);

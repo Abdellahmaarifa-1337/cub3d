@@ -6,25 +6,23 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 15:29:08 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/29 23:34:44 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/11/07 17:14:06 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./manage_player.h"
 
-int	mouse_switcher(int button, int x, int y, t_cub *cub)
+int	mouse_switcher(t_cub *cub)
 {
-	(void)x;
-	(void)y;
-	if (button == 1 && !cub->mouse_on)
+	if (!cub->mouse_on)
 	{
 		cub->mouse_on = 1;
-		// mlx_mouse_hide();
+		mlx_mouse_hide();
 	}
-	else if (button == 1 && cub->mouse_on)
+	else
 	{
 		cub->mouse_on = 0;
-		// mlx_mouse_show();
+		mlx_mouse_show();
 	}
 	return (0);
 }
@@ -42,9 +40,9 @@ int	mouse_hook(int x, int y, t_cub *cub)
 	if (cub->mouse_on)
 	{
 		if (sign > 0)
-			look_left(cub);
-		else if (sign < 0)
 			look_right(cub);
+		else if (sign < 0)
+			look_left(cub);
 	}
 	cub->prev_x_mouse = x;
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:06:13 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/11/05 19:35:35 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/11/10 14:23:54 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,10 @@ double set_vertical_ray(t_cub * cub)
 	}
 	if (px == -1 && py == -1)
 		return (INT_MAX);
+	if (px != -1 && py != -1)
+	{
+		cub->rays->x_ver = px;
+		cub->rays->y_ver = py;
+	}
 	return (sqrt((px - PLY.x)*(px - PLY.x) + (py - PLY.y) * (py - PLY.y)));
 }
