@@ -3,29 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   player_moves_management.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 22:26:12 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/11/08 15:17:59 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/11/16 12:53:57 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "manage_player.h"
 
-int is_wall(t_cub *cub, float dx, float dy)
+int	is_wall(t_cub *cub, float dx, float dy)
 {
-	if (dx < 0)
-		dx -= 2;
-	else
-		dx += 2;
-	if (dy < 0)
-		dy -= 2;
-	else
-		dy += 2;
-	if (MAP.data[(int)((PLY.y + dy) / CELL)][(int)((PLY.x + dx) / CELL)] == '1'
-		|| (MAP.data[(int)(PLY.y / CELL)][(int)((PLY.x + dx) / CELL)] == '1'
-		&& MAP.data[(int)((PLY.y + dy) / CELL)][(int)(PLY.x / CELL)] == '1'))
+	if ( cub->map.data[(int)((cub->p.y + dy) / CELL)][(int)((cub->p.x + dx) / CELL)] == '1'
+		|| (cub->map.data[(int)(cub->p.y / CELL)][(int)((cub->p.x + dx) / CELL)] == '1'
+		&& cub->map.data[(int)((cub->p.y + dy) / CELL)][(int)(cub->p.x / CELL)] == '1'))
 		return (1);
+	if (dx < 0)
+		dx += 2;
+	else
+		dx -= 2;
+	if (dy < 0)
+		dy += 2;
+	else
+		dy -= 2;
+	if ( cub->map.data[(int)((cub->p.y + dy) / CELL)][(int)((cub->p.x + dx) / CELL)] == '1'
+		|| (cub->map.data[(int)(cub->p.y / CELL)][(int)((cub->p.x + dx) / CELL)] == '1'
+		&& cub->map.data[(int)((cub->p.y + dy) / CELL)][(int)(cub->p.x / CELL)] == '1'))
+	 	return (1);
+	// if (cub->map.data[(int)((cub->p.y + dy + 1) / CELL)]
+	// 	[(int)((cub->p.x + dx) / CELL)] == '1'
+	// 	|| cub->map.data[(int)((cub->p.y + dy - 1) / CELL)]
+	// 	[(int)((cub->p.x + dx) / CELL)] == '1'
+	// 	|| cub->map.data[(int)((cub->p.y + dy) / CELL)]
+	// 	[(int)((cub->p.x + dx + 1) / CELL)] == '1'
+	// 	|| cub->map.data[(int)((cub->p.y + dy) / CELL)]
+	// 	[(int)((cub->p.x + dx - 1) / CELL)] == '1'
+	// 	|| cub->map.data[(int)((cub->p.y + dy + 1) / CELL)]
+	// 	[(int)((cub->p.x + dx + 1) / CELL)] == '1')
+	// 	return (1);
 	return (0);
 }
 
@@ -62,20 +77,23 @@ int	pressed_keys(int keycode, t_cub *cub)
 	if (keycode == 53)
 		exit(0);
 	else
+	{
 		player_moves(cub);
-		return (0);
+		render_scene(cub);
+	}
+	return (0);
 }
 
 void	player_angle(int keycode, t_cub *cub)
 {
 	if (keycode == 69)
-		PLY.inc_pa += 0.01;
+		cub->p.inc_pa += 0.01;
 	if (keycode == 78)
-		PLY.inc_pa -= 0.01;
-	if (PLY.inc_pa <= 0)
-		PLY.inc_pa = 0.01;
-	else if (PLY.inc_pa > 0.1)
-		PLY.inc_pa = 0.1;
+		cub->p.inc_pa -= 0.01;
+	if (cub->p.inc_pa <= 0)
+		cub->p.inc_pa = 0.01;
+	else if (cub->p.inc_pa > 0.1)
+		cub->p.inc_pa = 0.1;
 }
 
 int	released_keys(int keycode, t_cub *cub)
@@ -94,7 +112,5 @@ int	released_keys(int keycode, t_cub *cub)
 		cub->keys[5] = 0;
 	if (keycode == 69 || keycode == 78)
 		player_angle(keycode, cub);
-	if (keycode == 259 || keycode == 260)
-		mouse_switcher(cub);
-		return (0);
+	return (0);
 }

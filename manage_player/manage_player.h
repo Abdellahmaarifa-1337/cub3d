@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   manage_player.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:43:55 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/11/06 19:54:23 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/11/13 21:01:24 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MANAGE_PLAYER_H
 # define MANAGE_PLAYER_H
 
 # include "../cub.h"
-# include "../render_game/miniMap.h"
+# include "../render_game/render_game.h"
 
 /***************** MOUSE HOOK ******************/
 int		mouse_hook(int x, int y, t_cub *cub);

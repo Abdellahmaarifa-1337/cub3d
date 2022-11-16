@@ -6,13 +6,13 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:13:42 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/18 14:14:08 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/11/12 20:55:50 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./cub.h"
 
-/***************** PRINT MAP/IDENTIFIERS ********************/
+/***************** PRINT cub->map/IDENTIFIERS ********************/
 void	print_map(t_map *map)
 {
 	int	i;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_moves.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 23:23:04 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/11/06 19:33:35 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/11/13 21:02:28 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 
 void	move_up(t_cub *cub)
 {
-	if (!is_wall(cub, PLY.dx, PLY.dy))
+	if (!is_wall(cub, cub->p.dx, cub->p.dy))
 	{
-		PLY.x += PLY.dx;
-		PLY.y += PLY.dy;
+		cub->p.x += cub->p.dx;
+		cub->p.y += cub->p.dy;
 	}
 }
 
 void	move_down(t_cub *cub)
 {
-	if (!is_wall(cub, - PLY.dx, - PLY.dy))
+	if (!is_wall(cub, -cub->p.dx, -cub->p.dy))
 	{
-		PLY.x -= PLY.dx;
-		PLY.y -= PLY.dy;
+		cub->p.x -= cub->p.dx;
+		cub->p.y -= cub->p.dy;
 	}
 }
 
@@ -37,15 +37,15 @@ void	move_right(t_cub *cub)
 	float	dy;
 	float	pa;
 
-	pa = PLY.pa + PI / 2;
+	pa = cub->p.pa + PI / 2;
 	if (pa > (2 * PI))
 		pa -= (2 * PI);
 	dx = cos(pa) * 5;
 	dy = sin(pa) * 5;
 	if (!is_wall(cub, dx, dy))
 	{
-		PLY.x += dx;
-		PLY.y += dy;
+		cub->p.x += dx;
+		cub->p.y += dy;
 	}
 }
 
@@ -55,15 +55,14 @@ void	move_left(t_cub *cub)
 	float	dy;
 	float	pa;
 
-	pa = PLY.pa - PI / 2;
+	pa = cub->p.pa - PI / 2;
 	if (pa < 0)
 		pa += (2 * PI);
 	dx = cos(pa) * 5;
 	dy = sin(pa) * 5;
-
 	if (!is_wall(cub, dx, dy))
 	{
-		PLY.x += dx;
-		PLY.y += dy;
+		cub->p.x += dx;
+		cub->p.y += dy;
 	}
 }

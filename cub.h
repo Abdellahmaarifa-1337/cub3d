@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/11/11 10:36:56 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/11/13 21:57:42 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,8 @@
 # include <fcntl.h>
 # include "./libft/libft.h"
 # include "./get_next_line/get_next_line.h"
-// # include "./lib/lib.h"
 # include "./mlx/mlx.h"
 # include "limits.h"
-
-# define	MAP	cub->map
-# define	PLY cub->p
-# define	RAY cub->ray
-# define	IMG	cub->img
-# define	IDN	cub->idn
-# define	TEX cub->textures
 
 // GAME VARIBALES
 
@@ -42,7 +34,6 @@
 # define WIN_WIDHT	1080
 # define WIN_HEIGHT	720
 # define CELL		64
-# define PLY_WIDTH	CELL/6
 # define PI			3.14159265359
 # define INC_PA		0.02
 
@@ -55,9 +46,7 @@
 # define PLAYER		0xF5DC50
 # define LINE		0xFF7D2D
 
-
-
-typedef struct	s_img {
+typedef struct s_img {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -86,12 +75,6 @@ typedef struct s_map
 	float	ray_pa;
 }	t_map;
 
-typedef	struct s_ray
-{
-	float	rayLenght;
-}	t_ray;
-
-
 typedef struct s_player
 {
 	float	x;
@@ -104,24 +87,14 @@ typedef struct s_player
 
 typedef struct s_rays
 {
-	/* data */
 	double	pa;
-	int			ray_dist;
-	float		x_hor;
-	float		y_hor;
-	float		x_ver;
-	float		y_ver;
-	float		is;
-} t_rays;
-
-typedef struct s_intersection
-{
-	/* data */
-	int is_ver;
-	int inter_h;
-	int inter_v;
-	int inter;
-} t_intersection;
+	int		ray_dist;
+	float	x_hor;
+	float	y_hor;
+	float	x_ver;
+	float	y_ver;
+	float	is;
+}	t_rays;
 
 // Gloabl struct
 typedef struct s_cub
@@ -129,19 +102,15 @@ typedef struct s_cub
 	t_map			map;
 	t_idn			idn;
 	t_player		p;
-	t_ray			ray;
+	t_rays			rays;
 	t_img			img;
-	t_rays			rays[WIN_WIDHT + 1];
-	void*			mlx;
-	void*			mlx_win;
-	void*			mlx3d;
-	void*			mlx3d_win;
-	t_img			img3d;
+	void			*mlx;
+	void			*mlx_win;
 	int				keys[6];
 	int				mouse_on;
 	int				prev_x_mouse;
 	t_img			textures[4];
-	t_intersection	inter;
+	int				is_ver;
 	int				side;
 }	t_cub;
 
@@ -175,10 +144,8 @@ void	set_rgb(t_idn *idn, char *key, char *value);
 void	print_map(t_map *map);
 void	print_idn(t_idn *idn);
 
-
 // temp global vars
 
-int is_ver;
 // Manage Player
 void	set_map_attribute(t_cub *cub);
 
