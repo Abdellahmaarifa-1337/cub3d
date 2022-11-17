@@ -6,16 +6,18 @@ MLX_OP = -lmlx -framework OpenGL -framework AppKit -fsanitize=address -g
 #---------- Sanitize ????
 
 NAME = cube3D
+NAME_BONUS = ../cube3D_bonus
 
 SRC = ./main.c ./parsing/parse_map.c handel_error/throw_error.c ./lib/helpers.c \
 		./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c \
 		./render_game/render_game.c ./parsing/get_identifiers.c ./parsing/get_map.c \
 		./parsing/utils.c ./parsing/get_map_utils.c ./parsing/get_identifiers_utils.c \
-		./parsing/check_if_close.c ./temp_functions.c render_game/miniMap.c \
+		./parsing/check_if_close.c ./temp_functions.c \
 		./manage_player/player_moves.c ./manage_player/player_moves_management.c \
 		./render_game/set_vertical_ray.c ./render_game/ray_utils.c ./render_game/set_horizontal_ray.c\
-		./manage_player/player_eyesight.c ./manage_player/mouse_hook.c ./render_game/set_rays.c \
-		./render_game/render_scene.c ./render_game/get_ray_dist.c ./render_game/texture.c
+		./manage_player/player_eyesight.c ./manage_player/mouse_hook.c  \
+		./render_game/render_scene.c ./render_game/get_ray_dist.c ./render_game/texture.c \
+		./render_game/utils.c ./render_game/init_game.c
 
 OBJ = ${SRC:.c=.o}
 
@@ -42,20 +44,24 @@ ${MLX_LIB} :
 	@make -sC ./mlx
 	@echo .
 
+bonus : ${NAME_BONUS}
+
+${NAME_BONUS} :
+	@make -sC ./bonus
+
 clean:
 	@make clean -sC ./libft
 	@make clean -sC ./mlx
+	@make clean -sC ./bonus
 	@rm -rf ${OBJ}
 	@echo "\033[1;31m************* Removed **************\033[0m"
 
 fclean: clean
 	@make fclean -sC ./libft
+	@make fclean -sC ./bonus
 	@rm -rf ${NAME}
 	@rm -rf ${MLX_LIB}
 
 re: fclean all
 
-.PHONY: all clean fclean
-
-
-
+.PHONY: all clean fclean re
