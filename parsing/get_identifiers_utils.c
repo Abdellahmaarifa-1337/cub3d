@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 11:30:55 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/11/16 13:19:40 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/10/18 22:27:38 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,6 @@ char	*check_rgb(char *tmp)
 			cop[j] = tmp[i];
 			if (cop[j] == ',' && ++comma && j > 0 && cop[j - 1] == ',')
 				throw_error("invalid6", 1);
-			if (i > 0 && tmp[i - 1] == 32 && tmp[i] != ','
-				&& j > 0 && cop[j - 1] != ',')
-				throw_error("err65", 1);
 			j++;
 		}
 	}
