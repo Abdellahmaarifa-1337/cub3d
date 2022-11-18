@@ -1,4 +1,4 @@
-mCC = CC
+CC = CC
 
 #---------- Flags ??????? 
 CFLAGS = -O3 #-Werror -Wextra -Wall
@@ -11,7 +11,7 @@ SRC = ./main.c ./parsing/parse_map.c handel_error/throw_error.c ./lib/helpers.c 
 		./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c \
 		./render_game/render_game.c ./parsing/get_identifiers.c ./parsing/get_map.c \
 		./parsing/utils.c ./parsing/get_map_utils.c ./parsing/get_identifiers_utils.c \
-		./parsing/check_if_close.c ./temp_functions.c \
+		./parsing/check_if_close.c \
 		./manage_player/player_moves.c ./manage_player/player_moves_management.c \
 		./render_game/set_vertical_ray.c ./render_game/ray_utils.c ./render_game/set_horizontal_ray.c\
 		./manage_player/player_eyesight.c \
@@ -21,12 +21,15 @@ SRC = ./main.c ./parsing/parse_map.c handel_error/throw_error.c ./lib/helpers.c 
 OBJ = ${SRC:.c=.o}
 
 LIB = ./libft/libft.a
-MLX_LIB = ./mlx/libmlx.a
+MLX_LIB = ./libmlx.a
 
 .c.o :
 	@${CC} ${CFLAGS} -Imlx -c $< -o $@
 	@echo -n .
-all: ${NAME}
+all:  mlx_extract ${NAME}
+
+mlx_extract:
+	@tar -xf mlx.tar
 
 ${NAME} : ${OBJ} ${LIB} ${MLX_LIB}
 	@${CC} ${CFLAGS} ${OBJ} ${LIB} ${MLX_OP} ${MLX_LIB} -o ${NAME}
@@ -45,7 +48,7 @@ ${MLX_LIB} :
 
 clean:
 	@make clean -sC ./libft
-	@make clean -sC ./mlx
+	@rm -rf mlx
 	@rm -rf ${OBJ}
 	@echo "\033[1;31m************* Removed **************\033[0m"
 

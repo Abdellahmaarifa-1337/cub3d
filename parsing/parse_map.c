@@ -6,7 +6,7 @@
 /*   By: amaarifa <amaarifa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:01:05 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/10/19 11:04:57 by amaarifa         ###   ########.fr       */
+/*   Updated: 2022/11/18 09:50:27 by amaarifa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,5 @@ int	parse_map(const char *path, t_cub *g)
 		throw_error("Identifier error!", 1);
 	get_map(fd, g);
 	check_map(&(g->map));
-	print_idn(&(g->idn));
-	print_map(&(g->map));
 	return (0);
 }
