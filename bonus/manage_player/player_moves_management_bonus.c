@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_moves_management.c                          :+:      :+:    :+:   */
+/*   player_moves_management_bonus.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 22:26:12 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/11/19 13:04:27 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/11/18 19:12:02 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "manage_player.h"
+#include "manage_player_bonus.h"
 
 int	is_wall(t_cub *cub, float dx, float dy)
 {
@@ -56,11 +56,6 @@ int	pressed_keys(int keycode, t_cub *cub)
 		cub->keys[5] = 1;
 	if (keycode == 53)
 		exit(0);
-	else
-	{
-		player_moves(cub);
-		render_scene(cub);
-	}
 	return (0);
 }
 
@@ -92,5 +87,7 @@ int	released_keys(int keycode, t_cub *cub)
 		cub->keys[5] = 0;
 	if (keycode == 69 || keycode == 78)
 		player_angle(keycode, cub);
+	if (keycode == 259 || keycode == 260)
+		mouse_switcher(cub);
 	return (0);
 }

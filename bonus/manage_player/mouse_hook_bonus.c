@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse_hook.c                                       :+:      :+:    :+:   */
+/*   mouse_hook_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 15:29:08 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/11/07 17:14:06 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/11/18 19:06:49 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./manage_player.h"
+#include "./manage_player_bonus.h"
 
 int	mouse_switcher(t_cub *cub)
 {
@@ -43,6 +43,8 @@ int	mouse_hook(int x, int y, t_cub *cub)
 			look_right(cub);
 		else if (sign < 0)
 			look_left(cub);
+		render_scene(cub);
+		execute_minimap(cub);
 	}
 	cub->prev_x_mouse = x;
 	return (0);

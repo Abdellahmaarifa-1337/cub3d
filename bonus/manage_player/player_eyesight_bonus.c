@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lib.h                                              :+:      :+:    :+:   */
+/*   player_eyesight_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 11:28:13 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/18 14:00:20 by mkabissi         ###   ########.fr       */
+/*   Created: 2022/10/26 22:39:51 by mkabissi          #+#    #+#             */
+/*   Updated: 2022/11/18 21:56:54 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	LIB_H
-#define	LIB_H
+#include "manage_player_bonus.h"
 
-#include "../cub.h"
+void	look_right(t_cub *cub)
+{
+	cub->p.pa += cub->p.inc_pa;
+	if (cub->p.pa > (2 * PI))
+		cub->p.pa -= (2 * PI);
+	cub->p.dx += cos(cub->p.pa) * 2;
+	cub->p.dy += sin(cub->p.pa) * 2;
+}
 
-struct	t_idn;
-struct	t_map;
-struct	t_cub;
-
-int	rgbToInt(int r, int g, int b);
-
-#endif
+void	look_left(t_cub *cub)
+{
+	cub->p.pa -= cub->p.inc_pa;
+	if (cub->p.pa < 0)
+		cub->p.pa += (2 * PI);
+	cub->p.dx += cos(cub->p.pa) * 2;
+	cub->p.dy += sin(cub->p.pa) * 2;
+}

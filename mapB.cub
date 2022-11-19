@@ -1,9 +1,10 @@
-SO        ./texture/wl.xpm
-NO        ./texture/wl.xpm
-EA        ./texture/wl.xpm
-WE        ./texture/wl.xpm
-F     1   ,    58 ,   1   2
-C     111 ,   5   ,  2 5 5
+SO        ./texture/SO.xpm
+NO        ./texture/NO.xpm
+EA        ./texture/EA_2.xpm
+WE        ./texture/WE_2.xpm
+
+F     100 ,   130   ,  100
+C     225, 230, 230
 
 
 1                                                    1

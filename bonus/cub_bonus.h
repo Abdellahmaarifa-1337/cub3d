@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub.h                                              :+:      :+:    :+:   */
+/*   cub_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/11/19 13:02:07 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/11/18 19:17:43 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB_H
-# define CUB_H
+#ifndef CUB_BONUS_H
+# define CUB_BONUS_H
 
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include "./libft/libft.h"
-# include "./get_next_line/get_next_line.h"
-# include "./mlx/mlx.h"
+# include "../libft/libft.h"
+# include "get_next_line/get_next_line_bonus.h"
+# include "../mlx/mlx.h"
 # include "limits.h"
 
 // GAME VARIBALES
@@ -104,6 +104,7 @@ typedef struct s_cub
 	t_player		p;
 	t_rays			rays;
 	t_img			img;
+	t_img			m_map;
 	void			*mlx;
 	void			*mlx_win;
 	int				keys[6];
@@ -112,8 +113,8 @@ typedef struct s_cub
 	t_img			textures[4];
 	int				is_ver;
 	int				side;
-	int				c_color;
-	int				f_color;
+	float			begin[2];
+	float			end[2];
 }	t_cub;
 
 int		parse_map(const char *path, t_cub *g);
@@ -150,6 +151,5 @@ void	print_idn(t_idn *idn);
 
 // Manage Player
 void	set_map_attribute(t_cub *cub);
-int		rgb_to_int(int r, int g, int b);
 
 #endif

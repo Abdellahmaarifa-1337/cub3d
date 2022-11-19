@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_game.c                                        :+:      :+:    :+:   */
+/*   init_game_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 21:42:32 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/11/19 13:04:49 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/11/18 12:33:49 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render_game.h"
+#include "render_game_bonus.h"
 
 void	*get_image(t_cub *cub, char *img_path, int *d)
 {

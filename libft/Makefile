@@ -26,6 +26,7 @@ BONUS_OBJS = ${BONUS_SRC:.c=.o}
 all: ${NAME}
 
 ${NAME}: ${OBJS}
+	@echo -n .
 
 bonus: ${BONUS_OBJS}
 

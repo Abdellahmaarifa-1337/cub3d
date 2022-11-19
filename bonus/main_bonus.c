@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:50 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/11/19 13:02:17 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/11/18 12:29:31 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub.h"
+#include "cub_bonus.h"
 
 int	main(int ac, char **av)
 {
@@ -35,7 +35,6 @@ int	main(int ac, char **av)
 	g.map.data[g.map.map_capacity] = NULL;
 	g.p.inc_pa = INC_PA;
 	parse_map(av[1], &g);
-	// exit(1);
 	set_map_attribute(&g);
 	render_game(&g);
 	return (0);
