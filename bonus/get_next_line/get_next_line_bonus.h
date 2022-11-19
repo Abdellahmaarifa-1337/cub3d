@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lib.h                                              :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 11:28:13 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/10/18 14:00:20 by mkabissi         ###   ########.fr       */
+/*   Created: 2021/11/24 12:17:13 by amaarifa          #+#    #+#             */
+/*   Updated: 2022/11/18 12:58:06 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	LIB_H
-#define	LIB_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-#include "../cub.h"
+# include <stdlib.h>
+# include <unistd.h>
 
-struct	t_idn;
-struct	t_map;
-struct	t_cub;
-
-int	rgbToInt(int r, int g, int b);
+char	*ft_substr2(char *s, unsigned int start, size_t len);
+int		get_nl(const char *s);
+char	*ft_strdup(const char	*src);
+size_t	ft_strlen(const char *s);
+char	*ft_strjoin2(char *s1, char *s2);
+char	*get_next_line(int fd);
+char	*get_line(char **s);
 
 #endif

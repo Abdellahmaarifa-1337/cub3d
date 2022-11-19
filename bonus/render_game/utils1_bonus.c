@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 21:27:53 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/11/18 12:09:00 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/11/18 16:05:11 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"render_game.h"
+#include	"render_game_bonus.h"
 
 int	rgb_to_int(int r, int g, int b)
 {
@@ -83,3 +83,4 @@ void	my_mlx_clear_image(t_img *img, int height, int width)
 		i++;
 	}
 }
+

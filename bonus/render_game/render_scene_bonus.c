@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_scene.c                                     :+:      :+:    :+:   */
+/*   render_scene_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 17:21:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/11/18 21:54:54 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/11/18 19:20:48 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./render_game.h"
+#include "./render_game_bonus.h"
 
 #define DPP 255
 
 void	draw_sky(t_cub *cub, int x, int end)
 {
 	int	y;
-	
+
 	y = 0;
 	while (y < end)
 	{
-		my_mlx_pixel_put(&(cub->img), x, y, (cub->idn._c[0] << 16) + (cub->idn._c[1] << 8) + cub->idn._c[2]);
+		my_mlx_pixel_put(&(cub->img), x, y,
+			rgb_to_int(cub->idn._c[0], cub->idn._c[1], cub->idn._c[2]));
 		y++;
 	}
 }
@@ -30,7 +31,8 @@ void	draw_floor(t_cub *cub, int i, int end)
 {
 	while (end < WIN_HEIGHT)
 	{
-		my_mlx_pixel_put(&(cub->img), i, end, (cub->idn._f[0] << 16) + (cub->idn._f[1] << 8) + cub->idn._f[2]);
+		my_mlx_pixel_put(&(cub->img), i, end,
+			rgb_to_int(cub->idn._f[0], cub->idn._f[1], cub->idn._f[2]));
 		end++;
 	}
 }

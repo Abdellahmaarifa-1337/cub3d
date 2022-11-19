@@ -1,13 +1,13 @@
 CC = CC
 
 #---------- Flags ??????? 
-CFLAGS = -O3 #-Werror -Wextra -Wall
+CFLAGS = -O3 -Werror -Wextra -Wall
 MLX_OP = -lmlx -framework OpenGL -framework AppKit #-fsanitize=address -g
 #---------- Sanitize ????
 
 NAME = cube3D
 
-SRC = ./main.c ./parsing/parse_map.c handel_error/throw_error.c ./lib/helpers.c \
+SRC = ./main.c ./parsing/parse_map.c \
 		./get_next_line/get_next_line.c ./get_next_line/get_next_line_utils.c \
 		./render_game/render_game.c ./parsing/get_identifiers.c ./parsing/get_map.c \
 		./parsing/utils.c ./parsing/get_map_utils.c ./parsing/get_identifiers_utils.c \
@@ -26,10 +26,7 @@ MLX_LIB = ./libmlx.a
 .c.o :
 	@${CC} ${CFLAGS} -Imlx -c $< -o $@
 	@echo -n .
-all:  mlx_extract ${NAME}
-
-mlx_extract:
-	@tar -xf mlx.tar
+all :  mlx_extract ${NAME}
 
 ${NAME} : ${OBJ} ${LIB} ${MLX_LIB}
 	@${CC} ${CFLAGS} ${OBJ} ${LIB} ${MLX_OP} ${MLX_LIB} -o ${NAME}
@@ -46,20 +43,26 @@ ${MLX_LIB} :
 	@make -sC ./mlx
 	@echo .
 
-clean:
+bonus : mlx_extract
+	@make -sC ./libft
+	@make -sC ./bonus
+
+mlx_extract :
+	@tar -xf mlx.tar
+
+clean :
 	@make clean -sC ./libft
+	@make clean -sC ./bonus
 	@rm -rf mlx
 	@rm -rf ${OBJ}
 	@echo "\033[1;31m************* Removed **************\033[0m"
 
-fclean: clean
+fclean : clean
 	@make fclean -sC ./libft
+	@make fclean -sC ./bonus
 	@rm -rf ${NAME}
 	@rm -rf ${MLX_LIB}
 
-re: fclean all
+re : fclean all
 
-.PHONY: all clean fclean
-
-
-
+.PHONY : all clean fclean re
