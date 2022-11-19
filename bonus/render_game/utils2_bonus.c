@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 18:53:29 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/11/19 11:09:08 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/11/19 12:03:44 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,42 @@ void	put_pixels(t_cub *cub, float begin[2], int px_line)
 		my_mlx_pixel_put(&(cub->m_map), x, px_line, 0xFFFFFF00);
 		x++;
 	}
+}
+
+void	protect_edges(t_cub *cub, float begin[2], float end[0])
+{
+	if (begin[0] < 0)
+	{
+		begin[0] = 0;
+		end[0] = 7.0f * 40.0f;
+	}
+	else if (begin[0] > (float)(cub->map.width * 40.0f) - (float)(7.0f * 40.0f))
+	{
+		begin[0] = (float)(cub->map.width * 40.0f) - (float)(7.0f * 40.0f);
+		end[0] = (float)cub->map.width * 40.0f;
+	}
+	if (begin[1] < 0)
+	{
+		begin[1] = 0;
+		end[1] = 5.0f * 40.0f;
+	}
+	else if (begin[1] > (float)(cub->map.height * 40.0f)
+		- (float)(5.0f * 40.0f))
+	{
+		begin[1] = (float)(cub->map.height * 40.0f) - (float)(5.0f * 40.0f);
+		end[1] = (float)cub->map.height * 40.0f;
+	}
+}
+
+void	init(t_cub *cub, float begin[2], float end[2])
+{
+	begin[1] = (cub->p.y / (float)CELL) * 40.0f - 2.5f * 40.0f;
+	begin[0] = (cub->p.x / (float)CELL) * 40.0f - 3.5f * 40.0f;
+	end[1] = (cub->p.y / (float)CELL) * 40.0f + 2.5f * 40.0f;
+	end[0] = (cub->p.x / (float)CELL) * 40.0f + 3.5f * 40.0f;
+	protect_edges(cub, begin, end);
+	cub->begin[0] = begin[0];
+	cub->begin[1] = begin[1];
+	cub->end[0] = end[0];
+	cub->end[1] = end[1];
 }

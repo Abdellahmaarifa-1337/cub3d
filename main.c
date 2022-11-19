@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 11:00:50 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/11/18 17:33:53 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/11/19 11:32:57 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,6 @@ int	main(int ac, char **av)
 	g.p.inc_pa = INC_PA;
 	parse_map(av[1], &g);
 	set_map_attribute(&g);
-	// g.c_color = WALL;
-	// g.f_color = BMARIN;
-	// g.c_color = rgb_to_int(g.idn._c[0], g.idn._c[1], g.idn._c[2]);
-	// g.f_color = rgb_to_int(g.idn._f[0], g.idn._f[1], g.idn._f[2]);
 	render_game(&g);
 	return (0);
 }

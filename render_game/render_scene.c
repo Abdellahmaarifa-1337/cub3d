@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 17:21:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/11/18 21:54:54 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/11/19 12:29:22 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@
 void	draw_sky(t_cub *cub, int x, int end)
 {
 	int	y;
-	
+
 	y = 0;
 	while (y < end)
 	{
-		my_mlx_pixel_put(&(cub->img), x, y, (cub->idn._c[0] << 16) + (cub->idn._c[1] << 8) + cub->idn._c[2]);
+		my_mlx_pixel_put(&(cub->img), x, y,
+			rgb_to_int(cub->idn._c[0], cub->idn._c[1], cub->idn._c[2]));
 		y++;
 	}
 }
@@ -30,7 +31,8 @@ void	draw_floor(t_cub *cub, int i, int end)
 {
 	while (end < WIN_HEIGHT)
 	{
-		my_mlx_pixel_put(&(cub->img), i, end, (cub->idn._f[0] << 16) + (cub->idn._f[1] << 8) + cub->idn._f[2]);
+		my_mlx_pixel_put(&(cub->img), i, end,
+			rgb_to_int(cub->idn._f[0], cub->idn._f[1], cub->idn._f[2]));
 		end++;
 	}
 }
@@ -52,15 +54,14 @@ void	draw_slice(t_cub *cub, int psh, int i)
 	index = WIN_HEIGHT / 2 - psh / 2;
 	draw_sky(cub, i, index);
 	end = index + psh;
-	start = index;
-	while (index < end && index < WIN_HEIGHT)
+	start = --index + 1;
+	while (++index < end && index < WIN_HEIGHT)
 	{
 		size = (double)(index - start) / psh;
 		if (psh + reminder * 2 > WIN_HEIGHT)
 			size = (double)(index - start + reminder) / (psh + (reminder * 2));
 		my_mlx_pixel_put(&(cub->img), i, index,
 			get_color_from_texture(cub, size));
-		index++;
 	}
 	draw_floor(cub, i, end);
 }

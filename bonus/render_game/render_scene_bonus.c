@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 17:21:56 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/11/18 19:20:48 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/11/19 12:54:24 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,14 @@ void	draw_slice(t_cub *cub, int psh, int i)
 	index = WIN_HEIGHT / 2 - psh / 2;
 	draw_sky(cub, i, index);
 	end = index + psh;
-	start = index;
-	while (index < end && index < WIN_HEIGHT)
+	start = --index + 1;
+	while (++index < end && index < WIN_HEIGHT)
 	{
 		size = (double)(index - start) / psh;
 		if (psh + reminder * 2 > WIN_HEIGHT)
 			size = (double)(index - start + reminder) / (psh + (reminder * 2));
 		my_mlx_pixel_put(&(cub->img), i, index,
 			get_color_from_texture(cub, size));
-		index++;
 	}
 	draw_floor(cub, i, end);
 }

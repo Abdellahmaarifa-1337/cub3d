@@ -6,12 +6,12 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:47:57 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/11/18 18:55:16 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/11/19 12:12:50 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RENDER_GAME_H
-# define RENDER_GAME_H
+#ifndef RENDER_GAME_BONUS_H
+# define RENDER_GAME_BONUS_H
 
 # include "../cub_bonus.h"
 # include <math.h>
@@ -31,6 +31,7 @@ int		render_scene(t_cub *cub);
 void	my_mlx_clear_image(t_img *img, int height, int width);
 double	get_ray_dist(t_cub *cub);
 int		get_color_from_texture(t_cub *cub, double y);
+void	init(t_cub *cub, float begin[2], float end[2]);
 void	init_textures(t_cub *cub, int *d);
 void	init_mlx(t_cub *cub);
 void	initializing_keys(t_cub *cub);

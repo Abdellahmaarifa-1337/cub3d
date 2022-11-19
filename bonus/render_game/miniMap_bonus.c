@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 14:50:16 by mkabissi          #+#    #+#             */
-/*   Updated: 2022/11/19 11:09:37 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/11/19 12:00:32 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,45 +47,12 @@ void	put_player(t_cub *cub)
 		x = px - 2;
 		while (x < px + 2)
 		{
-			my_mlx_pixel_put(&(cub->m_map) , (int)x, (int)y, PLAYER);
+			my_mlx_pixel_put(&(cub->m_map), (int)x, (int)y, PLAYER);
 			x++;
 		}
 		y++;
 	}
 	direction_ray(cub, px, py);
-}
-
-void	init(t_cub *cub, float begin[2], float end[2])
-{
-	begin[1] = (cub->p.y / (float)CELL) * 40.0f - 2.5f * 40.0f;
-	begin[0] = (cub->p.x / (float)CELL) * 40.0f - 3.5f * 40.0f;
-	end[1] = (cub->p.y / (float)CELL) * 40.0f + 2.5f * 40.0f;
-	end[0] = (cub->p.x / (float)CELL) * 40.0f + 3.5f * 40.0f;
-	if (begin[0] < 0)
-	{
-		begin[0] = 0;
-		end[0] = 7.0f * 40.0f;
-	}
-	else if (begin[0] > (float)(cub->map.width * 40.0f) - (float)(7.0f * 40.0f))
-	{
-		begin[0] = (float)(cub->map.width * 40.0f) - (float)(7.0f * 40.0f);
-		end[0] = (float)cub->map.width * 40.0f;
-	}
-	if (begin[1] < 0)
-	{
-		begin[1] = 0;
-		end[1] = 5.0f * 40.0f;
-	}
-	else if (begin[1] > (float)(cub->map.height * 40.0f)
-		- (float)(5.0f * 40.0f))
-	{
-		begin[1] = (float)(cub->map.height * 40.0f) - (float)(5.0f * 40.0f);
-		end[1] = (float)cub->map.height * 40.0f;
-	}
-	cub->begin[0] = begin[0];
-	cub->begin[1] = begin[1];
-	cub->end[0] = end[0];
-	cub->end[1] = end[1];
 }
 
 void	rendering_the_map(t_cub *cub)

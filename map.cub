@@ -3,8 +3,8 @@ NO        ./texture/NO.xpm
 EA        ./texture/EA_2.xpm
 WE        ./texture/WE_2.xpm
 
-F     255   ,    255 ,   255
-C     255 ,   255   ,  255
+F     100 ,   130   ,  100
+C     225, 230, 230
 
 
  11111111

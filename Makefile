@@ -1,9 +1,7 @@
 CC = CC
 
-#---------- Flags ??????? 
-CFLAGS = -O3 -Werror -Wextra -Wall
+CFLAGS = -Werror -Wextra -Wall
 MLX_OP = -lmlx -framework OpenGL -framework AppKit #-fsanitize=address -g
-#---------- Sanitize ????
 
 NAME = cube3D
 
@@ -26,22 +24,20 @@ MLX_LIB = ./libmlx.a
 .c.o :
 	@${CC} ${CFLAGS} -Imlx -c $< -o $@
 	@echo -n .
-all :  mlx_extract ${NAME}
+all :  mlx_extract  ${NAME}
 
-${NAME} : ${OBJ} ${LIB} ${MLX_LIB}
+${NAME} : libft_mk ${OBJ} ${MLX_LIB}
 	@${CC} ${CFLAGS} ${OBJ} ${LIB} ${MLX_OP} ${MLX_LIB} -o ${NAME}
 	@echo
 	@echo "\033[1;32m************* DONE *************\033[0m"
 	@echo "run \033[1;32m./${NAME}\033[0m to execute program"
 	@echo "\033[1;32m********************************\033[0m"
 
-${LIB} :
+libft_mk :
 	@make -sC ./libft
-	@echo -n .
 
 ${MLX_LIB} :
 	@make -sC ./mlx
-	@echo .
 
 bonus : mlx_extract
 	@make -sC ./libft

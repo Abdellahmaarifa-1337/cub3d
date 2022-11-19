@@ -6,7 +6,7 @@
 /*   By: mkabissi <mkabissi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 08:58:40 by amaarifa          #+#    #+#             */
-/*   Updated: 2022/11/18 16:54:53 by mkabissi         ###   ########.fr       */
+/*   Updated: 2022/11/19 12:15:14 by mkabissi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 
 int	render_frames(t_cub *cub)
 {
-	if (cub->keys[0] == 1 || cub->keys[1] == 1 || cub->keys[2] == 1 ||
-		cub->keys[3] == 1 || cub->keys[4] == 1 || cub->keys[5] == 1)
+	if (cub->keys[0] == 1 || cub->keys[1] == 1 || cub->keys[2] == 1
+		|| cub->keys[3] == 1 || cub->keys[4] == 1 || cub->keys[5] == 1)
 	{
 		player_moves(cub);
 		render_scene(cub);

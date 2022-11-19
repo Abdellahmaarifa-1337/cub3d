@@ -2,8 +2,9 @@ SO        ./texture/SO.xpm
 NO        ./texture/NO.xpm
 EA        ./texture/EA_2.xpm
 WE        ./texture/WE_2.xpm
-F     1   ,    58 ,   12
-C     111 ,   5   ,  255
+
+F     100 ,   130   ,  100
+C     225, 230, 230
 
 
 1                                                    1
